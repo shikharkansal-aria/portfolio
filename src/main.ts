@@ -164,8 +164,15 @@ function trackHint() {
   } else hint.hidden = true;
 
   const showTags = free && !p;
-  const placed: [number, number, number, number][] = [];
   const W = stage.clientWidth, H = stage.clientHeight;
+  // Toolbar buttons count as occupied, so tags never slide under them.
+  const sr = stage.getBoundingClientRect();
+  const placed: [number, number, number, number][] = showTags
+    ? $$<HTMLElement>('.uv-top > *', uv).map((el) => {
+        const r = el.getBoundingClientRect();
+        return [r.left - sr.left, r.top - sr.top, r.right - sr.left, r.bottom - sr.top];
+      })
+    : [];
   for (const tag of tags) {
     const a = showTags ? api.anchor(tag.dataset.tag!) : null;
     if (!a || a.x < 0 || a.y < 60 || a.x > W || a.y > H - 110) { tag.hidden = true; continue; }
@@ -174,7 +181,7 @@ function trackHint() {
     if (!size) { size = [tag.offsetWidth, tag.offsetHeight]; tagW.set(tag, size); }
     const [w, h] = size;
     const box: [number, number, number, number] = [a.x - w / 2, a.y - h - 6, a.x + w / 2, a.y - 6];
-    if (placed.some((b) => box[0] < b[2] + 6 && box[2] + 6 > b[0] && box[1] < b[3] + 4 && box[3] + 4 > b[1])) { tag.hidden = true; continue; }
+    if (box[0] < 4 || box[2] > W - 4 || box[1] < 4 || placed.some((b) => box[0] < b[2] + 6 && box[2] + 6 > b[0] && box[1] < b[3] + 4 && box[3] + 4 > b[1])) { tag.hidden = true; continue; }
     placed.push(box);
     tag.style.transform = `translate(${Math.round(box[0])}px, ${Math.round(box[1])}px)`;
   }

@@ -10,18 +10,14 @@ import type { Theme } from './theme';
 /**
  * Station id → screenshot. `journey` is a key in public/img/journey/ (we load `<key>-800.webp`, then `<key>.webp`);
  * `fallback` is any other image path. With neither, the screen shows a clean title card built from the island data.
- * Edit this table when new captures land.
+ * Only list captures that exist (a missing file is a 404 on every walkthrough). Add rows when new captures land.
  */
 export const SCREEN_IMAGE: Record<string, { journey?: string; fallback?: string }> = {
-  'agent-builder': { journey: 'agent-builder' },
   outage: { journey: 'nuplay-landing' },
   hisaab: { journey: 'hisaab-phones' },
   aria: { journey: 'aria-mission-control', fallback: '/img/aria-mission-control.webp' },
-  dragonfire: { journey: 'dragonfire', fallback: '/img/dragon-icon.webp' },
+  dragonfire: { fallback: '/img/dragon-icon.webp' },
   'job-hunt': { journey: 'ats-tracker' },
-  'ai-router': { journey: 'ai-router' },
-  'claude-tools': { journey: 'claude-tools' },
-  mailbox: { journey: 'mailbox' },
 };
 
 const HEIGHT: Record<Tier, number> = { flagship: 1.55, second: 1.3, mid: 1.12, small: 0.92, moon: 0.92 };

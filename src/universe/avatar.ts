@@ -49,14 +49,6 @@ export function resolveClip(clips: AnimationClip[], a: GuideAction): AnimationCl
   return null;
 }
 
-async function exists(url: string): Promise<boolean> {
-  try {
-    const r = await fetch(url, { method: 'HEAD' });
-    const ct = r.headers.get('content-type') ?? '';
-    return r.ok && !ct.includes('text/html'); // dev servers answer unknown paths with index.html
-  } catch { return false; }
-}
-
 export interface GuideOptions { avatarUrl?: string }
 
 /** `opts.avatarUrl` (dev harness only) forces a model; a URL ending in .vrm or containing "vrm" loads through three-vrm. */
@@ -64,12 +56,12 @@ export async function loadGuide(theme: Theme, opts: GuideOptions = {}): Promise<
   const base = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
   try {
     const forced = opts.avatarUrl;
-    const vrmUrl = forced ? (/vrm|aria/i.test(forced) ? forced : null) : (await exists(`${base}/avatar/shikhar.vrm`)) ? `${base}/avatar/shikhar.vrm` : null;
+    const vrmUrl = forced ? (/vrm|aria/i.test(forced) ? forced : null) : __AVATAR_KIND__ === 'vrm' ? `${base}/avatar/shikhar.vrm` : null;
     if (vrmUrl) {
       const { loadVrmGuide } = await import('./vrm');
       return await loadVrmGuide(vrmUrl, `${base}/avatar/anim/`);
     }
-    const glb = forced ?? ((await exists(`${base}/avatar/shikhar.glb`)) ? `${base}/avatar/shikhar.glb` : null);
+    const glb = forced ?? (__AVATAR_KIND__ === 'glb' ? `${base}/avatar/shikhar.glb` : null);
     const url = glb ?? `${base}/avatar/placeholder.glb`;
     const gltf = await new GLTFLoader().loadAsync(url);
     return fromGltf(gltf.scene, gltf.animations, !glb, theme);
