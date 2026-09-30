@@ -18,7 +18,7 @@
 
 ## Public-site rules
 - Public web ≠ resume: **no confidential client details** (internal numbers, prompts, contracts, recordings, customer data). Client names only where they already appear on his approved resume; otherwise anonymise ("a US farm-retail chain"). Ask him if unsure.
-- No phone number, no secrets/keys, no private personal info. Email + LinkedIn + GitHub only.
+- No secrets/keys, no private personal info. Contact: email, phone (+91 62030 42129, approved by Shikhar 2026-10-01), LinkedIn, GitHub.
 - Write copy with the `stop-slop` skill: specific, plain, first-person, numbers where verified. No buzzword soup.
 - Case-study shape: Problem → what he did (decisions/trade-offs) → result (verified number) → what he learned.
 

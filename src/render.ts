@@ -17,7 +17,7 @@ const ext = `${svg(icons.external)}<span class="sr-only"> (opens in a new tab)</
 const socialIcons = (cls = 'social') => {
   const items = [
     { href: `mailto:${person.email}`, label: `Email ${person.email}`, tip: 'Email', icon: brandSvg(brand.gmail), ext: false },
-    ...(person.phone ? [{ href: `tel:${person.phone}`, label: `Call ${person.phone}`, tip: 'Call', icon: svg(icons.phone), ext: false }] : []),
+    ...(person.phone ? [{ href: `tel:${person.phone}`, label: `Call ${person.phoneDisplay}`, tip: person.phoneDisplay, icon: svg(icons.phone), ext: false }] : []),
     { href: person.linkedin, label: 'LinkedIn', tip: 'LinkedIn', icon: brandSvg(brand.linkedin), ext: true },
     { href: person.github, label: 'GitHub', tip: 'GitHub', icon: brandSvg(brand.github), ext: true },
   ];
@@ -28,7 +28,7 @@ const socialIcons = (cls = 'social') => {
 const contactLinks = (cls = 'links') => `
   <ul class="${cls}">
     <li><a class="btn" href="${person.resume}" download>${svg(icons.download)}Resume (PDF)</a></li>
-    <li><a class="btn" href="mailto:${person.email}">${brandSvg(brand.gmail)}<span>${person.email}</span></a></li>${person.phone ? `\n    <li><a class="btn" href="tel:${person.phone}">${svg(icons.phone)}<span>${person.phone}</span></a></li>` : ''}
+    <li><a class="btn" href="mailto:${person.email}">${brandSvg(brand.gmail)}<span>${person.email}</span></a></li>${person.phone ? `\n    <li><a class="btn" href="tel:${person.phone}">${svg(icons.phone)}<span>${person.phoneDisplay}</span></a></li>` : ''}
     <li><a class="btn" href="${person.linkedin}" rel="noopener" target="_blank">${brandSvg(brand.linkedin)}LinkedIn${ext}</a></li>
     <li><a class="btn" href="${person.github}" rel="noopener" target="_blank">${brandSvg(brand.github)}GitHub${ext}</a></li>
   </ul>`;
