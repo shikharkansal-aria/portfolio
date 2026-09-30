@@ -187,7 +187,7 @@ export const journey: Stage[] = [
       { key: 'ey-vol-10y', caption: 'USD/NGN daily changes over 10 years: 29.41% annualised volatility.' },
       { key: 'ey-vol-1y', caption: 'The last year alone: 43.47%.' },
       { key: 'ey-deck-cashpool', caption: 'Cash pooling: ₹12.0 Cr deposit returns plus ₹25.2 Cr of borrowing removed.' },
-      { key: 'ey-forecaster', caption: 'The USD/INR forecaster: adjust model weights, see a 6-month range.' },
+      { key: 'ey-forecaster-split', caption: 'The USD/INR forecaster: set the indicators on the left, read the 6-month forecast on the right.' },
     ],
     link: { href: 'https://n92hmk.csb.app/', label: 'Try the USD/INR forecaster' },
   },
