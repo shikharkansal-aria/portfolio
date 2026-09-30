@@ -1,0 +1,186 @@
+[
+ {
+  "key": "aria-mission-control",
+  "file": "/img/journey/aria-mission-control.webp",
+  "file800": "/img/journey/aria-mission-control-800.webp",
+  "w": 1090,
+  "h": 779,
+  "alt": "Aria Mission Control: a dark dashboard with eight agents orbiting a central Aria core, status counts along the bottom"
+ },
+ {
+  "key": "aria-scene",
+  "file": "/img/journey/aria-scene.webp",
+  "file800": "/img/journey/aria-scene-800.webp",
+  "w": 1280,
+  "h": 813,
+  "alt": "Aria, an animated virtual human, standing in an alpine meadow scene with a message box at the bottom"
+ },
+ {
+  "key": "aria-app",
+  "file": "/img/journey/aria-app.webp",
+  "file800": "/img/journey/aria-app-800.webp",
+  "w": 1280,
+  "h": 720,
+  "alt": "Aria web app on a dark stage with the virtual human, a message box and a mic button"
+ },
+ {
+  "key": "nuplay-landing",
+  "file": "/img/journey/nuplay-landing.webp",
+  "file800": "/img/journey/nuplay-landing-800.webp",
+  "w": 1600,
+  "h": 953,
+  "alt": "NuPlay demo landing page: \"Support that actually resolves\", with an Order Tracking Agent card listing four scenarios and a Start the Demo button"
+ },
+ {
+  "key": "aria-moods",
+  "file": "/img/journey/aria-moods.webp",
+  "file800": "/img/journey/aria-moods-800.webp",
+  "w": 1600,
+  "h": 1452,
+  "alt": "Contact sheet of twelve Aria emotion states: neutral, happy, excited, laughing, sarcastic, shy, thinking, concerned, confident, surprised, sad, grateful"
+ },
+ {
+  "key": "nuplay-playground",
+  "file": "/img/journey/nuplay-playground.webp",
+  "file800": "/img/journey/nuplay-playground-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "NuPlay CRM playground: \"Pick a customer\" grid of 60 seeded customer profiles, each card listing what you can test on the call"
+ },
+ {
+  "key": "nuplay-scenarios",
+  "file": "/img/journey/nuplay-scenarios.webp",
+  "file800": "/img/journey/nuplay-scenarios-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "NuPlay customer cards scrolled to show test scenarios such as order status lookup, cancellation with refund, and returns"
+ },
+ {
+  "key": "ey-vol-10y",
+  "file": "/img/journey/ey-vol-10y.webp",
+  "file800": "/img/journey/ey-vol-10y-800.webp",
+  "w": 1600,
+  "h": 1050,
+  "alt": "Chart: USD/NGN daily change, 10 years \u00b7 annualised volatility 29.41%"
+ },
+ {
+  "key": "ey-vol-1y",
+  "file": "/img/journey/ey-vol-1y.webp",
+  "file800": "/img/journey/ey-vol-1y-800.webp",
+  "w": 1600,
+  "h": 1041,
+  "alt": "Chart: last 12 months \u00b7 43.47%"
+ },
+ {
+  "key": "ey-forecaster",
+  "file": "/img/journey/ey-forecaster.webp",
+  "file800": "/img/journey/ey-forecaster-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "USD/INR forecasting model: input panel for spot rate, oil, inflation, rates, growth and sentiment sliders"
+ },
+ {
+  "key": "ey-forecaster-chart",
+  "file": "/img/journey/ey-forecaster-chart.webp",
+  "file800": "/img/journey/ey-forecaster-chart-800.webp",
+  "w": 1440,
+  "h": 1078,
+  "alt": "USD/INR 6-month forecast with confidence bands, model contribution bars and the month-by-month breakdown table"
+ },
+ {
+  "key": "ey-deck-exposure",
+  "file": "/img/journey/ey-deck-exposure.webp",
+  "file800": "/img/journey/ey-deck-exposure-800.webp",
+  "w": 1600,
+  "h": 800,
+  "alt": "EY CAFTA deck slide \"Quantifying the Exposure\": $10.3M annual risk exposure, 43% one-year and 29% ten-year USD/NGN volatility, with both volatility charts"
+ },
+ {
+  "key": "ey-deck-cashpool",
+  "file": "/img/journey/ey-deck-cashpool.webp",
+  "file800": "/img/journey/ey-deck-cashpool-800.webp",
+  "w": 1600,
+  "h": 1262,
+  "alt": "EY CAFTA deck slide \"Cash Pooling: INR 37.2 Crore Annual Savings\": four pillars of optimisation and two headline figures"
+ },
+ {
+  "key": "finanalyse-audit",
+  "file": "/img/journey/finanalyse-audit.webp",
+  "file800": "/img/journey/finanalyse-audit-800.webp",
+  "w": 1530,
+  "h": 1650,
+  "alt": "FinAnalyse accuracy and verification report for a TCS financial model: overall accuracy 65.2 percent, 60 of 92 data points matched, with a category table of matches and mismatches"
+ },
+ {
+  "key": "finanalyse-workbook",
+  "file": "/img/journey/finanalyse-workbook.webp",
+  "file800": "/img/journey/finanalyse-workbook-800.webp",
+  "w": 940,
+  "h": 1270,
+  "alt": "Generated Excel workbook for Infosys: financial ratios sheet with liquidity, profitability, leverage, efficiency, per-share and DuPont sections for 2022 to 2024"
+ },
+ {
+  "key": "ats-tracker",
+  "file": "/img/journey/ats-tracker.webp",
+  "file800": "/img/journey/ats-tracker-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "Requisition Screening Console: a scorecard for a fictional senior backend engineer role with a ranked pool of six candidates and a score breakdown by dimension"
+ },
+ {
+  "key": "ken-flow",
+  "file": "/img/journey/ken-flow.webp",
+  "file800": "/img/journey/ken-flow-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "Hisaab flow map: seven states of one store payment end to end, with an animated phone mock"
+ },
+ {
+  "key": "ken-flow-2",
+  "file": "/img/journey/ken-flow-2.webp",
+  "file800": "/img/journey/ken-flow-2-800.webp",
+  "w": 1440,
+  "h": 900,
+  "alt": "Hisaab flow map scrolled to later states"
+ },
+ {
+  "key": "hisaab-phones",
+  "file": "/img/journey/hisaab-phones.webp",
+  "file800": "/img/journey/hisaab-phones-800.webp",
+  "w": 1600,
+  "h": 660,
+  "alt": "Five Hisaab phone screens in a row: monthly summary, payment scan notification, categorising a transfer, asking a question in your own language, and the weekly inbox"
+ },
+ {
+  "key": "ecell-emerge-banner",
+  "file": "/img/journey/ecell-emerge-banner.webp",
+  "file800": "/img/journey/ecell-emerge-banner-800.webp",
+  "w": 1600,
+  "h": 800,
+  "alt": "E-Merge 3.0 promotional banner from E-Cell IIT Hyderabad: Network. Compete. Thrive, with the Boardroom, Founders Forum, Speaker sessions and Networking arena tracks, 15+ colleges and 150+ participants"
+ },
+ {
+  "key": "ecell-emerge",
+  "file": "/img/journey/ecell-emerge.webp",
+  "file800": "/img/journey/ecell-emerge-800.webp",
+  "w": 953,
+  "h": 640,
+  "alt": "E-MERGE 3.0 report executive summary: flagship networking conclave of E-Cell IIT Hyderabad, 160+ students from 15+ colleges, Startup Senate, Boardroom Simulation and Founders Forum"
+ },
+ {
+  "key": "tedx-cert",
+  "file": "/img/journey/tedx-cert.webp",
+  "file800": "/img/journey/tedx-cert-800.webp",
+  "w": 1600,
+  "h": 900,
+  "alt": "TEDxIITHyderabad certificate presented to Shikhar Kansal as Public Relations and Marketing Coordinator for the 2024-25 tenure"
+ },
+ {
+  "key": "ecell-logos",
+  "file": "/img/journey/ecell-logos.webp",
+  "file800": "/img/journey/ecell-logos-800.webp",
+  "w": 1600,
+  "h": 213,
+  "alt": "Logos of E-Cell IIT Hyderabad and partner organisations: Innomet Advanced Materials, NPCI and Masters Union"
+ }
+]
