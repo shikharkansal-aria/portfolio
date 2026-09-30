@@ -51,7 +51,7 @@ html.locked, html.locked body { overflow: hidden; }
 .hero-copy > * { pointer-events: auto; }
 .hero-eyebrow { display: flex; align-items: center; gap: var(--s3); color: var(--muted); font-size: 0.9375rem; }
 .hero-eyebrow::before { content: ''; flex: none; width: 40px; height: 1px; background: var(--ink); }
-.hero-name { font-size: clamp(3.75rem, 11.2vw, 14.5rem); font-weight: 800; line-height: 0.84; letter-spacing: -0.06em; margin-left: -0.05em; }
+.hero-name { font-size: clamp(3.25rem, 6.2vw, 7.5rem); font-weight: 650; line-height: 0.95; letter-spacing: -0.03em; margin-left: -0.03em; }
 .hero-name span { display: block; }
 .hero-intro { font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem); line-height: 1.5; max-width: 40ch; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s3); }
@@ -334,7 +334,7 @@ html.locked, html.locked body { overflow: hidden; }
   .hero { grid-template-columns: minmax(0, 1fr) 38%; grid-template-areas: 'eyebrow eyebrow' 'name fig' 'intro intro' 'cta cta' 'links links'; min-height: 0; column-gap: var(--s2); padding-bottom: var(--s6); }
   .hero-copy { display: contents; }
   .hero-eyebrow { grid-area: eyebrow; padding-top: var(--s6); }
-  .hero-name { grid-area: name; align-self: end; font-size: clamp(3rem, 13.5vw, 6rem); padding-bottom: var(--s5); position: relative; z-index: 3; }
+  .hero-name { grid-area: name; align-self: end; font-size: clamp(2.75rem, 11vw, 4.5rem); padding-bottom: var(--s5); position: relative; z-index: 3; }
   .hero-figure { grid-area: fig; grid-column: auto; grid-row: auto; margin: var(--s4) 0 0; justify-content: center; }
   .hero { overflow-x: clip; } /* the field circle is wider than its column */
   .hero-field { left: 50%; width: 140%; bottom: 8%; }
