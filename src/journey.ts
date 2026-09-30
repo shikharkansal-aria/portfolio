@@ -309,7 +309,7 @@ export const journey: Stage[] = [
       { value: '19 days → 3× / day', label: 'silent outage, now checked 3 times a day' },
     ],
     visuals: [
-      { key: 'nuplay-landing', caption: 'The demo landing page: "Support that actually resolves".' },
+      { key: 'nuplay-agent', caption: 'The Order Tracking Agent in the NuPlay dashboard: start a web or phone call, with the caller’s orders beside it.' },
       { key: 'nuplay-playground', caption: 'The playground: pick a scenario and call the crew.' },
     ],
     link: { href: 'https://experience.nurixlabs.tech/nurix-experience/experience', label: 'Open the live experience page' },
@@ -319,7 +319,7 @@ export const journey: Stage[] = [
     period: 'Sep 2026',
     title: 'The Ken case: Hisaab',
     org: 'The Ken agentic-commerce case competition (₹20L)',
-    role: 'Round 2',
+    role: 'Round 3',
     kind: 'feature',
     lead:
       'UPI tells you where money went, never what it was for. Hisaab is an Android app that names small UPI transfers in one tap and keeps your data on the phone.',
@@ -333,7 +333,7 @@ export const journey: Stage[] = [
       { value: '26', label: 'students surveyed' },
       { value: '77%', label: 'can’t account for small UPI transfers' },
       { value: '8,541', label: 'lines of Kotlin, 22 test files' },
-      { value: 'Round 2', label: 'of the ₹20L competition' },
+      { value: 'Round 3', label: 'of the ₹20L competition' },
     ],
     visuals: [
       { key: 'hisaab-phones', caption: 'Hisaab screens: the one-tap question and the month view.' },

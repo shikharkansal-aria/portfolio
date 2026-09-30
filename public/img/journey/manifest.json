@@ -190,5 +190,13 @@
   "w": 1994,
   "h": 950,
   "alt": "USD/INR forecaster: on the left, the indicators you set (spot rate, oil, inflation, interest rates, GDP, deficit, FDI, sentiment); on the right, a 6-month forecast line with ±2% bands and a bar chart of each model's projected rate"
+ },
+ {
+  "key": "nuplay-agent",
+  "file": "/img/journey/nuplay-agent.webp",
+  "file800": "/img/journey/nuplay-agent-800.webp",
+  "w": 1600,
+  "h": 866,
+  "alt": "NuPlay dashboard: the Order Tracking Agent ready for a web or phone call, with suggested questions and the caller's orders shown beside it (contact details blurred)"
  }
 ]

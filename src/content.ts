@@ -109,7 +109,7 @@ export const cases: CaseStudy[] = [
     context: 'The Ken agentic-commerce case competition (₹20L) · September 2026 · Android app',
     metric: { before: '77% can’t track', after: '1 tap each', label: 'students who can’t account for small UPI transfers → one tap to name a payee' },
     summary:
-      'An Android app that names the small UPI transfers bank apps can’t categorise, grounded in a 26-student survey. The core app keeps your data on the phone. Advanced to Round 2 of a ₹20L competition.',
+      'An Android app that names the small UPI transfers bank apps can’t categorise, grounded in a 26-student survey. The core app keeps your data on the phone. Advanced to Round 3 of a ₹20L competition.',
     problem: [
       'UPI tells you where money went, never what it was for. Small peer transfers (chai, canteen, splitting a bill) pile up with no category, and bank apps can’t tell a dinner split from a repaid debt.',
       'I surveyed 26 students to check the pain was real. 73% avoid checking their balance, 73% had lied to a parent about spending, and 77% named small UPI transfers as the spending they can’t account for.',
@@ -121,7 +121,7 @@ export const cases: CaseStudy[] = [
       'I reused the money model from my earlier prototype and spent the time on capture and the question flow.',
     ],
     result: [
-      'Advanced to Round 2 of The Ken’s ₹20L case competition with a working Android build: 8,541 lines of Kotlin and 22 test files.',
+      'Advanced to Round 3 of The Ken’s ₹20L case competition with a working Android build: 8,541 lines of Kotlin and 22 test files.',
     ],
     learned:
       'Field-testing taught me more than the plan did: the naive build broke 7 of our own design rules within 20 minutes of real use. So I turned some rules into code: a build check that fails if the app ever shows streaks, grades or exclamation marks.',
@@ -129,7 +129,7 @@ export const cases: CaseStudy[] = [
       { value: '26', label: 'students surveyed' },
       { value: '73%', label: 'avoid checking their balance' },
       { value: '77%', label: 'of students can’t account for small UPI' },
-      { value: 'Round 2', label: '₹20L competition' },
+      { value: 'Round 3', label: '₹20L competition' },
     ],
   },
   {

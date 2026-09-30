@@ -13,7 +13,7 @@ import type { Theme } from './theme';
  * Only list captures that exist (a missing file is a 404 on every walkthrough). Add rows when new captures land.
  */
 export const SCREEN_IMAGE: Record<string, { journey?: string; fallback?: string }> = {
-  outage: { journey: 'nuplay-landing' },
+  outage: { journey: 'nuplay-agent' },
   hisaab: { journey: 'hisaab-phones' },
   aria: { journey: 'aria-mission-control', fallback: '/img/aria-mission-control.webp' },
   dragonfire: { fallback: '/img/dragon-icon.webp' },

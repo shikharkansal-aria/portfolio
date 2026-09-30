@@ -181,7 +181,7 @@ export const islands: Island[] = [
       { value: '26', label: 'students surveyed before any code' },
       { value: '77%', label: 'named small UPI transfers as spending they can’t account for' },
       { value: '8,541', label: 'lines of Kotlin, with 22 test files' },
-      { value: 'Round 2', label: 'of the ₹20L competition' },
+      { value: 'Round 3', label: 'of the ₹20L competition' },
     ],
     myPart: 'Built for The Ken case competition. I surveyed 26 students to check the problem was real.',
     learned:

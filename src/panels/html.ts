@@ -80,7 +80,7 @@ export function caseBody(c: CaseStudy, headingTag: 'h3' | 'h4' = 'h4') {
 /** A real screenshot for an island's panel (from the journey manifest), when one exists. */
 export interface PanelShot { src: string; w: number; h: number; alt: string }
 /** Island → journey image key. Agent Builder has no screenshot, so it keeps its SVG cover. */
-export const ISLAND_SHOT: Record<string, string> = { aria: 'aria-app', hisaab: 'hisaab-phones', outage: 'nuplay-landing', 'job-hunt': 'ats-tracker' };
+export const ISLAND_SHOT: Record<string, string> = { aria: 'aria-app', hisaab: 'hisaab-phones', outage: 'nuplay-agent', 'job-hunt': 'ats-tracker' };
 
 const cover = (i: Island, shot?: PanelShot) => {
   if (shot) return `<figure class="panel-shot"><img src="${shot.src}" width="${shot.w}" height="${shot.h}" alt="${esc(shot.alt)}" decoding="async"></figure>`;
