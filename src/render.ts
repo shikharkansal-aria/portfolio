@@ -6,19 +6,31 @@ import { person, about, stats, cases, experience, more, education, type CaseStud
 import { journeyHTML, type Shot, type StageLike } from './panels/journey-html';
 import { journey } from './journey';
 import type { Island } from './universe/types';
-import { esc, svg, icons, metricStrip, list, paras, scopeBadge, contextText, ISLAND_SHOT, type PanelShot } from './panels/html';
+import { esc, svg, icons, brand, brandSvg, metricStrip, list, paras, scopeBadge, contextText, ISLAND_SHOT, type PanelShot } from './panels/html';
 
 /** Shikhar fills in dates/location later. UI placeholder, not a claim. */
 export const FINAL_YEAR_LINE = 'IIT Hyderabad · class of 2027';
 
 const ext = `${svg(icons.external)}<span class="sr-only"> (opens in a new tab)</span>`;
 
+/** Icon-only contact row: each is a real link (click/tap opens it); the label shows on hover and focus. */
+const socialIcons = (cls = 'social') => {
+  const items = [
+    { href: `mailto:${person.email}`, label: `Email ${person.email}`, tip: 'Email', icon: brandSvg(brand.gmail), ext: false },
+    ...(person.phone ? [{ href: `tel:${person.phone}`, label: `Call ${person.phone}`, tip: 'Call', icon: svg(icons.phone), ext: false }] : []),
+    { href: person.linkedin, label: 'LinkedIn', tip: 'LinkedIn', icon: brandSvg(brand.linkedin), ext: true },
+    { href: person.github, label: 'GitHub', tip: 'GitHub', icon: brandSvg(brand.github), ext: true },
+  ];
+  return `<ul class="${cls}">${items.map((i) =>
+    `<li><a class="social-link" href="${esc(i.href)}" data-tip="${esc(i.tip)}" aria-label="${esc(i.label)}${i.ext ? ' (opens in a new tab)' : ''}"${i.ext ? ' rel="noopener" target="_blank"' : ''}>${i.icon}</a></li>`).join('')}</ul>`;
+};
+
 const contactLinks = (cls = 'links') => `
   <ul class="${cls}">
     <li><a class="btn" href="${person.resume}" download>${svg(icons.download)}Resume (PDF)</a></li>
-    <li><a class="btn" href="mailto:${person.email}">${svg(icons.mail)}<span>${person.email}</span></a></li>
-    <li><a class="btn" href="${person.linkedin}" rel="noopener" target="_blank">LinkedIn${ext}</a></li>
-    <li><a class="btn" href="${person.github}" rel="noopener" target="_blank">GitHub${ext}</a></li>
+    <li><a class="btn" href="mailto:${person.email}">${brandSvg(brand.gmail)}<span>${person.email}</span></a></li>${person.phone ? `\n    <li><a class="btn" href="tel:${person.phone}">${svg(icons.phone)}<span>${person.phone}</span></a></li>` : ''}
+    <li><a class="btn" href="${person.linkedin}" rel="noopener" target="_blank">${brandSvg(brand.linkedin)}LinkedIn${ext}</a></li>
+    <li><a class="btn" href="${person.github}" rel="noopener" target="_blank">${brandSvg(brand.github)}GitHub${ext}</a></li>
   </ul>`;
 
 const statRow = () =>
@@ -140,12 +152,10 @@ export function renderDesktop() {
           <button class="btn btn-primary btn-big js-only" type="button" data-enter>Start the walkthrough${svg(icons.arrow)}</button>
           <a class="btn btn-big btn-quiet" href="/recruiter/">Recruiter view</a>
         </div>
-        <ul class="hero-links">
-          <li><a href="${person.resume}" download>Resume (PDF)</a></li>
-          <li><a href="mailto:${person.email}">${person.email}</a></li>
-          <li><a href="${person.linkedin}" rel="noopener" target="_blank">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
-          <li><a href="${person.github}" rel="noopener" target="_blank">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
-        </ul>
+        <div class="hero-links">
+          <a class="hero-resume" href="${person.resume}" download>Resume (PDF)</a>
+          ${socialIcons()}
+        </div>
       </div>
       <div class="hero-figure">
         <span class="hero-field" aria-hidden="true"></span>
@@ -185,7 +195,8 @@ export function renderDesktop() {
   </main>
   <footer class="foot">
     <p class="foot-name">${esc(person.name)}</p>
-    <p><a href="mailto:${person.email}">${person.email}</a> · <a href="${person.linkedin}" rel="noopener" target="_blank">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a> · <a href="${person.github}" rel="noopener" target="_blank">GitHub<span class="sr-only"> (opens in a new tab)</span></a> · <a href="/recruiter/">Recruiter view</a></p>
+    ${socialIcons('social social-foot')}
+    <p><a href="/recruiter/">Recruiter view</a></p>
   </footer>
   ${walkthroughOverlay()}
   <div class="panel-layer" data-panel-layer hidden>

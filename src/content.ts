@@ -11,6 +11,8 @@ export const person = {
   linkedin: 'https://www.linkedin.com/in/shikhar-kansal-a6b42028b',
   github: 'https://github.com/shikharkansal-aria',
   resume: '/Shikhar-Kansal-Resume.pdf',
+  /** E.164, e.g. '+91XXXXXXXXXX'. Empty = no phone icon anywhere (the default: the site publishes no phone number). */
+  phone: '',
 };
 
 export const about = [

@@ -55,9 +55,28 @@ html.locked, html.locked body { overflow: hidden; }
 .hero-name span { display: block; }
 .hero-intro { font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem); line-height: 1.5; max-width: 40ch; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--s3); }
-.hero-links { list-style: none; padding: 0; display: flex; flex-wrap: wrap; column-gap: var(--s5); font-size: 0.9375rem; }
-.hero-links a { display: inline-block; padding-block: 12px; color: var(--ink); text-decoration-color: #b9bfca; }
-.hero-links a:hover { color: var(--accent); text-decoration-color: currentColor; }
+.hero-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s5); font-size: 0.9375rem; }
+.hero-resume { display: inline-block; padding-block: 12px; color: var(--ink); text-decoration-color: #b9bfca; }
+.hero-resume:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+/* Contact icons: real links; the name shows as a tooltip on hover and keyboard focus. */
+.social { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s2); }
+.social-link {
+  position: relative; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  color: var(--ink); border: 1px solid var(--line); background: var(--surface);
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s, transform 0.15s;
+}
+.social-link .ico { width: 20px; height: 20px; }
+.social-link:hover, .social-link:focus-visible { color: #fff; background: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
+.social-link::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; translate: -50% 4px;
+  padding: 4px 8px; border-radius: 6px; background: var(--ink); color: #fff; white-space: nowrap;
+  font: 500 0.75rem/1.3 var(--font-mono); opacity: 0; pointer-events: none; transition: opacity 0.15s, translate 0.15s;
+}
+.social-link:hover::after, .social-link:focus-visible::after { opacity: 1; translate: -50% 0; }
+@media (prefers-reduced-motion: reduce) { .social-link, .social-link::after { transition: none; } .social-link:hover, .social-link:focus-visible { transform: none; } }
+.foot .social { align-self: center; }
+.foot .social-link { padding: 0; }
 .hero-figure {
   --av-h: min(86svh, 1080px); --av-c: calc(var(--av-h) * 0.179); /* half the avatar's width (484 / 1350 / 2) */
   grid-column: 7 / 13; grid-row: 1; position: relative; display: flex; align-items: flex-end; justify-content: flex-start; pointer-events: none;
