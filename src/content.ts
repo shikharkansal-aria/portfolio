@@ -8,7 +8,7 @@ export const person = {
   sub: 'Product & Growth Intern at Nurix AI (now NuPlay) · B.Tech, IIT Hyderabad, class of 2027',
   seeking: 'APM, Product Analyst, Product Associate and Growth roles',
   email: 'shikharkansal.sk@gmail.com',
-  linkedin: 'https://linkedin.com/in/shikhar-kansal-a6b42028b',
+  linkedin: 'https://www.linkedin.com/in/shikhar-kansal-a6b42028b',
   github: 'https://github.com/shikharkansal-aria',
   resume: '/Shikhar-Kansal-Resume.pdf',
 };
@@ -86,7 +86,7 @@ export const cases: CaseStudy[] = [
       'I tested one call at a time until I found the cause: the store connection used a token that expires every 24 hours. Every lookup since 22 August had been rejected.',
       'I built a new connection, re-pointed 16 tool bindings across 4 sub-agents, and confirmed the fix on a live call.',
       'The outage came back. My first fix had also used a 24-hour token. I wrote the incident note in first person (“That is on me”), then switched to a token that doesn’t expire.',
-      'Then I built the check that should have existed from day one. It runs a real order query, posts to Slack when it fails, reports 3 times a day, and names the failure type (expired token, frozen store, missing permission) so the next person doesn’t have to dig.',
+      'Then I built the check that should have existed from day one. It runs a real order query, sends a Telegram report 3 times a day, and names the failure type (expired token, frozen store, missing permission) so the next person doesn’t have to dig.',
     ],
     result: [
       'Order lookups work again. A failure now shows up at the next check instead of hiding for 19 days.',
@@ -135,7 +135,7 @@ export const cases: CaseStudy[] = [
     title: 'Aria',
     icon: 'A',
     context: 'Personal project · April to September 2026 · real-time 3D voice companion',
-    metric: { before: '1,603 ms', after: '690 ms', label: 'before Aria starts speaking' },
+    metric: { before: '1,603 ms', after: '690 ms', label: 'voice first-byte time (median)' },
     summary:
       'A voice-first 3D companion that speaks Hinglish. I ran it as product owner over 5 parallel Claude Code lanes: 96 commits, 86 automated specs, first-audio latency down 57%.',
     problem: [
@@ -153,7 +153,7 @@ export const cases: CaseStudy[] = [
     learned:
       'The project’s operating rule was “a check that cannot fail is worse than no check.” Directing AI builders taught me that the spec is the product: a lane only ships what I wrote down clearly.',
     facts: [
-      { value: '57%', label: 'faster first audio' },
+      { value: '57%', label: 'faster voice first byte' },
       { value: '5', label: 'parallel build lanes' },
       { value: '96', label: 'commits' },
       { value: '86', label: 'automated specs' },
@@ -176,8 +176,8 @@ export const experience = [
       'Conceived and shipped Agent Builder: setup from 5 days to 30 minutes, 4 quality gates, 7 later engagements.',
       'Delivered 53 conversational AI bots for 27 companies across 18 industries and 7 languages, including prototypes for a top Indian hotel chain and Latin America’s largest international airline network.',
       'Audited 2,140 deals and 2,843 accounts to answer an open coverage question, surfacing an untapped vertical and the CRM defects hiding it.',
-      'Built a 3-party hold-and-verify booking flow in Danish, German and Dutch: a relay caller phones the property while the guest waits.',
-      'Tested releases over 80 recorded calls and classified 12 faults by mechanism; wrote 53 bilingual test scenarios for a Chennai-based lender.',
+      'Built a 3-party hold-and-verify booking flow for a hospitality group: a relay caller phones the property while the guest waits. Also launched Danish, German and Dutch housekeeping voicebots.',
+      'Tested releases over 80 recorded calls and classified 12 faults by mechanism; ran 53 bilingual test scenarios for a Chennai-based lender.',
       'Guided 4 interns and presented in 8 customer meetings.',
     ],
   },

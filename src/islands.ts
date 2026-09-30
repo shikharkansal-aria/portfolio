@@ -100,7 +100,7 @@ export const islands: Island[] = [
         detail: 'A check now runs a real order query, alerts on failure, reports 3 times a day and names the failure type: expired token, frozen store or missing permission.',
       },
     ],
-    stack: ['Voice agents', 'Tool bindings', 'Token auth', 'Scheduled health check', 'Slack alerts'],
+    stack: ['Voice agents', 'Tool bindings', 'Token auth', 'Scheduled health check', 'Telegram reports'],
     decisions: [
       {
         choice: 'Test one call at a time to find the cause',
@@ -121,7 +121,7 @@ export const islands: Island[] = [
         why: 'My first fix had the same flaw as the original, and I wanted the record to say so.',
       },
     ],
-    runs: 'The health check runs on a schedule, posts to Slack on failure, and sends reports 3 times a day.',
+    runs: 'The health check runs on a schedule, names the failure type, and sends a Telegram report 3 times a day.',
     numbers: [
       { value: '19 days', label: 'order lookups failing before the first fix' },
       { value: '24 h', label: 'token expiry, the root cause both times' },
@@ -176,7 +176,7 @@ export const islands: Island[] = [
         why: 'A money app that guilts students repeats what they already avoid, so a build task fails if the app ever shows a streak, a grade or an exclamation mark.',
       },
     ],
-    runs: 'Runs on the phone with no account and works offline. The core app makes no network calls.',
+    runs: 'Runs on the phone with no account and works offline. The core app makes no network calls unless you switch on optional sharing.',
     numbers: [
       { value: '26', label: 'students surveyed before any code' },
       { value: '77%', label: 'named small UPI transfers as spending they can’t account for' },
@@ -195,7 +195,7 @@ export const islands: Island[] = [
     scope: 'personal',
     tagline: 'A Hinglish-speaking 3D voice companion I directed as product owner.',
     context: 'Personal project · Apr–Sep 2026 · real-time 3D voice companion',
-    metric: { before: '1,603 ms', after: '690 ms', label: 'before Aria starts speaking' },
+    metric: { before: '1,603 ms', after: '690 ms', label: 'voice first-byte time (median)' },
     what:
       'A full-body 3D anime companion you talk to in Hinglish. She listens, answers through a language model, and speaks with lip-sync and mood-driven gestures.',
     pipeline: [
@@ -233,7 +233,7 @@ export const islands: Island[] = [
     ],
     runs: 'Runs locally on my laptop.',
     numbers: [
-      { value: '1,603 → 690 ms', label: 'median time to first audio' },
+      { value: '1,603 → 690 ms', label: 'voice first-byte time, median of 4 runs' },
       { value: '5', label: 'parallel Claude Code lanes' },
       { value: '96', label: 'commits' },
       { value: '86', label: 'automated specs' },

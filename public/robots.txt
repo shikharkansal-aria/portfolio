@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://shikhar-kansal.vercel.app/sitemap.xml

@@ -1,0 +1,7 @@
+# Keep private working files out of Vercel uploads (the site is built from src/, public/, index.html, recruiter/).
+Portfolio Chat.md
+CLAUDE.md
+design
+scripts
+.privacy-patterns
+.claude

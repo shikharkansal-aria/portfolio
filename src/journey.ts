@@ -229,7 +229,7 @@ export const journey: Stage[] = [
       'When a sound classifier stuck at 10% accuracy, I left its check failing in CI. Faking a pass would have hidden the problem.',
     ],
     numbers: [
-      { value: '1,603 → 690 ms', label: 'median time to first audio' },
+      { value: '1,603 → 690 ms', label: 'voice first-byte time, median of 4 runs' },
       { value: '5', label: 'parallel Claude Code lanes' },
       { value: '96', label: 'commits' },
       { value: '86', label: 'automated specs' },
@@ -237,7 +237,7 @@ export const journey: Stage[] = [
     visuals: [
       { key: 'aria-scene', caption: 'Aria in her scene.' },
       { key: 'aria-moods', caption: 'Hidden mood tags in each reply drive her face and gestures.' },
-      { key: 'aria-mission-control', caption: 'Mission Control, the dashboard I ran the build lanes from (5 at the start, 8 by the end).' },
+      { key: 'aria-mission-control', caption: 'Mission Control, the dashboard I ran the build lanes from (5 build lanes).' },
     ],
   },
   {
