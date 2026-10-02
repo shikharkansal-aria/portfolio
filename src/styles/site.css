@@ -78,7 +78,7 @@ html.locked, html.locked body { overflow: hidden; }
 .foot .social { align-self: center; }
 .foot .social-link { padding: 0; }
 .hero-figure {
-  --av-h: min(86svh, 1080px); --av-c: calc(var(--av-h) * 0.1623); /* half the photo's width (336 / 1035 / 2) */
+  --av-h: min(86svh, 1080px); --av-c: calc(var(--av-h) * 0.179); /* half the avatar's width (484 / 1350 / 2) */
   grid-column: 7 / 13; grid-row: 1; position: relative; display: flex; align-items: flex-end; justify-content: flex-start; pointer-events: none;
 }
 @media (min-width: 1600px) { .hero-figure { grid-column: 6 / 13; } }

@@ -48,9 +48,6 @@ const moreBody = () => `<div class="cols">${more.map((m) => `<article class="job
 const avatarImg = (cls: string, eager = false, sizes = '(max-width: 820px) 120px, 320px') =>
   `<img class="${cls}" src="/img/avatar-cutout.webp" srcset="/img/avatar-cutout-560.webp 201w, /img/avatar-cutout.webp 484w" sizes="${sizes}" alt="Shikhar’s 3D avatar: glasses, beard, peach polo, grey joggers and white sneakers" width="484" height="1350" decoding="async"${eager ? ' fetchpriority="high"' : ' loading="lazy"'}>`;
 
-/** Hero photo: a cut-out of Shikhar's own photo (the 3D guide stays the walkthrough host). */
-const heroPhoto = () =>
-  `<img class="hero-avatar hero-photo" src="/img/photo-cutout.webp" srcset="/img/photo-cutout-200.webp 200w, /img/photo-cutout.webp 336w" sizes="(max-width: 820px) 40vw, 32vh" alt="Shikhar Kansal in a black polo and navy trousers, smiling" width="336" height="1035" decoding="async" fetchpriority="high">`;
 
 // ---------- Landing (index.html) ----------
 
@@ -163,7 +160,8 @@ export function renderDesktop() {
       </div>
       <div class="hero-figure">
         <span class="hero-field" aria-hidden="true"></span>
-        ${heroPhoto()}
+        <span class="hero-shadow" aria-hidden="true"></span>
+        ${avatarImg('hero-avatar', true, '(max-width: 820px) 40vw, 32vh')}
       </div>
       <p class="hero-scroll" aria-hidden="true"><span>Scroll the journey</span><span class="hero-span">${esc(span)}</span></p>
     </section>
