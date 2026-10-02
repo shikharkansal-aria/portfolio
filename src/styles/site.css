@@ -49,6 +49,8 @@ html.locked, html.locked body { overflow: hidden; }
 }
 .hero-copy { grid-column: 1 / 9; grid-row: 1; align-self: center; display: flex; flex-direction: column; gap: var(--s5); padding-block: var(--s7) calc(var(--s8) + 16px); position: relative; z-index: 1; pointer-events: none; }
 .hero-copy > * { pointer-events: auto; }
+.hero-photo { width: 104px; height: 104px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--bg, #f6f7f9), 0 0 0 4px var(--line); margin-bottom: calc(var(--s2) * -1); }
+@media (max-width: 820px) { .hero-photo { grid-area: photo; width: 72px; height: 72px; margin: var(--s6) 0 0 3px; } }
 .hero-eyebrow { display: flex; align-items: center; gap: var(--s3); color: var(--muted); font-size: 0.9375rem; }
 .hero-eyebrow::before { content: ''; flex: none; width: 40px; height: 1px; background: var(--ink); }
 .hero-name { font-size: clamp(3.25rem, 6.2vw, 7.5rem); font-weight: 650; line-height: 0.95; letter-spacing: -0.03em; margin-left: -0.03em; }
@@ -362,9 +364,9 @@ html.locked, html.locked body { overflow: hidden; }
 }
 @media (max-width: 820px) {
   .topbar-nav .nav-link { display: none; }
-  .hero { grid-template-columns: minmax(0, 1fr) 38%; grid-template-areas: 'eyebrow eyebrow' 'name fig' 'intro intro' 'cta cta' 'links links'; min-height: 0; column-gap: var(--s2); padding-bottom: var(--s6); }
+  .hero { grid-template-columns: minmax(0, 1fr) 38%; grid-template-areas: 'photo photo' 'eyebrow eyebrow' 'name fig' 'intro intro' 'cta cta' 'links links'; min-height: 0; column-gap: var(--s2); padding-bottom: var(--s6); }
   .hero-copy { display: contents; }
-  .hero-eyebrow { grid-area: eyebrow; padding-top: var(--s6); }
+  .hero-eyebrow { grid-area: eyebrow; padding-top: var(--s4); }
   .hero-name { grid-area: name; align-self: end; font-size: clamp(2.75rem, 11vw, 4.5rem); padding-bottom: var(--s5); position: relative; z-index: 3; }
   .hero-figure { grid-area: fig; grid-column: auto; grid-row: auto; margin: var(--s4) 0 0; justify-content: center; }
   .hero { overflow-x: clip; } /* the field circle is wider than its column */

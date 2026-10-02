@@ -146,6 +146,7 @@ export function renderDesktop() {
   <main id="main">
     <section class="hero" aria-labelledby="hero-h">
       <div class="hero-copy">
+        <img class="hero-photo" src="/img/photo-round.webp" srcset="/img/photo-round-192.webp 192w, /img/photo-round.webp 480w" sizes="(max-width: 820px) 72px, 104px" alt="Shikhar Kansal, smiling, in sunglasses and a black polo" width="480" height="480" decoding="async" fetchpriority="high">
         <p class="hero-eyebrow">${esc(person.sub)}</p>
         <h1 id="hero-h" class="hero-name"><span>Shikhar</span> <span>Kansal</span></h1>
         <p class="hero-intro">${esc(introText)}</p>
