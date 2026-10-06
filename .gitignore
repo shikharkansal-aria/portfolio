@@ -4,3 +4,4 @@ dist
 .DS_Store
 .env*
 .privacy-patterns
+design/refs/

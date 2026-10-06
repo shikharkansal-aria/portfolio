@@ -6,7 +6,7 @@ import { esc, svg, icons } from './html';
 export interface Shot { key: string; file: string; file800?: string; w: number; h: number; alt: string }
 export interface StageLike {
   id: string;
-  kind: 'intro' | 'chapter' | 'feature' | 'compact' | 'skills' | string;
+  kind: 'intro' | 'chapter' | 'feature' | 'compact' | 'skills' | 'section' | string;
   period?: string;
   title?: string;
   org?: string;
@@ -36,7 +36,7 @@ const LAYOUT: Record<string, [Layout, NumStyle]> = {
   finanalyse: ['document', 'big'],
   hisaab: ['phones', 'grid'],
   'ecell-head': ['poster', 'grid'],
-  'agent-builder': ['numbers', 'grid'],
+  'agent-builder': ['numbers', 'inline'],
 };
 
 /** Screens of real web UIs get the browser chrome; charts, decks, documents, photos and logos don't. */
@@ -214,6 +214,11 @@ export function journeyHTML(stages: readonly StageLike[], shots: Map<string, Sho
     .filter((s) => s.kind !== 'intro')
     .map((s) => {
       const when = s.period ? `<p class="st-when"><span>${esc(s.period)}</span></p>` : '<p class="st-when" aria-hidden="true"></p>';
+      if (s.kind === 'section') {
+        return `<li class="st st-section" role="presentation" data-reveal>
+          <div class="st-section-label"><span>${esc(s.title ?? '')}</span></div>
+        </li>`;
+      }
       if (s.kind === 'chapter') {
         // Chapter openers show the year large, with the full period under it.
         const year = s.period?.match(/20\d\d/)?.[0];

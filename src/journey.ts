@@ -2,7 +2,7 @@
 // Every figure traces to career-kb, TRACK-RECORD, the approved resume, content.ts or islands.ts (numbers match exactly).
 // Items marked TODO_CONFIRM need Shikhar's sign-off before launch.
 
-export type StageKind = 'intro' | 'chapter' | 'feature' | 'compact' | 'skills';
+export type StageKind = 'intro' | 'chapter' | 'feature' | 'compact' | 'skills' | 'section';
 
 export interface StageNumber {
   value: string;
@@ -48,6 +48,18 @@ export const journey: Stage[] = [
       'I treat every decision as an experiment. Make the call, measure what happened, then pick the next test.',
       'Outside work I take photographs, play basketball, follow equities and make long-form explainer video essays.',
     ],
+    numbers: [],
+    visuals: [],
+  },
+  {
+    id: 'section-por',
+    period: '',
+    title: 'Positions of Responsibility',
+    org: '',
+    role: '',
+    kind: 'section',
+    lead: '',
+    points: [],
     numbers: [],
     visuals: [],
   },
@@ -112,9 +124,21 @@ export const journey: Stage[] = [
     visuals: [{ key: 'tedx-cert', caption: 'TEDx IIT Hyderabad certificate, 2024-25 tenure.' }],
   },
   {
+    id: 'section-workex',
+    period: '',
+    title: 'Work Experience',
+    org: '',
+    role: '',
+    kind: 'section',
+    lead: '',
+    points: [],
+    numbers: [],
+    visuals: [],
+  },
+  {
     id: 'kyrion',
     period: 'May to Jul 2025',
-    title: 'First internship',
+    title: 'RU Skilled',
     org: 'Kyrion Technologies (parent of RU Skilled and Techgyan)',
     role: 'Strategy & Business Intern, RU Skilled',
     kind: 'compact',
@@ -214,6 +238,18 @@ export const journey: Stage[] = [
     visuals: [],
   },
   {
+    id: 'section-projects',
+    period: '',
+    title: 'Projects',
+    org: '',
+    role: '',
+    kind: 'section',
+    lead: '',
+    points: [],
+    numbers: [],
+    visuals: [],
+  },
+  {
     id: 'aria',
     period: 'Apr to Sep 2026',
     title: 'Aria',
@@ -272,7 +308,7 @@ export const journey: Stage[] = [
     role: 'Conceived and shipped',
     kind: 'feature',
     lead:
-      'Each new client needed a crew of voice agents built by hand, which took about 5 days. I conceived and shipped a tool that turns a brand’s website and target workflow into a checked crew in 30 minutes.',
+      "Each new client needed a crew of voice agents built by hand: writing prompts, linking agents, wiring tools, building a demo page. That took about 5 days per client. I built a tool that does it in 30 minutes.",
     points: [
       'It reads up to 5 pages of the site in plain code, then writes a one-page brief the operator corrects before any prompt exists.',
       'One short planning call sets the crew, and each agent is written in parallel. A 4-agent crew that failed after 240+ seconds now finishes in 123 seconds with zero errors.',

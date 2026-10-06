@@ -7,7 +7,7 @@ export const person = {
     'I find where work is slow or broken, ship the fix, and measure it. At Nurix AI that meant cutting voice-agent setup from 5 days to 30 minutes.',
   sub: 'Product & Growth Intern at Nurix AI (now NuPlay) · B.Tech, IIT Hyderabad, class of 2027',
   seeking: 'APM, Product Analyst, Product Associate and Growth roles',
-  email: 'shikharkansal.sk@gmail.com',
+  email: 'ms23btech11024@iith.ac.in',
   linkedin: 'https://www.linkedin.com/in/shikhar-kansal-a6b42028b',
   github: 'https://github.com/shikharkansal-aria',
   resume: '/Shikhar-Kansal-Resume.pdf',
