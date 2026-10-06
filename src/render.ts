@@ -100,9 +100,18 @@ function walkthroughOverlay() {
           <span class="stops-count"><b data-stop-n>1</b> / ${n}</span><span class="stops-name" data-stop-name>${esc(islands[0].title)}</span>
           <span class="sr-only">: show all stops</span>
         </button>
-        <ol class="stops-list frost" id="stops-list" hidden>${islands
-          .map((i, k) => `<li><button type="button" class="stop-link" data-go="${i.id}"><span class="stop-link-n">${k + 1}</span>${esc(i.title)}</button></li>`)
-          .join('')}</ol>
+        <ol class="stops-list frost" id="stops-list" hidden>${(() => {
+          const sections: Record<string, string> = {
+            'agent-builder': 'Work Experience',
+            'hisaab': 'Projects',
+            'dragonfire': 'Personal Tools & Interests',
+          };
+          let k = 0;
+          return islands.map((i) => {
+            const sec = sections[i.id] ? `<li class="stop-section" role="presentation"><span>${esc(sections[i.id])}</span></li>` : '';
+            return `${sec}<li><button type="button" class="stop-link" data-go="${i.id}"><span class="stop-link-n">${++k}</span>${esc(i.title)}</button></li>`;
+          }).join('');
+        })()}</ol>
       </div>
       <button class="btn btn-big btn-primary" type="button" data-next-stop><span>Next<span class="next-word"> stop</span></span>${svg(icons.next)}</button>
       <button class="btn btn-big btn-accent bar-open" type="button" data-open-stop>Open project</button>
@@ -149,6 +158,9 @@ export function renderDesktop() {
   <main id="main">
     <section class="hero" aria-labelledby="hero-h">
       <div class="hero-copy">
+        <div class="hero-avatar-row">
+          <img class="hero-circle" src="/img/photo-cutout.webp" alt="Shikhar Kansal" width="144" height="144" decoding="async" fetchpriority="high">
+        </div>
         <p class="hero-eyebrow">${esc(person.sub)}</p>
         <h1 id="hero-h" class="hero-name"><span>Shikhar</span> <span>Kansal</span></h1>
         <p class="hero-intro">${esc(introText)}</p>
@@ -163,7 +175,7 @@ export function renderDesktop() {
       </div>
       <div class="hero-figure">
         <span class="hero-field" aria-hidden="true"></span>
-        ${heroPhoto()}
+        ${avatarImg('hero-avatar', true)}
       </div>
       <p class="hero-scroll" aria-hidden="true"><span>Scroll the journey</span><span class="hero-span">${esc(span)}</span></p>
     </section>
