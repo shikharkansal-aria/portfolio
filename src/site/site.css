@@ -110,21 +110,6 @@ html:not(.js) .js-only { display: none !important; }
 .menu li a { display: flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 12px; text-decoration: none; font-weight: 500; }
 .menu li a:hover { background: var(--parch); }
 
-/* Home: hero. The name is split to two corners of the stage; the avatar fills the right column edge to edge. */
-.hero { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); height: calc(100svh - 56px); min-height: 640px; max-height: 920px; max-width: 1600px; margin-inline: auto; }
-.hero-stage { grid-column: 1 / 10; position: relative; padding: var(--gut); }
-.hero-name { font-size: var(--xl); letter-spacing: -0.05em; line-height: 0.86; }
-.hn-a { display: block; }
-.hn-b { position: absolute; }
-.hn-b { right: var(--gut); bottom: var(--gut); }
-.hero-copy { position: absolute; left: 16%; top: 38%; max-width: 30ch; }
-.hero-lead { font-size: clamp(1.5rem, 2.4vw, 2.25rem); line-height: 1.16; letter-spacing: -0.03em; font-weight: 600; max-width: 21ch; }
-.hero-sub { margin-top: 18px; font-size: var(--m); line-height: 1.3; letter-spacing: -0.02em; color: var(--muted); }
-.hero-quick { position: absolute; right: var(--gut); top: 36%; list-style: none; display: grid; gap: 2px; text-align: right; }
-.hero-quick a { display: inline-flex; min-height: 40px; align-items: center; font-size: var(--s); color: var(--muted); text-decoration: none; }
-.hero-quick a:hover { color: var(--ink); text-decoration: underline; }
-.hero-figure { grid-column: 10 / 13; background: var(--parch); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; padding-top: 32px; }
-.hero-figure img { height: min(88%, 860px); width: auto; max-width: none; }
 
 /* Section heads */
 .sec-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col); align-items: end; margin-bottom: clamp(40px, 5vw, 72px); }
@@ -400,25 +385,14 @@ html:not(.js) .js-only { display: none !important; }
   .pipe ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pipe li { min-height: 0; }
   .pipe li:last-child { grid-column: 1 / -1; }
-  .hero-copy { left: var(--gut); right: 34%; }
-  .hero-quick { display: none; }
 }
 
 /* Phone: its own composition */
 @media (max-width: 820px) {
   .nav-links, .bar-cta { display: none; }
   .menu { display: block; }
-  .hero { grid-template-columns: minmax(0, 1fr); height: auto; min-height: 0; max-height: none; }
-  .hero-stage { grid-column: 1; min-height: 0; padding: 20px var(--gut) 32px; display: flex; flex-direction: column; }
-  .hn-a, .hn-b { position: static; display: block; }
-  .hn-b { text-align: right; margin-top: 4px; }
-  .hero-name { font-size: 19vw; }
-  .hero-lead { font-size: 1.5rem; }
   .change-xl .change-fig, .change-l .change-fig { font-size: 1.75rem; }
   .change .was, .change .arrow { font-size: 0.64em; }
-  .hero-copy { position: static; margin-top: 32px; max-width: none; }
-  .hero-figure { grid-column: 1; height: 62svh; min-height: 420px; padding-top: 20px; }
-  .hero-figure img { height: 100%; }
   .sec-head, .story-grid, .skill-grid, .two, .case-sec, .jyear-in, .about-in, .bleed-more { grid-template-columns: minmax(0, 1fr); }
   .sec-head h2, .sec-head p, .story-pin, .story-steps, .skill-pic, .skill-side, .two > h2, .two > :not(h2),
   .case-sec h2, .case-sec > div, .case-sec > ul, .jyear-side, .jentries, .about-in > div:first-child, .about-photo { grid-column: 1; }
