@@ -664,3 +664,8 @@ html:not(.js) .js-only { display: none !important; }
 .hero-dots button[aria-pressed='true']::before { width: 1.5rem; background: #ffffff; }
 .hero-dots button:focus-visible { outline: 3px solid #ffffff; outline-offset: -4px; border-radius: 999px; }
 .hero:not(.is-ready) .hero-dots, .hero.no-gl .hero-dots { display: none; }
+
+/* Vertical swipes still scroll the page; sideways swipes on the scene change the frame (hero3d.ts). */
+.hero-canvas canvas { touch-action: pan-y; }
+.hero-dots button.arrow::before { content: '‹'; width: auto; height: auto; background: none; color: #ffffff; font-size: 1.75rem; line-height: 1; transform: translateY(-0.06em); }
+.hero-dots button.arrow.next::before { content: '›'; }

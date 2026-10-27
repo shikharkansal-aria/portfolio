@@ -418,6 +418,7 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     gl.setPixelRatio(Math.min(devicePixelRatio, matchMedia('(pointer: coarse)').matches ? 1.5 : 2));
     gl.setSize(w, h, false);
     camera.aspect = w / h;
+    labelMesh.visible = camera.aspect >= 1.2; // on a narrow scene the tag would run off the edge; the screen frame carries the same label
     const t = Math.tan((camera.fov * Math.PI) / 360);
     const needH = 6.0 / 2 / t;
     const needW = (camera.aspect < 1.2 ? 7.4 : 9.0) / 2 / (t * camera.aspect);
@@ -465,10 +466,12 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     hover = null;
     host.style.cursor = '';
   });
+  let swiped = false;
   host.addEventListener('click', (e) => {
+    if (swiped) return;
     const h = pick(e);
     if (h === 'cube') location.href = '/work/hisaab/';
-    else if (h === 'screen' && (e as PointerEvent).pointerType === 'mouse') location.href = frames[cur].href;
+    else if (h === 'screen') location.href = frames[cur].href;
   });
 
   // Dots under the scene: pick what the screen shows. Real buttons, so keyboards and screen readers get them too.
@@ -476,6 +479,15 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
   dots.className = 'hero-dots';
   dots.setAttribute('role', 'group');
   dots.setAttribute('aria-label', 'Choose what the screen shows');
+  const arrow = (dir: number, label: string) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = `arrow ${dir < 0 ? 'prev' : 'next'}`;
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', () => step(dir));
+    return b;
+  };
+  dots.append(arrow(-1, 'Previous'));
   frames.forEach((f, i) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -485,8 +497,9 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     b.addEventListener('click', () => goTo(i));
     dots.append(b);
   });
+  dots.append(arrow(1, 'Next'));
   host.append(dots);
-  const markDots = (active: number) => [...dots.children].forEach((b, i) => b.setAttribute('aria-pressed', String(i === active)));
+  const markDots = (active: number) => [...dots.querySelectorAll('button:not(.arrow)')].forEach((b, i) => b.setAttribute('aria-pressed', String(i === active)));
   function goTo(i: number) {
     if (nxt >= 0) { cur = nxt; nxt = -1; }
     if (i === cur) return;
@@ -496,6 +509,26 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     markDots(i);
     loop();
   }
+  const step = (dir: number) => goTo((((nxt >= 0 ? nxt : cur) + dir) % frames.length + frames.length) % frames.length);
+
+  // Swipe (touch, pen or a mouse drag) and sideways wheel or trackpad scroll change the frame, like the arrows.
+  let down: { x: number; y: number } | null = null;
+  host.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY }; swiped = false; });
+  host.addEventListener('pointerup', (e) => {
+    if (!down) return;
+    const dx = e.clientX - down.x, dy = e.clientY - down.y;
+    down = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) { swiped = true; step(dx < 0 ? 1 : -1); }
+  });
+  host.addEventListener('pointercancel', () => { down = null; });
+  let wheelAt = 0;
+  host.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 14) {
+      e.preventDefault();
+      const now = performance.now();
+      if (now - wheelAt > 650) { wheelAt = now; step(e.deltaX > 0 ? 1 : -1); }
+    }
+  }, { passive: false });
 
   function draw(now = performance.now()) {
     const time = now / 1000;
