@@ -3,8 +3,8 @@
 ## Decisions already made (by Shikhar, 2026-09-29)
 - **Audience:** recruiters and hiring managers for product roles — APM, Product Analyst, Product Associate, Growth.
   The site must prove product judgment: problems picked, decisions and trade-offs, what shipped, measured outcomes.
-- **Style:** playful and interactive (e.g. an OS-desktop or terminal metaphor; his animated DragonFire dragon
-  and Aria virtual human are natural motifs) — memorable, but never at the cost of clarity.
+- **Style (updated 2026-10-27):** editorial multi-page site with tabs (Work, Journey, About, Resume), easy for a recruiter
+  to navigate and not AI-generated looking. See `design/tokens.md`. The earlier playful 3D walkthrough was retired.
 - **Must also have a one-click "Recruiter view":** a plain, fast, one-page version (who he is, 3–4 flagship
   case studies, experience, resume PDF, contact) reachable from the first screen. Many recruiters skim for 30 seconds.
 - **Hosting:** Vercel. Build locally first; deploy only after Shikhar approves (he'll log in with `npx vercel login`).

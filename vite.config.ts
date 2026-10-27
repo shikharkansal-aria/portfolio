@@ -1,31 +1,34 @@
 import { defineConfig, type Plugin } from 'vite';
-import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { renderDesktop, renderRecruiter } from './src/render';
+import { relative, resolve } from 'node:path';
+import { home, work, casePage, journeyPage, about, recruiter, caseIds } from './src/site/pages.ts';
 
-// Pre-render every page at build time so content is in the HTML (fast LCP, works without JS).
+// Every page is rendered to static HTML at build time (fast, works without JavaScript).
+// Each route has a one-line index.html shell; this plugin fills it.
+const routes: Record<string, () => { head: string; body: string }> = {
+  'index.html': home,
+  'work/index.html': work,
+  'journey/index.html': journeyPage,
+  'about/index.html': about,
+  'recruiter/index.html': recruiter,
+  ...Object.fromEntries(caseIds.map((id) => [`work/${id}/index.html`, () => casePage(id)])),
+};
+
 const prerender = (): Plugin => ({
   name: 'prerender',
   transformIndexHtml(html, ctx) {
-    const body = /recruiter[\\/]index\.html$/.test(ctx.filename) || ctx.path.startsWith('/recruiter')
-      ? renderRecruiter()
-      : renderDesktop();
-    return html.replace('<!--app-->', body);
+    const key = relative(import.meta.dirname, ctx.filename).split('\\').join('/');
+    const render = routes[key];
+    if (!render) throw new Error(`No page for ${key}`);
+    const p = render();
+    return html.replace('<!--head-->', p.head).replace('<!--body-->', p.body);
   },
 });
 
-// Which custom guide model ships in public/avatar/ (decided at build time, so the browser never probes for missing files).
-const avatarKind = existsSync(resolve(__dirname, 'public/avatar/shikhar.vrm')) ? 'vrm'
-  : existsSync(resolve(__dirname, 'public/avatar/shikhar.glb')) ? 'glb' : '';
-
 export default defineConfig({
   plugins: [prerender()],
-  define: { __AVATAR_KIND__: JSON.stringify(avatarKind) },
   build: {
-    // The 3D walkthrough chunk (~170 KB gzip) loads only after "Start the walkthrough".
-    chunkSizeWarningLimit: 720,
     rollupOptions: {
-      input: { main: resolve(__dirname, 'index.html'), recruiter: resolve(__dirname, 'recruiter/index.html') },
+      input: Object.fromEntries(Object.keys(routes).map((k) => [k.replace(/\/?index\.html$/, '') || 'home', resolve(import.meta.dirname, k)])),
     },
   },
 });

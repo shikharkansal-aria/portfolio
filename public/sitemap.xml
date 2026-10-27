@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://shikhar-kansal.vercel.app/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/journey/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/about/</loc></url>
   <url><loc>https://shikhar-kansal.vercel.app/recruiter/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/agent-builder/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/nuplay-electronics/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/hisaab/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/aria/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/ey-cafta/</loc></url>
+  <url><loc>https://shikhar-kansal.vercel.app/work/finanalyse/</loc></url>
 </urlset>
