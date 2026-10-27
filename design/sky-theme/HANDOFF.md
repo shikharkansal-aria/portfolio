@@ -44,3 +44,9 @@ To regenerate the poster after changing the scene: open `/?poster=1`, then in th
 - `src/site/site.css`: the old hero rules are removed (to be replaced). Restore them from `redesign-editorial` if you need the old hero back.
 - `package.json`: adds three, @types/three, @fontsource/dm-serif-display, @fontsource-variable/oswald.
 - `design/sky-theme/clouds.mjs`: draws original clouds as an SVG and renders `clouds.png` with Playwright. First draft is `clouds-draft.webp`; it reads too flat and noisy. Next: fewer, larger puffs, stronger white tops, less noise.
+
+## Screens, motion and tooling (27 Oct 2026, later)
+- The taste-skill inspector is installed globally (`~/.agents/skills/design-taste-frontend`, linked into `~/.claude/skills`). Run: `node ~/.agents/skills/design-taste-frontend/scripts/inspect.mjs <url> --widths 3840,2560,1920,1440,1024,820,390,360 --allow gradient,glass,shadow,button-fx,text-shadow,hairline,outlined-box,font-count,hero-words,no-footage,few-pictures,still-page,card-rows,eyebrow,covered-text,size-count`. The `--allow` list is the sky theme on purpose (gradients, glass, shadows, outlines, Oswald ticker). With it: 0 FAIL except blank-gap and off-centre advisories at 360px, which are unrevealed-content and inspector-viewport artefacts.
+- Every pixel size in `site.css` is now rem. From 1920px up `html { font-size: calc(100vw / 120) }`, so a 4K TV shows the same layout as 1920 at twice the size. Below 1920 the layout is fluid (clamp, vw, grid) with breakpoints at 1200, 1080 and 820.
+- Checked: no element crosses the screen edge at 11 widths (320 to 3840) on 6 pages; reduced motion forced in Chrome (switch starts OFF, scene static); landscape phone, tablet, 1366x768, 3440x1440 screenshots.
+- Safari text-stroke bold: not tested (no Safari tool, by choice).

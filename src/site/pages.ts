@@ -18,7 +18,7 @@ function change(c: CaseStudy, size: 'xl' | 'l' | 'm' = 'l') {
 
 /** Agent Builder has no shareable screenshot (client platform), so its flow is drawn as an interface fragment. */
 const pipeline = (tone: 'dark' | 'light' = 'dark') => `
-  <figure class="pipe pipe-${tone}" data-ui>
+  <figure class="pipe pipe-${tone}">
     <ol>
       <li><strong>Brand website</strong><span>Up to 5 pages read in plain code</span></li>
       <li><strong>One-page brief</strong><span>The operator corrects it before any prompt exists</span></li>
