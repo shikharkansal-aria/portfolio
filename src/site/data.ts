@@ -24,7 +24,7 @@ export interface CaseStudy {
   org: string;
   role: string;
   period: string;
-  kind: 'Work at Nurix AI' | 'Competition' | 'Personal project' | 'Hackathon';
+  kind: 'Work at Nurix AI' | 'Competition' | 'Personal project' | 'Hackathon' | 'Startup in the making';
   /** One sentence, shown on cards and at the top of the case page. */
   summary: string;
   headline: { before?: string; after: string; label: string };
@@ -110,36 +110,43 @@ export const cases: CaseStudy[] = [
   {
     id: 'hisaab',
     title: 'Hisaab',
-    org: 'The Ken agentic-commerce case competition (₹20L)',
-    role: 'Reached Round 3',
-    period: 'September 2026',
-    kind: 'Competition',
+    org: 'My startup in the making',
+    role: 'Founder, building it',
+    period: 'September 2026 to now',
+    kind: 'Startup in the making',
     summary:
-      'An Android app that names the small UPI transfers bank apps can’t categorise, grounded in a 26-student survey. It reached Round 3 of a ₹20L competition.',
-    headline: { after: 'Round 3', label: 'of The Ken’s ₹20L case competition' },
+      'An app that asks one question after every UPI payment, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s ₹20L case competition and is now an Android app in a free friends beta, on its way to Google Play.',
+    headline: { before: 'Case competition entry', after: 'App in beta', label: 'Hisaab, from a Round 3 entry to a product heading for Google Play' },
     problem: [
-      'UPI tells you where money went, never what it was for. Small peer transfers (chai, canteen, splitting a bill) pile up with no category, and bank apps can’t tell a dinner split from a repaid debt.',
+      'UPI tells you where money went, never what it was for. Small payments (chai, canteen, splitting a bill) pile up with no category, and bank apps can’t tell a dinner split from a repaid debt.',
       'I surveyed 26 students to check the pain was real. 73% avoid checking their balance, and 77% named small UPI transfers as the spending they can’t account for.',
     ],
     did: [
-      'I read payment notifications instead of SMS. SMS and accessibility permissions are Play Store rejection risks, and I wanted something a student could install from the store.',
-      'The app asks you to name a person once, with up to 3 one-tap category buttons, then reuses that label for later payments to them.',
-      'I field-tested the pre-payment card. Triggering it when the payment app opened fired on ordinary balance checks, so I moved the trigger to the moment you scan a QR code.',
-      'The first build broke 7 of our design rules within 20 minutes of real use, so I turned some rules into code: a build check fails if the app ever shows streaks, grades or exclamation marks.',
+      'For The Ken’s case competition I built the first Android version and, for Round 3, an agent build on Pine Labs’ AgenticOrg platform: four agents (ledger, payment rails, voice and month) with MCP servers for Gnani speech and mock payment and delivery services. We submitted it on 4 October.',
+      'After the competition I kept going and rebuilt Hisaab as a product. After every payment it asks one question, and the reason is always typed, never picked from a preset list. It remembers the person or shop, folds a bank SMS and an app alert into one row, cancels a debit when its refund arrives, and leaves transfers between your own accounts out of the totals.',
+      'I made privacy the product, not a policy page. The Play build has no internet permission, no account and no ads; everything stays on the phone, with backup, restore and Delete everything built in. The privacy policy is public.',
+      'I set the business model early: free for the friends beta, then a one-time lifetime unlock on Google Play (the aim is ₹2: “Hisaab bas 2 rupay mai”), with no subscription and no free-then-paid trap.',
+      'I redesigned every screen in a premium ledger style and kept quality measurable: the build fails if the app ever shows streaks, grades or judging words, and every change runs the full test suite.',
+      'I started telling people about it: Hisaab’s X account went live on 26 October, with posts for X, LinkedIn and Instagram that go out only after I approve each one.',
     ],
-    result: ['Reached Round 3 of The Ken’s ₹20L case competition with a working Android build: 8,541 lines of Kotlin and 22 test files.'],
-    learned: 'Field-testing taught me more than the plan did. I now write the rules down first and test the build against them.',
+    result: [
+      'Hisaab is in a free friends beta. Next: the Google Play closed test (12 testers for 14 days), then publishing.',
+    ],
+    learned: 'A competition gives you a deadline; a product needs a reason to open it tomorrow. I now judge every feature by whether it gets a payment its reason in seconds.',
     figures: [
       { value: '26', label: 'students surveyed before any code' },
-      { value: '77%', label: 'can’t account for small UPI transfers' },
-      { value: '8,541', label: 'lines of Kotlin, 22 test files' },
-      { value: 'Round 3', label: 'of the ₹20L competition' },
+      { value: '4', label: 'agents in the Round 3 build' },
+      { value: '390', label: 'automated tests passing (24 October)' },
+      { value: '₹2', label: 'one-time unlock we are aiming for, no subscription' },
     ],
     shots: [
-      { key: 'hisaab-phones', w: 1600, h: 660, alt: 'Five Hisaab phone screens in a row: monthly summary, payment scan notification, categorising a transfer, asking a question in your own language, and the weekly inbox', caption: 'Hisaab screens, from the month view to the one-tap question.' },
+      { key: 'hisaab-phones', w: 1600, h: 660, alt: 'Five Hisaab phone screens in a row: monthly summary, payment scan notification, categorising a transfer, asking a question in your own language, and the weekly inbox', caption: 'Early Hisaab screens from the case competition.' },
       { key: 'ken-flow', w: 1440, h: 900, alt: 'Hisaab flow map: seven states of one store payment end to end, with an animated phone mock', caption: 'The flow from payment notification to a named payee.' },
     ],
-    links: [{ href: 'https://hisaab-landing-brown.vercel.app/', label: 'See the Hisaab page' }],
+    links: [
+      { href: 'https://hisaab-landing-brown.vercel.app/', label: 'See the Hisaab page' },
+      { href: 'https://shikharkansal-aria.github.io/hisaab-policy/', label: 'Read the privacy policy' },
+    ],
   },
   {
     id: 'aria',
@@ -370,7 +377,7 @@ export const journey: Year[] = [
       { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A Hinglish voice companion; first-audio latency down 57%.', caseId: 'aria' },
       { title: 'NuPlay Electronics', org: 'Nurix AI', role: 'Built and ran the demo', period: 'April to September 2026', text: 'A 5-agent support crew, and the 19-day silent outage I traced and fixed.', caseId: 'nuplay-electronics' },
       { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Setting up a new client’s voice agents went from 5 days by hand to 30 minutes; colleagues ran 7 later engagements on it.', caseId: 'agent-builder' },
-      { title: 'Hisaab', org: 'The Ken case competition', role: 'Round 3', period: 'September 2026', text: 'A UPI expense app grounded in a 26-student survey.', caseId: 'hisaab' },
+      { title: 'Hisaab', org: 'The Ken case competition, then my own startup', role: 'Founder', period: 'September 2026 to now', text: 'Started as a Round 3 case entry; now an app in a free friends beta, heading for Google Play.', caseId: 'hisaab' },
     ],
   },
 ];

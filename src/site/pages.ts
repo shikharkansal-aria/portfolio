@@ -75,6 +75,7 @@ export function home() {
         </div>
       </div>
       <ul class="hero-quick" aria-label="Jump to">
+        <li><a href="#nb-h">Now building: Hisaab</a></li>
         <li><a href="#work-h">Selected work</a></li>
         <li><a href="#jr-h">My journey</a></li>
         <li><a href="/recruiter/">30-second version</a></li>
@@ -85,11 +86,27 @@ export function home() {
     </div>
   </section>
 
+  <section class="building" aria-labelledby="nb-h">
+    <div class="wrap building-in">
+      <div class="building-text reveal">
+        <h2 id="nb-h" class="building-h"><img src="/img/hisaab-logo.svg" width="56" height="56" alt="" /> Now building: Hisaab</h2>
+        <p>My startup in the making. After every UPI payment it asks one question, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s case competition. I kept going after Round 3 and rebuilt it as a product: private by design, with no internet permission, no account and no ads. It is in a free friends beta and heading for Google Play, with a one-time unlock instead of a subscription.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="/work/hisaab/">Read the Hisaab story</a>
+          ${ext(hs.links![0].href, 'See the Hisaab page')}
+        </div>
+      </div>
+      <dl class="building-figs reveal">
+        ${hs.figures.map((f) => `<div><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`).join('')}
+      </dl>
+    </div>
+  </section>
+
   <section class="gallery" aria-labelledby="work-h">
     <div class="wrap">
       <div class="sec-head reveal">
         <h2 id="work-h">Selected work</h2>
-        <p>Six projects from my internship at Nurix AI, two competitions and my own time. Each number below is one I measured, with what it measures written under it.</p>
+        <p>Six projects: two from my internship at Nurix AI, my startup, a competition, a hackathon and one of my own. Each number below is one I measured, with what it measures written under it.</p>
       </div>
     </div>
 
@@ -141,7 +158,7 @@ export function home() {
     <div class="wrap">
       <div class="sec-head reveal">
         <h2 id="jr-h">Four years, start to finish</h2>
-        <p>From a first-year job finding sponsors for E-Cell to building AI products at Nurix. Scroll through it, or <a href="/journey/">read every step</a>.</p>
+        <p>From a first-year job finding sponsors for E-Cell to building AI products at Nurix and starting Hisaab. Scroll through it, or <a href="/journey/">read every step</a>.</p>
       </div>
       <div class="story-grid">
         <div class="story-pin" aria-hidden="true">
@@ -358,14 +375,14 @@ export function journeyPage() {
     <div class="wrap now-in reveal">
       <div>
         <h2 id="now-h">Now</h2>
-        <p class="now-text">I graduate from IIT Hyderabad in 2027. ${esc(person.seeking)}</p>
+        <p class="now-text">I graduate from IIT Hyderabad in 2027. Alongside college I am building <a href="/work/hisaab/">Hisaab</a>, my startup in the making, now in a free friends beta. ${esc(person.seeking)}</p>
       </div>
       <div class="actions"><a class="btn btn-accent" href="${mailto()}">Email me</a><a class="chev chev-light" href="${person.resume}">Download resume</a></div>
     </div>
   </section>`;
   return page({
     title: 'Journey · Shikhar Kansal',
-    description: 'From E-Cell and a campus startup in 2023 to building voice-agent products at Nurix AI in 2026, year by year.',
+    description: 'From E-Cell and a campus startup in 2023 to voice-agent products at Nurix AI and my own startup, Hisaab, in 2026, year by year.',
     path: '/journey/',
     nav: 'journey',
     body,
