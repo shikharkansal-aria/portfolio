@@ -124,33 +124,33 @@ export function home() {
       </div>
     </div>
 
-    <article class="tile tile-full tile-dark bend" aria-labelledby="t-ab">
+    <article class="tile tile-full tile-dark bend" aria-labelledby="t-hs">
+      <div class="tile-center">
+        <h3 id="t-hs"><a href="/work/hisaab/">Hisaab</a></h3>
+        <p class="tile-sub">${esc(hs.summary)}</p>
+        ${change(hs, 'xl')}
+        ${caseLink(hs)}
+      </div>
+      <div class="wrap tile-wide"><a class="tile-media" href="/work/hisaab/" tabindex="-1" aria-hidden="true">${shot(hs.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px' })}</a></div>
+    </article>
+
+    <article class="tile tile-full tile-light bend" aria-labelledby="t-ab">
       <div class="tile-center">
         <h3 id="t-ab"><a href="/work/agent-builder/">Agent Builder</a></h3>
         <p class="tile-sub">${esc(ab.summary)}</p>
         ${change(ab, 'xl')}
         ${caseLink(ab)}
       </div>
-      <div class="wrap tile-wide">${pipeline('dark')}</div>
-    </article>
-
-    <article class="tile tile-full tile-light bend" aria-labelledby="t-np">
-      <div class="tile-center">
-        <h3 id="t-np"><a href="/work/nuplay-electronics/">NuPlay Electronics</a></h3>
-        <p class="tile-sub">${esc(np.summary)}</p>
-        ${change(np, 'l')}
-        ${caseLink(np)}
-      </div>
-      <div class="wrap tile-wide"><a class="tile-media" href="/work/nuplay-electronics/" tabindex="-1" aria-hidden="true">${shot(np.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px' })}</a></div>
+      <div class="wrap tile-wide">${pipeline('light')}</div>
     </article>
 
     <div class="wrap tiles-two">
-      ${half(hs, 'light')}
-      ${half(ar, 'dark')}
+      ${half(np, 'dark')}
+      ${half(ar, 'light')}
     </div>
     <div class="wrap tiles-two flip">
-      ${half(ey, 'dark', ey.shots[1])}
-      ${half(fa, 'light')}
+      ${half(ey, 'light', ey.shots[1])}
+      ${half(fa, 'dark')}
     </div>
   </section>
 
@@ -260,7 +260,7 @@ export function work() {
             ${change(c, 'l')}
             ${caseLink(c)}
           </div>
-          <div class="wrap tile-wide">${c.id === 'agent-builder' ? pipeline('dark') : `<a class="tile-media" href="/work/${c.id}/" tabindex="-1" aria-hidden="true">${shot(c.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px', eager: i < 2 })}</a>`}</div>
+          <div class="wrap tile-wide">${c.id === 'agent-builder' ? pipeline(i % 2 ? 'light' : 'dark') : `<a class="tile-media" href="/work/${c.id}/" tabindex="-1" aria-hidden="true">${shot(c.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px', eager: i < 2 })}</a>`}</div>
         </article>`,
       )
       .join('')}
