@@ -1,19 +1,20 @@
 import './site.css';
-import { ledger } from './data.ts';
 
 const $$ = <T extends Element>(sel: string, root: ParentNode = document) => [...root.querySelectorAll<T>(sel)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Staggered entrances. Content is only hidden while JS runs and motion is allowed (see site.css).
 const reveals = $$<HTMLElement>('.reveal');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(
     (entries) => {
-      const shown = entries.filter((e) => e.isIntersecting);
-      shown.forEach((e, i) => {
-        (e.target as HTMLElement).style.setProperty('--d', `${i * 80}ms`);
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      });
+      entries
+        .filter((e) => e.isIntersecting)
+        .forEach((e, i) => {
+          (e.target as HTMLElement).style.setProperty('--d', `${i * 80}ms`);
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        });
     },
     { rootMargin: '0px 0px -8% 0px' },
   );
@@ -34,28 +35,63 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Home ledger: pick a line to see it to scale.
-const detail = document.querySelector<HTMLElement>('.ledger-detail');
-if (detail) {
-  const picks = $$<HTMLButtonElement>('.pick');
-  const set = (f: string) => detail.querySelector<HTMLElement>(`[data-f="${f}"]`)!;
-  const bars = detail.querySelector<HTMLElement>('.bars')!;
-  const nowBar = detail.querySelector<HTMLElement>('.now-bar')!;
-  picks.forEach((btn) =>
-    btn.addEventListener('click', () => {
-      const row = ledger[Number(btn.dataset.row)];
-      picks.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-      bars.hidden = row.ratio == null;
-      set('before').textContent = row.before;
-      set('after').textContent = row.after;
-      set('note').textContent = row.note;
-      (set('link') as HTMLAnchorElement).href = `/work/${row.id}/`;
-      if (row.ratio != null) nowBar.style.setProperty('--r', String(Math.max(row.ratio, 0.012)));
-    }),
+// Home journey: the pinned year follows whichever step crosses the middle of the screen.
+const pin = document.querySelector<HTMLElement>('.story-pin');
+if (pin && 'IntersectionObserver' in window) {
+  const year = pin.querySelector<HTMLElement>('[data-year-display]')!;
+  const chapter = pin.querySelector<HTMLElement>('[data-chapter-display]')!;
+  let current = year.textContent;
+  const set = (y: string, c: string) => {
+    if (y === current) return;
+    current = y;
+    if (reduce) {
+      year.textContent = y;
+      chapter.textContent = c;
+      return;
+    }
+    pin.classList.add('swap');
+    setTimeout(() => {
+      year.textContent = y;
+      chapter.textContent = c;
+      pin.classList.remove('swap');
+    }, 200);
+  };
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target as HTMLElement;
+          set(el.dataset.year!, el.dataset.chapter!);
+        }
+      }),
+    { rootMargin: '-45% 0px -45% 0px' },
   );
+  $$<HTMLElement>('.story-step').forEach((s) => io.observe(s));
 }
 
-// Journey: show one year or all.
+// Home skills: one row open at a time; its picture shows on the left.
+const skillRows = $$<HTMLLIElement>('.skill-row');
+if (skillRows.length) {
+  const imgs = $$<HTMLImageElement>('[data-skill-img]');
+  const open = (i: number) => {
+    skillRows.forEach((row, k) => {
+      const on = k === i;
+      row.classList.toggle('on', on);
+      row.querySelector('button')!.setAttribute('aria-expanded', String(on));
+      row.querySelector<HTMLElement>('.skill-more')!.hidden = !on;
+    });
+    imgs.forEach((img, k) => img.classList.toggle('on', k === i));
+  };
+  skillRows.forEach((row, i) => {
+    const btn = row.querySelector('button')!;
+    btn.addEventListener('click', () => open(i));
+    btn.addEventListener('mouseenter', () => {
+      if (matchMedia('(hover: hover)').matches) open(i);
+    });
+  });
+}
+
+// Journey page: show one year or all, kept in the URL.
 const chooser = document.querySelector<HTMLElement>('.chooser');
 if (chooser) {
   const buttons = $$<HTMLButtonElement>('button', chooser);

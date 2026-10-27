@@ -14,8 +14,7 @@ const NAV: { key: NavKey; href: string; label: string }[] = [
   { key: 'about', href: '/about/', label: 'About' },
 ];
 
-export const mailto = () =>
-  `mailto:${person.email}?subject=${encodeURIComponent('Hello Shikhar')}`;
+export const mailto = () => `mailto:${person.email}?subject=${encodeURIComponent('Hello Shikhar')}`;
 
 export function head(o: { title: string; description: string; path: string }) {
   const url = SITE + o.path;
@@ -23,9 +22,9 @@ export function head(o: { title: string; description: string; path: string }) {
   const d = esc(o.description);
   return `
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#EEF0EB" />
+    <meta name="theme-color" content="#ffffff" />
     <title>${t}</title>
     <meta name="description" content="${d}" />
     <link rel="canonical" href="${url}" />
@@ -61,7 +60,7 @@ export function nav(active: NavKey) {
       <nav aria-label="Main">
         <ul class="nav-links">${links}${resume}</ul>
       </nav>
-      <a class="btn btn-accent bar-cta" href="${mailto()}">Email me</a>
+      <a class="btn btn-accent btn-sm bar-cta" href="${mailto()}">Email me</a>
       <details class="menu">
         <summary>Menu</summary>
         <ul>${links}${resume}<li><a href="${mailto()}">Email me</a></li></ul>
@@ -72,26 +71,33 @@ export function nav(active: NavKey) {
 
 export function footer() {
   return `
-  <footer class="foot">
-    <div class="wrap foot-in">
-      <p class="foot-big">Hiring for product or growth?<br />Let’s talk.</p>
-      <ul class="foot-links">
-        <li><a href="${mailto()}">${esc(person.email)}</a></li>
-        <li><a href="tel:${person.phone}">${esc(person.phoneDisplay)}</a></li>
-        <li><a href="${person.linkedin}" rel="noopener">LinkedIn</a></li>
-        <li><a href="${person.github}" rel="noopener">GitHub</a></li>
-        <li><a href="${person.resume}">Resume (PDF)</a></li>
+  <footer class="foot" aria-labelledby="foot-h">
+    <div class="foot-photo">
+      <img src="/img/photo-cutout.webp" width="336" height="1035" alt="Shikhar Kansal in a black polo, smiling" loading="lazy" decoding="async" />
+    </div>
+    <div class="foot-side">
+      <h2 id="foot-h" class="foot-mark">Shikhar Kansal</h2>
+      <ul class="foot-menu">
+        <li><a href="/work/">Work</a></li>
+        <li><a href="/journey/">Journey</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="${person.resume}">Resume</a></li>
+        <li><a href="/recruiter/">30-second version</a></li>
       </ul>
-      <p class="foot-small">© 2026 Shikhar Kansal · <a href="/recruiter/">The 30-second version</a></p>
+      <div class="foot-blocks">
+        <p><a href="${mailto()}">${esc(person.email)}</a><br /><a href="tel:${person.phone}">${esc(person.phoneDisplay)}</a></p>
+        <p><a href="${person.linkedin}" rel="noopener">LinkedIn</a><br /><a href="${person.github}" rel="noopener">GitHub</a></p>
+      </div>
+      <p class="foot-legal">© 2026 Shikhar Kansal · IIT Hyderabad</p>
     </div>
   </footer>`;
 }
 
 /** Responsive screenshot. The -800 files exist next to every full-size image. */
-export function shot(s: Shot, o: { sizes?: string; eager?: boolean; caption?: boolean } = {}) {
+export function shot(s: Shot, o: { sizes?: string; eager?: boolean; caption?: boolean; cls?: string } = {}) {
   const base = `/img/journey/${s.key}`;
   const sizes = o.sizes ?? '(max-width: 820px) 100vw, 60vw';
-  const img = `<img src="${base}-800.webp" srcset="${base}-800.webp 800w, ${base}.webp ${s.w}w" sizes="${sizes}" width="${s.w}" height="${s.h}" alt="${esc(s.alt)}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" />`;
+  const img = `<img${o.cls ? ` class="${o.cls}"` : ''} src="${base}-800.webp" srcset="${base}-800.webp 800w, ${base}.webp ${s.w}w" sizes="${sizes}" width="${s.w}" height="${s.h}" alt="${esc(s.alt)}"${o.eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" />`;
   return o.caption === false ? img : `<figure class="shot">${img}<figcaption>${esc(s.caption)}</figcaption></figure>`;
 }
 

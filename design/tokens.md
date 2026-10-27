@@ -1,22 +1,23 @@
-# Design tokens v3: editorial ledger (decided 2026-10-27)
+# Design v4: Apple-style gallery (decided by Shikhar, 2026-10-27)
 
-Replaces v2 (light 3D studio walkthrough). Shikhar asked for a multi-page site a recruiter can navigate easily,
-that does not look AI-generated. Built with the design-taste-frontend rules: no gradients, glass, eyebrows,
-monospace, hairlines, pill badges or icon cards.
+Shikhar chose: Apple-style light gallery · journey told with the year pinned while that year's work scrolls ·
+Agent Builder figure written as "5 days by hand → 30 minutes, to set up AI voice agents for one new client" ·
+his 3D Bitmoji as the hero picture.
 
-Idea: his work is booked like a ledger. Every project shows its before and after, measured.
+Built with: taste-skill v2 (direction dealt: "The pinned poster", seed 351028969, palette and type kept from the
+Apple reference), awesome-design-md/apple tokens, vercel-labs web-design-guidelines, Impeccable detect,
+Hallmark sloplint (render tier), Playwright and playwright-cli. Every page: 0 FAIL in taste-skill inspect.
 
 | Token | Value | Use |
 |---|---|---|
-| `--ground` | `#EEF0EB` | page |
-| `--paper` | `#F7F8F5` | lighter step for alternate sections and rows |
-| `--step` | `#E1E5DD` | tone step for selected rows, quiet buttons, image wells |
-| `--ink` | `#121512` | text, dark fields (flagship, footer) |
-| `--muted` | `#434A43` | secondary text |
-| `--soft` | `#5C645C` | struck-out "before" numbers (AA at all sizes) |
-| `--accent` | `#0B6B4B` | ledger green: primary action, "after" numbers, photo field |
-| `--accent-on-dark` | `#7FDCB3` | accent on dark fields |
+| `--bg` | `#ffffff` | page |
+| `--parch` | `#f5f5f7` | alternate canvas, light tiles, panels |
+| `--step` | `#e8e8ed` | quiet buttons, image wells |
+| `--ink` | `#1d1d1f` | text |
+| `--muted` | `#56565b` | secondary text (AA on white and parchment) |
+| `--dark` | `#000000` | dark tiles, contact, footer of case pages |
+| `--accent` | `#0066cc` | actions and "after" figures; `#2997ff` on dark |
 
-Type: Bricolage Grotesque Variable for headings and numbers; system UI for text. Five sizes (`--xl`, `--l`, `--m`, `--b`, `--s`).
-Buttons: square corners, one fill. Motion: staggered entrances (transform and opacity), off under reduced motion.
-Pages: `/`, `/work/`, `/work/<case>/`, `/journey/`, `/about/`, `/recruiter/` (30-second version). Content: `src/site/data.ts`.
+Type: one family, SF on Apple devices and Inter Variable elsewhere. Five sizes (`--xl`, `--l`, `--m`, `--b`, `--s`).
+Buttons: pills. Links: blue with a chevron. Motion: staggered entrances, pinned year, skill picture crossfade,
+avatar drift; all off under reduced motion.

@@ -5,3 +5,5 @@ dist
 .env*
 .privacy-patterns
 design/refs/
+.taste-skill/
+.hallmark/

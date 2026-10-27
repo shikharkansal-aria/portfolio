@@ -48,8 +48,8 @@ export const cases: CaseStudy[] = [
     period: 'June to September 2026',
     kind: 'Work at Nurix AI',
     summary:
-      'An internal tool that turns a brand’s website and target workflow into a ready voice-agent crew. Setup dropped from 5 days to 30 minutes, and colleagues ran 7 later engagements on it.',
-    headline: { before: '5 days', after: '30 min', label: 'to set up a client voice-agent crew' },
+      'Setting up AI voice agents for a new client took about 5 days of building by hand. I built an internal tool that does it in 30 minutes, and colleagues ran 7 later client engagements on it.',
+    headline: { before: '5 days by hand', after: '30 minutes', label: 'to set up AI voice agents for one new client' },
     problem: [
       'Each new client needed a crew of voice agents built by hand: prompts, tools, the handoffs between agents, a demo page. One crew took about 5 days, and I kept repeating the same steps for every brand.',
     ],
@@ -59,11 +59,11 @@ export const cases: CaseStudy[] = [
       'I put 4 quality gates in front of the platform, including one that stages adversarial conversations and grades them. Nothing gets written until a crew passes. Speed only helps if the output is right, so the gates came before the speed work.',
       'A 4-agent crew hit the model’s output limit and failed after more than 240 seconds. I split the job: one short planning call, each agent written in parallel, and everything predictable built in plain code. It now finishes in 123 seconds with zero validation errors.',
     ],
-    result: ['Setup went from 5 days to 30 minutes. Colleagues ran 7 later client engagements on the builder.'],
+    result: ['Setting up a new client’s voice agents went from about 5 days of hand-building to 30 minutes. Colleagues ran 7 later client engagements on the builder.'],
     learned:
       'I judge an internal tool by adoption: do colleagues pick it up without me in the room? Seven engagements answered that better than any demo I could give.',
     figures: [
-      { value: '5 days → 30 min', label: 'setup time per client crew' },
+      { value: '5 days → 30 min', label: 'to set up one new client’s voice agents' },
       { value: '240 s+ → 123 s', label: '4-agent crew build, 0 errors' },
       { value: '4', label: 'quality gates before anything ships' },
       { value: '7', label: 'later engagements run by colleagues' },
@@ -369,7 +369,7 @@ export const journey: Year[] = [
       { title: 'Financial statement analysis', org: 'Nurix internal hackathon', role: 'PRD owner', period: 'April 2026', text: 'A valuation workbook from one upload, then an audit that found 17 calculation errors.', caseId: 'finanalyse' },
       { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A Hinglish voice companion; first-audio latency down 57%.', caseId: 'aria' },
       { title: 'NuPlay Electronics', org: 'Nurix AI', role: 'Built and ran the demo', period: 'April to September 2026', text: 'A 5-agent support crew, and the 19-day silent outage I traced and fixed.', caseId: 'nuplay-electronics' },
-      { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Crew setup from 5 days to 30 minutes; 7 later engagements.', caseId: 'agent-builder' },
+      { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Setting up a new client’s voice agents went from 5 days by hand to 30 minutes; colleagues ran 7 later engagements on it.', caseId: 'agent-builder' },
       { title: 'Hisaab', org: 'The Ken case competition', role: 'Round 3', period: 'September 2026', text: 'A UPI expense app grounded in a 26-student survey.', caseId: 'hisaab' },
     ],
   },
@@ -400,8 +400,17 @@ export const interests = 'Outside work I take photographs, play basketball, foll
 
 /** The home page ledger: before and after, booked like entries in an account. */
 export const ledger = [
-  { id: 'agent-builder', what: 'Client crew setup', where: 'Agent Builder, Nurix AI', before: '5 days', after: '30 min', ratio: 30 / (5 * 24 * 60), note: 'An internal tool that writes a brief, plans the crew, and checks it against 4 quality gates. Colleagues ran 7 later engagements on it.' },
+  { id: 'agent-builder', what: 'Setting up a new client’s voice agents', where: 'Agent Builder, Nurix AI', before: '5 days by hand', after: '30 minutes', ratio: 30 / (5 * 24 * 60), note: 'An internal tool that writes a brief, plans the crew, and checks it against 4 quality gates. Colleagues ran 7 later engagements on it.' },
   { id: 'aria', what: 'Time to first word', where: 'Aria, personal project', before: '1,603 ms', after: '690 ms', ratio: 690 / 1603, note: 'Streaming speech and removing a fixed 700 ms delay on every turn cut the wait by 57%.' },
   { id: 'agent-builder', what: '4-agent crew build', where: 'Agent Builder, Nurix AI', before: '240 s+, failing', after: '123 s, 0 errors', ratio: 123 / 240, note: 'One short planning call, each agent written in parallel, and everything predictable built in plain code.' },
   { id: 'nuplay-electronics', what: 'Silent order-lookup outage', where: 'NuPlay Electronics, Nurix AI', before: '19 days unseen', after: '3 checks a day', ratio: null, note: 'A health check now runs a real order query 3 times a day and names the failure type.' },
+] as const;
+
+/** Home page: each skill with the project that shows it, for the active list. */
+export const skillProof = [
+  { group: 'Product', items: 'Requirements and PRDs, funnel mapping, root cause analysis, competitive benchmarking, impact measurement.', proof: 'nuplay-electronics', shot: 'nuplay-agent', w: 1600, h: 866, alt: 'NuPlay dashboard with the Order Tracking Agent ready for a call' },
+  { group: 'AI', items: 'Multi-agent voice crews, prompt design, LLM evaluation and test scenarios, directing Claude Code builds.', proof: 'aria', shot: 'aria-mission-control', w: 1090, h: 779, alt: 'Aria Mission Control dashboard with build lanes around the Aria core' },
+  { group: 'Finance', items: 'FX volatility, cash pooling, hedging plans, DCF and DDM valuation, ratio analysis. Course: CIIB, NSE Academy & NYIF.', proof: 'ey-cafta', shot: 'ey-forecaster-split', w: 1994, h: 950, alt: 'USD/INR forecaster with indicators on the left and a 6-month forecast on the right' },
+  { group: 'Analysis tools', items: 'Python, SQL, Excel, Power BI, Google Sheets, HubSpot, Shopify and Salesforce integrations.', proof: 'finanalyse', shot: 'finanalyse-workbook', w: 940, h: 1270, alt: 'Generated Excel workbook of financial ratios for a listed company' },
+  { group: 'People', items: 'Sponsor negotiation, stakeholder management, cross-functional work, guiding interns.', proof: null, shot: 'ecell-emerge-banner', w: 1600, h: 800, alt: 'E-MERGE 3.0 banner from E-Cell IIT Hyderabad' },
 ] as const;
