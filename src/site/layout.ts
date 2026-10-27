@@ -6,17 +6,18 @@ export const SITE = 'https://shikhar-kansal.vercel.app';
 export const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-export type NavKey = 'home' | 'work' | 'journey' | 'about' | 'none';
+export type NavKey = 'home' | 'work' | 'journey' | 'about' | 'recruiter' | 'none';
 
 const NAV: { key: NavKey; href: string; label: string }[] = [
   { key: 'work', href: '/work/', label: 'Work' },
   { key: 'journey', href: '/journey/', label: 'Journey' },
   { key: 'about', href: '/about/', label: 'About' },
+  { key: 'recruiter', href: '/recruiter/', label: '30 seconds' },
 ];
 
 export const mailto = () => `mailto:${person.email}?subject=${encodeURIComponent('Hello Shikhar')}`;
 
-export function head(o: { title: string; description: string; path: string }) {
+export function head(o: { title: string; description: string; path: string; nav?: NavKey }) {
   const url = SITE + o.path;
   const t = esc(o.title);
   const d = esc(o.description);
@@ -24,7 +25,7 @@ export function head(o: { title: string; description: string; path: string }) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#1d4be0" />
     <title>${t}</title>
     <meta name="description" content="${d}" />
     <link rel="canonical" href="${url}" />
@@ -44,7 +45,7 @@ export function head(o: { title: string; description: string; path: string }) {
     <meta name="twitter:title" content="${t}" />
     <meta name="twitter:description" content="${d}" />
     <meta name="twitter:image" content="${SITE}/og.png" />
-    <script>document.documentElement.classList.add('js')</script>`;
+    <script>document.documentElement.classList.add('js');document.documentElement.dataset.page='${o.nav ?? 'none'}'</script>`;
 }
 
 export function nav(active: NavKey) {

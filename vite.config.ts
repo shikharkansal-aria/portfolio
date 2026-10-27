@@ -20,7 +20,12 @@ const prerender = (): Plugin => ({
     const render = routes[key];
     if (!render) throw new Error(`No page for ${key}`);
     const p = render();
-    return html.replace('<!--head-->', p.head).replace('<!--body-->', p.body);
+    // Preload the two fonts first paint needs (hashed names are only known after the build).
+    const pre = Object.keys(ctx.bundle ?? {})
+      .filter((k) => /(dm-serif-display-latin-400-normal|inter-latin-wght-normal)-.*\.woff2$/.test(k))
+      .map((k) => `<link rel="preload" as="font" type="font/woff2" href="/${k}" crossorigin />`)
+      .join('');
+    return html.replace('<!--head-->', p.head + pre).replace('<!--body-->', p.body);
   },
 });
 

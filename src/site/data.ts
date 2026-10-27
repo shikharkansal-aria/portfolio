@@ -140,7 +140,7 @@ export const cases: CaseStudy[] = [
       { value: '₹2', label: 'one-time unlock we are aiming for, no subscription' },
     ],
     shots: [
-      { key: 'hisaab-phones', w: 1600, h: 660, alt: 'Five Hisaab phone screens in a row: monthly summary, payment scan notification, categorising a transfer, asking a question in your own language, and the weekly inbox', caption: 'Early Hisaab screens from the case competition.' },
+      { key: 'hisaab-phones', w: 1600, h: 700, alt: 'Five Hisaab phone screens in a row: the dark Home, the light Home with money left, score and "You forgot these", Payments by day with rows missing a reason, the October Insights statement, and the monthly score', caption: 'The Hisaab app today: Home, Payments, Insights and Score, with a made-up month of payments.' },
       { key: 'ken-flow', w: 1440, h: 900, alt: 'Hisaab flow map: seven states of one store payment end to end, with an animated phone mock', caption: 'The flow from payment notification to a named payee.' },
     ],
     links: [

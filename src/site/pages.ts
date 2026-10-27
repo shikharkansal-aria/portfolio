@@ -64,25 +64,39 @@ export function home() {
 
   const body = `
   <section class="hero" aria-labelledby="h1">
-    <div class="hero-stage">
-      <h1 id="h1" class="hero-name"><span class="hn-a">Shikhar</span> <span class="hn-b">Kansal</span></h1>
-      <div class="hero-copy reveal">
-        <p class="hero-lead">I build AI products and measure what they change.</p>
-        <p class="hero-sub">Product and growth. IIT Hyderabad, class of 2027.</p>
-        <div class="actions">
-          <a class="btn btn-accent" href="/work/">See my work</a>
-          <a class="chev" href="${person.resume}">Download resume</a>
-        </div>
-      </div>
-      <ul class="hero-quick" aria-label="Jump to">
-        <li><a href="#nb-h">Now building: Hisaab</a></li>
-        <li><a href="#work-h">Selected work</a></li>
-        <li><a href="#jr-h">My journey</a></li>
-        <li><a href="/recruiter/">30-second version</a></li>
-      </ul>
+    <div class="hero-sky" aria-hidden="true">
+      <span class="star" style="left:13%;top:30%"></span><span class="star s2" style="left:86%;top:18%"></span>
+      <span class="star s3" style="left:70%;top:34%"></span><span class="star s2" style="left:30%;top:12%"></span>
+      <span class="star s3" style="left:92%;top:44%"></span>
+      <div class="hero-clouds hero-clouds-b"></div>
+      <div class="hero-ticker"><span>PRODUCT · GROWTH · AI VOICE AGENTS · HISAAB · </span><span>PRODUCT · GROWTH · AI VOICE AGENTS · HISAAB · </span></div>
+      <div class="hero-clouds hero-clouds-a"></div>
     </div>
-    <div class="hero-figure">
-      <img class="drift" src="/img/avatar-cutout.webp" srcset="/img/avatar-cutout-560.webp 201w, /img/avatar-cutout.webp 484w" sizes="(max-width: 820px) 46vw, 24vw" width="484" height="1350" alt="Shikhar’s 3D avatar: glasses, short beard, peach polo, grey joggers and white sneakers" fetchpriority="high" />
+    <div class="hero-copy">
+      <p class="hero-hi" aria-hidden="true">Hi, I’m</p>
+      <h1 id="h1" class="hero-name">Shikhar Kansal</h1>
+      <p class="hero-lead">I build AI products and measure what they change.</p>
+      <p class="hero-sub">Product and growth. IIT Hyderabad, class of 2027.</p>
+    </div>
+    <div class="hero-actions">
+        <a class="btn btn-sky" href="/work/">See my work</a>
+        <a class="btn btn-glass" href="${person.resume}">Download resume</a>
+    </div>
+    <div class="hero-canvas" aria-hidden="true">
+      <img class="hero-poster" src="/img/hero-poster.webp" width="1440" height="576" alt="" fetchpriority="high" decoding="async" />
+      <canvas></canvas>
+    </div>
+    <div class="hero-nav">
+      <nav aria-label="On this page">
+        <ul>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="#nb-h">Now building</a></li>
+          <li><a href="/journey/">Journey</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/recruiter/">30-second version</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="mode js-only" role="switch" aria-checked="true" data-mode><span>Interactive mode</span><span class="sw" aria-hidden="true"><span class="sw-state">ON</span></span></button>
     </div>
   </section>
 
@@ -110,7 +124,7 @@ export function home() {
       </div>
     </div>
 
-    <article class="tile tile-full tile-dark reveal" aria-labelledby="t-ab">
+    <article class="tile tile-full tile-dark bend" aria-labelledby="t-ab">
       <div class="tile-center">
         <h3 id="t-ab"><a href="/work/agent-builder/">Agent Builder</a></h3>
         <p class="tile-sub">${esc(ab.summary)}</p>
@@ -120,7 +134,7 @@ export function home() {
       <div class="wrap tile-wide">${pipeline('dark')}</div>
     </article>
 
-    <article class="tile tile-full tile-light reveal" aria-labelledby="t-np">
+    <article class="tile tile-full tile-light bend" aria-labelledby="t-np">
       <div class="tile-center">
         <h3 id="t-np"><a href="/work/nuplay-electronics/">NuPlay Electronics</a></h3>
         <p class="tile-sub">${esc(np.summary)}</p>
@@ -218,7 +232,7 @@ export function home() {
   return page({
     title: 'Shikhar Kansal · Product and growth · IIT Hyderabad',
     description:
-      'Shikhar Kansal, IIT Hyderabad class of 2027, looking for APM, Product Analyst, Product Associate and Growth roles. Agent Builder cut a new client’s voice-agent setup from about 5 days by hand to 30 minutes.',
+      'Shikhar Kansal, IIT Hyderabad class of 2027, seeking APM, Product Analyst and Growth roles. Agent Builder cut voice-agent setup for a new client from about 5 days to 30 minutes.',
     path: '/',
     nav: 'home',
     body,
@@ -238,7 +252,7 @@ export function work() {
   <section class="work-list" aria-label="Projects">
     ${cases
       .map(
-        (c, i) => `<article class="tile tile-full ${i % 2 ? 'tile-light' : 'tile-dark'} reveal" aria-labelledby="w-${c.id}">
+        (c, i) => `<article class="tile tile-full ${i % 2 ? 'tile-light' : 'tile-dark'} bend" aria-labelledby="w-${c.id}">
           <div class="tile-center">
             <h2 id="w-${c.id}" class="tile-title"><a href="/work/${c.id}/">${esc(c.title)}</a></h2>
             <p class="tile-meta">${esc(c.org)} · ${esc(c.period)}</p>
@@ -394,12 +408,16 @@ export function journeyPage() {
 export function about() {
   const body = `
   <section class="page-head">
+    <div class="wrap">
+      <h1 class="reveal">About me</h1>
+      <p class="lede reveal">I’m Shikhar, a final-year B.Tech student at IIT Hyderabad. I like finding out how a business works: where the money comes from, why people buy, and what a decision changes.</p>
+      <div class="actions reveal"><a class="btn btn-accent" href="${mailto()}">Email me</a><a class="chev" href="${person.resume}">Download resume</a></div>
+    </div>
+  </section>
+  <section class="sec-tight" aria-label="More about me">
     <div class="wrap about-in">
       <div>
-        <h1 class="reveal">About me</h1>
-        <p class="lede reveal">I’m Shikhar, a final-year B.Tech student at IIT Hyderabad. I like finding out how a business works: where the money comes from, why people buy, and what a decision changes.</p>
-        <div class="actions reveal"><a class="btn btn-accent" href="${mailto()}">Email me</a><a class="chev" href="${person.resume}">Download resume</a></div>
-        <div class="prose reveal">
+        <div class="prose">
           <p>I care about finance, fashion, management and marketing, and I like the ideating and strategy work that ties them together. I treat every decision as an experiment: make the call, measure what happened, then pick the next test.</p>
           <p>From January to July 2026 I was a Product & Growth Intern at Nurix AI (now NuPlay), building voice and chat agents for enterprise client demos; my client work continued through September. I started by building single agents by hand. By the end I had written the internal tool my colleagues used to build the next ones. Along the way I learned to trust a number only after I had checked it myself.</p>
           <p>${esc(interests)}</p>
@@ -488,7 +506,7 @@ export function recruiter() {
     title: 'Shikhar Kansal in 30 seconds',
     description: 'One page: who Shikhar Kansal is, his best results, experience, resume and contact.',
     path: '/recruiter/',
-    nav: 'none',
+    nav: 'recruiter',
     body,
   });
 }
