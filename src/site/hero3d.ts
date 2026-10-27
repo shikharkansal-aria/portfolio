@@ -15,7 +15,7 @@ const SCREEN_H = 3.1;
 const BEND_R = 3.4; // radius of the bend: z = x^2 / 2R, so the side edges come toward the viewer
 const bendZ = (x: number) => (x * x) / (2 * BEND_R);
 
-type Frame = { href: string; draw: (c: CanvasRenderingContext2D, w: number, h: number) => void };
+type Frame = { href: string; label: string; cta: string; draw: (c: CanvasRenderingContext2D, w: number, h: number) => void };
 
 const SERIF = '"DM Serif Display", Georgia, serif';
 const SANS = '"Inter Variable", Inter, system-ui, sans-serif';
@@ -76,7 +76,7 @@ function cover(c: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y:
 }
 
 function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
-  const f: Frame[] = [
+  const f: Pick<Frame, 'href' | 'draw'>[] = [
     {
       href: '/work/',
       draw(c, w, h) {
@@ -193,8 +193,10 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
       },
     },
   ];
-  // Hello, the app, the app's numbers, then Agent Builder and the 53 bots.
-  return [f[0], f[3], f[2], f[1], f[4]];
+  // Hisaab leads (the thing being built now), then Agent Builder, the 53 bots, and the greeting last.
+  const meta: [string, string][] = [['Hello', ''], ['Agent Builder', 'Read the case study'], ['Hisaab numbers', 'Read the Hisaab story'], ['Hisaab app', 'Read the Hisaab story'], ['53 bots', 'Read the case study']];
+  const all: Frame[] = f.map((fr, i) => ({ ...fr, label: meta[i][0], cta: meta[i][1] }));
+  return [all[3], all[2], all[1], all[4], all[0]];
 }
 
 export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
@@ -352,6 +354,25 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
   cube.position.set(2.95, -1.55 + 0.62, 0.5);
   cube.rotation.set(0.1, -0.5, 0);
   stage.add(cube);
+  // "Now building: Hisaab" tag on the pedestal face, so the cube reads as the thing to click.
+  const lab = document.createElement('canvas');
+  lab.width = 720;
+  lab.height = 150;
+  const lc = lab.getContext('2d')!;
+  lc.fillStyle = '#16143a';
+  lc.beginPath();
+  lc.roundRect(0, 10, 720, 130, 65);
+  lc.fill();
+  lc.fillStyle = '#ffffff';
+  lc.font = `600 52px ${SANS}`;
+  lc.textAlign = 'center';
+  lc.textBaseline = 'middle';
+  lc.fillText('Now building: Hisaab ›', 360, 76);
+  const labTex = new CanvasTexture(lab);
+  labTex.colorSpace = SRGBColorSpace;
+  const labelMesh = new Mesh(new PlaneGeometry(2.0, 2.0 * (150 / 720)), new MeshBasicMaterial({ map: labTex, transparent: true, toneMapped: false, depthWrite: false }));
+  labelMesh.position.set(2.55, -1.85, 1.86);
+  stage.add(labelMesh);
 
   // Screen content
   const frames = buildFrames({ hisaab });
@@ -364,13 +385,21 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
   off.width = tex.width;
   off.height = tex.height;
   const octx = off.getContext('2d')!;
+  const drawFrame = (c: CanvasRenderingContext2D, i: number) => {
+    const fr = frames[i];
+    fr.draw(c, tex.width, tex.height);
+    if (fr.cta) {
+      c.font = `600 26px ${SANS}`;
+      const tw = c.measureText(`${fr.cta} ›`).width + 40;
+      chip(c, `${fr.cta} ›`, tex.width - 40 - tw, tex.height - 104, '#16143a');
+    }
+  };
   const paint = (p: number) => {
-    // p in [0,1]: slide the next frame in from the right over the current one
     ctx.clearRect(0, 0, tex.width, tex.height);
-    frames[cur].draw(ctx, tex.width, tex.height);
+    drawFrame(ctx, cur);
     if (nxt >= 0) {
       octx.clearRect(0, 0, off.width, off.height);
-      frames[nxt].draw(octx, off.width, off.height);
+      drawFrame(octx, nxt);
       // Pure crossfade, held back at both ends so the two frames' text never sits half-visible for long.
       const e = Math.min(1, Math.max(0, (p - 0.2) / 0.6));
       ctx.save();
@@ -412,18 +441,61 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
   const hero = host.closest<HTMLElement>('.hero') ?? host;
   hero.addEventListener('pointermove', (e) => { if (on) { setPointer(e); loop(); } });
   hero.addEventListener('pointerleave', () => { tx = ty = 0; if (on) loop(); });
-  host.addEventListener('click', (e) => {
+  // What is under the pointer: the Hisaab cube (and its tag), the screen, or nothing.
+  type Hit = 'cube' | 'screen' | null;
+  let hover: Hit = null;
+  let cubeS = 1, spin = 0;
+  const pick = (e: PointerEvent | MouseEvent): Hit => {
     const r = host.getBoundingClientRect();
     ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -(((e.clientY - r.top) / r.height) * 2 - 1));
     ray.setFromCamera(ndc, camera);
-    if ((e as PointerEvent).pointerType === 'mouse' && ray.intersectObject(glass).length) location.href = frames[cur].href;
-  });
+    if (ray.intersectObjects([cube, labelMesh]).length) return 'cube';
+    if (ray.intersectObject(glass).length) return 'screen';
+    return null;
+  };
   host.addEventListener('pointermove', (e) => {
-    const r = host.getBoundingClientRect();
-    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -(((e.clientY - r.top) / r.height) * 2 - 1));
-    ray.setFromCamera(ndc, camera);
-    host.style.cursor = ray.intersectObject(glass).length ? 'pointer' : '';
+    const h = pick(e);
+    if (hover === 'screen' && h !== 'screen') lastSwap = performance.now();
+    hover = h;
+    host.style.cursor = h ? 'pointer' : '';
+    loop();
   });
+  host.addEventListener('pointerleave', () => {
+    if (hover === 'screen') lastSwap = performance.now();
+    hover = null;
+    host.style.cursor = '';
+  });
+  host.addEventListener('click', (e) => {
+    const h = pick(e);
+    if (h === 'cube') location.href = '/work/hisaab/';
+    else if (h === 'screen' && (e as PointerEvent).pointerType === 'mouse') location.href = frames[cur].href;
+  });
+
+  // Dots under the scene: pick what the screen shows. Real buttons, so keyboards and screen readers get them too.
+  const dots = document.createElement('div');
+  dots.className = 'hero-dots';
+  dots.setAttribute('role', 'group');
+  dots.setAttribute('aria-label', 'Choose what the screen shows');
+  frames.forEach((f, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.title = f.label;
+    b.setAttribute('aria-label', f.label);
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => goTo(i));
+    dots.append(b);
+  });
+  host.append(dots);
+  const markDots = (active: number) => [...dots.children].forEach((b, i) => b.setAttribute('aria-pressed', String(i === active)));
+  function goTo(i: number) {
+    if (nxt >= 0) { cur = nxt; nxt = -1; }
+    if (i === cur) return;
+    nxt = i;
+    tStart = performance.now();
+    lastSwap = tStart;
+    markDots(i);
+    loop();
+  }
 
   function draw(now = performance.now()) {
     const time = now / 1000;
@@ -435,12 +507,20 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     stage.rotation.x = -cy * 0.07;
     const bob = on ? Math.sin(time * 1.2) * 0.05 : 0;
     screen.position.y = 1.25 + bob;
-    cube.position.y = -1.55 + 0.62 + (on ? Math.sin(time * 1.5 + 1) * 0.06 : 0);
-    cube.rotation.y = -0.5 + (on ? Math.sin(time * 0.7) * 0.25 : 0);
+    const hot = hover === 'cube';
+    cubeS += ((hot ? 1.16 : 1) - cubeS) * 0.14;
+    if (hot) spin += 0.045;
+    else spin += (Math.round(spin / (Math.PI * 2)) * Math.PI * 2 - spin) * 0.12;
+    cube.scale.setScalar(cubeS);
+    labelMesh.scale.setScalar(1 + (cubeS - 1) * 0.5);
+    cube.position.y = -1.55 + 0.62 * cubeS + (on ? Math.sin(time * 1.5 + 1) * 0.06 : 0);
+    cube.rotation.y = -0.5 + (on ? Math.sin(time * 0.7) * 0.25 : 0) + spin;
     // cycle the screen
-    if (on && nxt < 0 && now - lastSwap > 4200) {
+    const holding = hover === 'screen' || dots.matches(':focus-within');
+    if (on && nxt < 0 && !holding && now - lastSwap > 5200) {
       nxt = (cur + 1) % frames.length;
       tStart = now;
+      markDots(nxt);
     }
     if (nxt >= 0) {
       const p = Math.min(1, (now - tStart) / 420);
@@ -454,7 +534,8 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
     const tick = (now: number) => {
       draw(now);
       const settling = Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002;
-      raf = on || settling || nxt >= 0 ? requestAnimationFrame(tick) : 0;
+      const popping = Math.abs(cubeS - (hover === 'cube' ? 1.16 : 1)) > 0.003 || Math.abs(spin) > 0.01;
+      raf = on || settling || popping || nxt >= 0 ? requestAnimationFrame(tick) : 0;
     };
     raf = requestAnimationFrame(tick);
   }

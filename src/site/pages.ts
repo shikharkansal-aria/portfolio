@@ -82,9 +82,9 @@ export function home() {
         <a class="btn btn-sky" href="/work/">See my work</a>
         <a class="btn btn-glass" href="${person.resume}">Download resume</a>
     </div>
-    <div class="hero-canvas" aria-hidden="true">
-      <img class="hero-poster" src="/img/hero-poster.webp" width="1440" height="576" alt="" fetchpriority="high" decoding="async" />
-      <canvas></canvas>
+    <div class="hero-canvas">
+      <img class="hero-poster" src="/img/hero-poster.webp" width="1440" height="548" alt="" fetchpriority="high" decoding="async" />
+      <canvas aria-hidden="true"></canvas>
     </div>
     <div class="hero-nav">
       <nav aria-label="On this page">

@@ -655,3 +655,12 @@ html:not(.js) .js-only { display: none !important; }
   .hero-sub { display: none; }
   .hero-lead { margin-top: 0.5rem; }
 }
+
+/* Dots under the 3D scene: choose what the screen shows. Each button is a 44px target; the visible dot is small. */
+.hero-dots { position: absolute; z-index: 3; left: 50%; bottom: clamp(0.75rem, 2.5vh, 1.75rem); transform: translateX(-50%); display: flex; gap: 0; padding: 0.125rem 0.5rem; border-radius: 999px; background: rgba(24, 20, 112, 0.84); }
+.hero-dots button { all: unset; box-sizing: border-box; cursor: pointer; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; }
+.hero-dots button::before { content: ''; width: 0.625rem; height: 0.625rem; border-radius: 999px; background: rgba(255, 255, 255, 0.55); transition: width 220ms var(--ease), background-color 220ms var(--ease); }
+.hero-dots button:hover::before { background: #ffffff; }
+.hero-dots button[aria-pressed='true']::before { width: 1.5rem; background: #ffffff; }
+.hero-dots button:focus-visible { outline: 3px solid #ffffff; outline-offset: -4px; border-radius: 999px; }
+.hero:not(.is-ready) .hero-dots, .hero.no-gl .hero-dots { display: none; }
