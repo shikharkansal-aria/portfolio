@@ -1,7 +1,7 @@
 // Shared page frame: <head>, navigation, footer and small HTML helpers. Runs at build time only.
 import { person, type Shot } from './data.ts';
 
-export const SITE = 'https://shikhar-kansal.vercel.app';
+export const SITE = 'https://shikhar-kansal.netlify.app';
 
 export const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

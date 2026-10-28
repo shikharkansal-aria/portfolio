@@ -7,7 +7,7 @@
   to navigate and not AI-generated looking. See `design/tokens.md`. The earlier playful 3D walkthrough was retired.
 - **Must also have a one-click "Recruiter view":** a plain, fast, one-page version (who he is, 3–4 flagship
   case studies, experience, resume PDF, contact) reachable from the first screen. Many recruiters skim for 30 seconds.
-- **Hosting:** Vercel. Build locally first; deploy only after Shikhar approves (he'll log in with `npx vercel login`).
+- **Hosting:** Netlify (moved from Vercel, 2026-10-28). Build locally first; deploy only after Shikhar approves (log in with `npx netlify-cli login`; settings in `netlify.toml`).
 
 ## Content sources (never invent — every claim must trace to these)
 1. `~/Downloads/Personal/Documents/career-kb/INDEX.md` → the 8 cited evidence files. **Obey the "Cautions" list** there
