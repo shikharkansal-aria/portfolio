@@ -140,7 +140,6 @@ export const cases: CaseStudy[] = [
       { value: '5', label: 'voice agents in the crew' },
       { value: '~100', label: 'seeded orders, 60 products, 60 customers' },
       { value: '8', label: 'cases in every pressure test' },
-      { value: '16', label: 'tool bindings re-pointed' },
     ],
     shots: [
       { key: 'nuplay-agent', w: 1600, h: 866, alt: 'NuPlay dashboard: the Order Tracking Agent ready for a web or phone call, with suggested questions and the caller’s orders shown beside it (contact details blurred)', caption: 'The Order Tracking Agent, with the caller’s orders beside it.' },
@@ -156,28 +155,22 @@ export const cases: CaseStudy[] = [
     period: 'April to September 2026',
     kind: 'Personal project',
     summary:
-      'A 3D voice companion that speaks Hinglish. I ran it as product owner over 5 parallel Claude Code lanes and cut first-audio latency by 57%.',
+      'A 3D virtual human you talk to in Hinglish. As her designer and product owner, I cut the wait for her first word by 57%.',
     headline: { before: '1,603 ms', after: '690 ms', label: 'time to Aria’s first word (median)' },
     problem: [
       'I wanted a voice companion that feels like talking to a person, in Hinglish. A long pause before she answers breaks that feeling, so I made first-audio latency the number to beat.',
     ],
     did: [
-      'I ran Aria like a small product team. I split the work into 5 parallel Claude Code lanes (animation, voice and latency, memory, brain and tools, QA) and acted as product owner: I wrote the specs, set priorities and made the calls each lane escalated. The lanes wrote the code.',
-      'I set up a Mission Control dashboard to see every lane at once: who is working, who is waiting on me, which decisions are queued.',
       'I chose models by testing them in Hindi. The free local stack worked, but its only Hindi voice was male and sounded uncanny, so I kept one paid voice layer.',
-      'I made quality measurable with 86 automated specs. When a sound classifier stuck at 10% accuracy, I left that check failing in CI. Faking a pass would have hidden the problem.',
+      'I made quality measurable with automated checks. When a sound classifier stuck at 10% accuracy, I left that check failing in CI. Faking a pass would have hidden the problem.',
     ],
-    result: ['First-audio latency fell 57%, from 1,603 ms to 690 ms, after moving to streaming speech and removing a fixed 700 ms delay on every turn. The lanes shipped 96 commits against 86 specs.'],
-    learned: 'Directing AI builders taught me that the spec is the product: a lane only ships what I wrote down clearly.',
+    result: ['First-audio latency fell 57%, from 1,603 ms to 690 ms, after moving to streaming speech and removing a fixed 700 ms delay on every turn.'],
     figures: [
       { value: '57%', label: 'faster to the first word' },
-      { value: '5', label: 'parallel build lanes' },
-      { value: '96', label: 'commits' },
-      { value: '86', label: 'automated specs' },
+      { value: '700 ms', label: 'fixed delay removed from every turn' },
     ],
     shots: [
       { key: 'aria-scene', w: 1280, h: 813, alt: 'Aria, an animated virtual human, standing in an alpine meadow scene with a message box at the bottom', caption: 'Aria in one of her scenes.' },
-      { key: 'aria-mission-control', w: 1090, h: 779, alt: 'Aria Mission Control: a dark dashboard with agents orbiting a central Aria core, status counts along the bottom', caption: 'Mission Control, where I ran the build lanes.' },
       { key: 'aria-moods', w: 1600, h: 1452, alt: 'Contact sheet of twelve Aria emotion states: neutral, happy, excited, laughing, sarcastic, shy, thinking, concerned, confident, surprised, sad, grateful', caption: 'Hidden mood tags in each reply drive her face and gestures.' },
     ],
   },
@@ -248,8 +241,8 @@ export const cases: CaseStudy[] = [
 export const tools = [
   { title: 'DragonFire', text: 'A dragon on my Mac. I click it, talk, and it pastes a cleaned-up version of what I said into whatever app I am in.' },
   { title: 'Resume agent and ATS tracker', text: 'Tailors each application from verified evidence and scores the fit the way an applicant tracking system would.' },
-  { title: 'Encrypted chat transfer', text: 'Hands a chat to another account through a relay I run myself, checked by 249 end-to-end assertions.' },
-  { title: 'MCP servers', text: 'Give Claude my campus placement portal (14 tools) and YouTube (9 tools).' },
+  { title: 'Encrypted chat transfer', text: 'Hands a chat to another account through a relay I run myself.' },
+  { title: 'MCP servers', text: 'Connect an AI assistant to my campus placement portal and to YouTube.' },
   { title: 'Inbox cleaner', text: 'Sorted 38,008 emails and moved 28,464 to Trash, with a full undo path and no permanent delete.' },
 ];
 
@@ -374,7 +367,7 @@ export const journey: Year[] = [
         ],
       },
       { title: 'Financial statement analysis', org: 'Nurix internal hackathon', role: 'PRD owner', period: 'April 2026', text: 'A valuation workbook from one upload, then an audit that found 17 calculation errors.', caseId: 'finanalyse' },
-      { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A Hinglish voice companion; first-audio latency down 57%.', caseId: 'aria' },
+      { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A 3D virtual human who speaks Hinglish; the wait for her first word is down 57%.', caseId: 'aria' },
       { title: 'NuPlay Electronics', org: 'Nurix AI', role: 'Built and ran the demo', period: 'April to September 2026', text: 'A 5-agent support crew, and the 19-day silent outage I traced and fixed.', caseId: 'nuplay-electronics' },
       { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Setting up a new client’s voice agents went from 5 days by hand to 30 minutes; colleagues ran 7 later engagements on it.', caseId: 'agent-builder' },
       { title: 'Hisaab', org: 'The Ken case competition, then my own startup', role: 'Founder', period: 'September 2026 to now', text: 'Started as a Round 3 case entry; now an app in a free friends beta, heading for Google Play.', caseId: 'hisaab' },
@@ -392,7 +385,7 @@ export const nurixNumbers: Figure[] = [
 export const skills = [
   { group: 'Product', items: 'Requirements and PRDs, funnel mapping, root cause analysis, competitive benchmarking, impact measurement.' },
   { group: 'Finance', items: 'FX volatility, cash pooling, hedging plans, DCF and DDM valuation, ratio analysis. Course: CIIB, NSE Academy & NYIF.' },
-  { group: 'AI', items: 'Multi-agent voice crews, prompt design, LLM evaluation and test scenarios, directing Claude Code builds.' },
+  { group: 'AI', items: 'Multi-agent voice crews, prompt design, LLM evaluation and test scenarios.' },
   { group: 'Tools', items: 'Python, SQL, Excel, Power BI, Google Sheets, HubSpot, Shopify and Salesforce integrations.' },
   { group: 'People', items: 'Sponsor negotiation, stakeholder management, cross-functional work, guiding interns.' },
 ];
@@ -416,7 +409,7 @@ export const ledger = [
 /** Home page: each skill with the project that shows it, for the active list. */
 export const skillProof = [
   { group: 'Product', items: 'Requirements and PRDs, funnel mapping, root cause analysis, competitive benchmarking, impact measurement.', proof: 'nuplay-electronics', shot: 'nuplay-agent', w: 1600, h: 866, alt: 'NuPlay dashboard with the Order Tracking Agent ready for a call' },
-  { group: 'AI', items: 'Multi-agent voice crews, prompt design, LLM evaluation and test scenarios, directing Claude Code builds.', proof: 'aria', shot: 'aria-mission-control', w: 1090, h: 779, alt: 'Aria Mission Control dashboard with build lanes around the Aria core' },
+  { group: 'AI', items: 'Multi-agent voice crews, prompt design, LLM evaluation and test scenarios.', proof: 'aria', shot: 'aria-scene', w: 1280, h: 813, alt: 'Aria, a 3D virtual human, standing in an alpine meadow scene' },
   { group: 'Finance', items: 'FX volatility, cash pooling, hedging plans, DCF and DDM valuation, ratio analysis. Course: CIIB, NSE Academy & NYIF.', proof: 'ey-cafta', shot: 'ey-forecaster-split', w: 1994, h: 950, alt: 'USD/INR forecaster with indicators on the left and a 6-month forecast on the right' },
   { group: 'Analysis tools', items: 'Python, SQL, Excel, Power BI, Google Sheets, HubSpot, Shopify and Salesforce integrations.', proof: 'finanalyse', shot: 'finanalyse-workbook', w: 940, h: 1270, alt: 'Generated Excel workbook of financial ratios for a listed company' },
   { group: 'People', items: 'Sponsor negotiation, stakeholder management, cross-functional work, guiding interns.', proof: null, shot: 'ecell-emerge-banner', w: 1600, h: 800, alt: 'E-MERGE 3.0 banner from E-Cell IIT Hyderabad' },
