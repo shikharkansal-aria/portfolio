@@ -107,10 +107,10 @@ export function home() {
     <div class="wrap building-in">
       <div class="building-text reveal">
         <h2 id="nb-h" class="building-h"><img src="/img/hisaab-logo.svg" width="56" height="56" alt="" /> Now building: Hisaab</h2>
-        <p>My startup in the making. After every UPI payment it asks one question, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s case competition. I kept going after Round 3 and rebuilt it as a product: private by design, with no internet permission, no account and no ads. It is in a free friends beta and heading for Google Play, with a one-time unlock instead of a subscription.</p>
+        <p>My startup in the making. After every UPI payment it asks one question, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s case competition. I kept going after Round 3 and rebuilt it as a product. It is in a free friends beta and heading for Google Play.</p>
         <div class="actions">
           <a class="btn btn-accent" href="/work/hisaab/">Read the Hisaab story</a>
-          ${ext(hs.links![0].href, 'See the Hisaab page')}
+          ${ext(hs.links![0].href, hs.links![0].label)}
         </div>
       </div>
       <dl class="building-figs reveal">

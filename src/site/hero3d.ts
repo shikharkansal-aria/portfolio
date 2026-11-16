@@ -92,7 +92,7 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
         c.textBaseline = 'alphabetic';
         c.font = `400 78px ${SERIF}`;
         c.fillText('Hello there,', a.x + 64, a.y + 140);
-        c.fillText('visitor 👋', a.x + 64, a.y + 232);
+        c.fillText('visitor.', a.x + 64, a.y + 232);
         c.font = `400 28px ${SANS}`;
         c.fillStyle = '#56565b';
         c.fillText('Product and growth. Six case studies,', a.x + 66, a.y + 300);
@@ -136,7 +136,7 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
       draw(c, w, h) {
         const a = windowChrome(c, w, h);
         chip(c, 'Now building: Hisaab', a.x + 24, a.y + 22, '#3a3de0');
-        const items: [string, string][] = [['26', 'students surveyed before any code'], ['390', 'automated tests passing'], ['4', 'agents in the Round 3 build'], ['₹2', 'one-time unlock, no subscription']];
+        const items: [string, string][] = [['26', 'students surveyed before any code'], ['73%', 'avoid checking their balance'], ['77%', 'lose track of small UPI transfers'], ['Why', 'asked after every payment']];
         const cw = (a.w - 24 * 2 - 20) / 2, ch = (a.h - 96 - 20) / 2;
         items.forEach(([n, t], i) => {
           const x = a.x + 24 + (i % 2) * (cw + 20), y = a.y + 90 + Math.floor(i / 2) * (ch + 20);
