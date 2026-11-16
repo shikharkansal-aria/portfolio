@@ -136,7 +136,7 @@ export const cases: CaseStudy[] = [
     ],
     links: [
       { href: 'https://hisaabstartup.netlify.app/', label: 'See the Hisaab page' },
-      { href: 'https://hisaabstartup.netlify.app/privacy', label: 'Read the privacy policy' },
+      { href: 'https://shikharkansal-aria.github.io/hisaab-policy/privacy/', label: 'Read the privacy policy' },
     ],
   },
   {
