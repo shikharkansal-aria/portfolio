@@ -731,3 +731,9 @@ html:not(.js) .js-only { display: none !important; }
 .case-head .lede { font-size: clamp(1.125rem, 1.6vw, 1.4rem); line-height: 1.45; max-width: 52ch; text-wrap: pretty; }
 .case-head .now { flex-basis: 100%; }
 .case-head .change-xl .change-fig { font-size: clamp(2rem, 4.4vw, 3.75rem); }
+
+/* Home timeline: each picture box takes its picture's shape; the logo strip gets a short padded box. */
+.story-media { aspect-ratio: auto; }
+.story-media img, .story-step:nth-child(3) .story-media img, .story-step:nth-child(4) .story-media img { width: 100%; height: auto; object-fit: initial; }
+.story-step:nth-child(1) .story-media { padding: clamp(1.75rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem); }
+.story-step:nth-child(1) .story-media img { width: 100%; }
