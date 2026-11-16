@@ -17,6 +17,9 @@ export const person = {
 
 export interface Shot { key: string; alt: string; w: number; h: number; caption: string }
 export interface Figure { value: string; label: string }
+export interface Phone { key: string; alt: string; caption: string }
+/** A titled section of a case page; used instead of problem, did and result when a case needs more chapters. */
+export interface Chapter { id: string; heading: string; paras?: string[]; list?: string[]; extra?: 'rivals' }
 
 export interface CaseStudy {
   id: string;
@@ -37,47 +40,102 @@ export interface CaseStudy {
   figures: Figure[];
   shots: Shot[];
   links?: { href: string; label: string }[];
+  chapters?: Chapter[];
+  /** Phone screens, shown in groups at the top of the case page. */
+  screens?: { heading: string; phones: Phone[] }[];
 }
 
 const nurixDates = 'January to July 2026, client work to September';
+
+// Hisaab: every line below is from .team/reports/T-169/CONTENT.md (Hisaab repo), checked against its CLAIMS.md.
+const hisaab = {
+  problem: [
+    'Where does my money go? I kept asking it at the end of each month. A UPI payment already records whom I paid and how much. The why gets lost, and without it a month of payments reads as a list of names and numbers.',
+    'Before writing any code I surveyed 26 college students. 77% named small UPI transfers as the spending they could not account for. Every one of them had tried a tracker and given up, typically inside two weeks.',
+  ],
+  insight: [
+    'An app that asks me to open it and type what I spent loses me within two weeks. So Hisaab asks one thing, right after I pay, while I still remember: why. Whom and how much are already there.',
+    'It began as my entry to The Ken’s case competition. After the competition I kept building it as my own product.',
+  ],
+  built: [
+    'An Android app that asks what a UPI payment was for, right after I make it. I tap one of six categories: the five I use most, plus Other. Then I tap one of my own past reasons in that category or type a new one; Other goes straight to typing. When the app already knows the kind of place I paid, it files the category for me and lets me add a note.',
+    'Home shows where my money went, with my own reasons named when they explain a real share of the day. Activity lists every payment by month; one without a reason shows Add a reason, and I can add a cash payment by hand. Hisaab keeps one row per payment, cancels a debit when its refund arrives, and leaves transfers between my own accounts out of the totals. It remembers payees, and when a payee shows up as a phone number it can show the contact name, only if I allow it. I can sign in with Google to back up and restore.',
+    'I also built a native iPhone version, which runs as a test build.',
+  ],
+  decisions: [
+    'The reasons are mine. The categories are fixed, but the reason pills under them show only reasons I typed before, and the app preselects nothing.',
+    'No ads. My payment history stays on my phone unless I choose to back it up.',
+    'Core before looks: I made the payment question reliable first and redesigned the screens after.',
+    'I filed an Indian provisional patent application in November 2026.',
+  ],
+  research: [
+    'I compared 26 apps, money trackers and habit apps, on 31 features. Of the 19 I could check, none asks why at the moment of payment; for the other 7 I could not confirm either way.',
+    'At least one rival already reads payment notifications on Android, so my edge has to be the why.',
+    'The study also showed where I am behind. 7 of the rivals offer family sharing, 2 of them as a paid feature; Hisaab has nothing for that yet, and no app lock either.',
+  ],
+  today: [
+    'The Android app is in a closed test on Google Play, free during the beta. It is not on the public Play Store yet: production access needs 12 testers opted in for 14 days in a row.',
+    'The iPhone version runs as a test build on a test phone.',
+    'I have not yet shown that testers come back day after day. That is my next test.',
+  ],
+  vision: [
+    'I want Hisaab to be a habit maker, not a tracker: a short step after each payment that, over months, leaves you knowing where your money goes. Next I am testing which result of the why makes people stay: knowing whether the money lasts till the 1st, keeping track of what friends owe, or a weekly fact about your spending.',
+    'Later, I want to earn trust with this one job, then add regulated products through licensed partners, without ever holding anyone’s money myself.',
+  ],
+};
 
 export const cases: CaseStudy[] = [
   {
     id: 'hisaab',
     title: 'Hisaab',
-    org: 'My startup in the making',
-    role: 'Founder, building it',
+    org: 'My own startup',
+    role: 'Founder',
     period: 'September 2026 to now',
     kind: 'Startup in the making',
     summary:
-      'An app that asks one question after every UPI payment, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s ₹20L case competition and is now an Android app in a free friends beta, on its way to Google Play.',
-    headline: { before: 'Case competition entry', after: 'App in beta', label: 'Hisaab, from a Round 3 entry to a product heading for Google Play' },
-    problem: [
-      'UPI tells you where money went, never what it was for. Small payments (tea, canteen, splitting a bill) pile up with no category, and bank apps can’t tell a dinner split from a repaid debt.',
-      'I surveyed 26 students to check the pain was real. 73% avoid checking their balance, and 77% named small UPI transfers as the spending they can’t account for.',
-    ],
-    did: [
-      'For The Ken’s case competition I built the first Android version and, for Round 3, an agent build on Pine Labs’ AgenticOrg platform: four agents (ledger, payment rails, voice and month) with MCP servers for Gnani speech and mock payment and delivery services. We submitted it on 4 October.',
-      'After the competition I kept going and rebuilt Hisaab as a product. After every payment it asks one question, and the reason is always typed, never picked from a preset list. It remembers the person or shop, folds a bank SMS and an app alert into one row, cancels a debit when its refund arrives, and leaves transfers between your own accounts out of the totals.',
-      'I built backup, restore and Delete everything into the app, and the privacy policy is public.',
-      'I redesigned every screen in a premium ledger style and kept quality measurable: the build fails if the app ever shows streaks, grades or judging words, and every change runs the full test suite.',
-      'I started telling people about it: Hisaab’s X account went live on 26 October, with posts for X, LinkedIn and Instagram that go out only after I approve each one.',
-    ],
-    result: [
-      'Hisaab is in a free friends beta. Next: the Google Play closed test (12 testers for 14 days), then publishing.',
-    ],
-    learned: 'A competition gives you a deadline; a product needs a reason to open it tomorrow. I now judge every feature by whether it gets a payment its reason in seconds.',
+      'Where does my money go? My UPI app tells me whom I paid and how much, never why. Hisaab asks why right after each payment, so I can come back anytime and see where my money went and why. It is an Android app in a closed test on Google Play, with an iPhone version in testing.',
+    headline: { before: 'Case competition entry', after: 'Closed test on Google Play', label: 'Hisaab, from a case competition entry to an Android app in a closed test on Google Play' },
+    problem: hisaab.problem,
+    did: [...hisaab.insight, ...hisaab.built, ...hisaab.decisions, ...hisaab.research],
+    result: [...hisaab.today, ...hisaab.vision],
+    learned: 'A competition gives you a deadline. A product needs a reason to open it tomorrow, and I am still proving that reason.',
     figures: [
-      { value: '26', label: 'students surveyed before any code' },
-      { value: '73%', label: 'of them avoid checking their balance' },
-      { value: '77%', label: 'can’t account for their small UPI transfers' },
+      { value: '26', label: 'rival apps compared on 31 features' },
+      { value: '0 of 19', label: 'rivals I could check ask why at the moment of payment (7 more not confirmed)' },
+      { value: '77%', label: 'of students surveyed could not account for their small UPI transfers' },
+    ],
+    chapters: [
+      { id: 'problem', heading: 'The problem', paras: hisaab.problem },
+      { id: 'insight', heading: 'The insight', paras: hisaab.insight },
+      { id: 'built', heading: 'What I built', paras: hisaab.built },
+      { id: 'decisions', heading: 'Key decisions', list: hisaab.decisions },
+      { id: 'research', heading: 'The research', paras: hisaab.research, extra: 'rivals' },
+      { id: 'today', heading: 'Where it stands today', paras: hisaab.today },
+      { id: 'vision', heading: 'The vision', paras: hisaab.vision },
+    ],
+    screens: [
+      {
+        heading: 'Right after a payment',
+        phones: [
+          { key: 'askwhy', alt: 'Hisaab’s in-app card over Home, with demo data: What did you pay ₹120 for? at Corner Cafe, and six categories: Food, Groceries, Transport, Bills, Shopping and Other', caption: 'Right after a payment, Hisaab’s in-app card asks what it was for. You tap a category.' },
+          { key: 'reasons', alt: 'The same in-app card after a category is picked: four of your past reasons as buttons, and Change category', caption: 'Then one of your past reasons.' },
+          { key: 'typing', alt: 'The same in-app card with a text box, Type what it was for, a Save button and Back', caption: 'Or you type a new one.' },
+        ],
+      },
+      {
+        heading: 'Anytime after',
+        phones: [
+          { key: 'home', alt: 'Hisaab Home with demo data: where your money went today, ₹1,026 spent, split into Health, Lunch with Ravi and Other, and payments with Add reason links', caption: 'Home shows where your money went, with a made-up month of payments.' },
+          { key: 'activity', alt: 'Activity with demo data: average spend by month as a bar chart, then November 2026 payments, two of them showing Add a reason', caption: 'Activity lists every payment by month. A payment without a reason shows Add a reason.' },
+          { key: 'you', alt: 'You with demo data: the profile, Your plan: Free beta, and account rows including Data and backup', caption: 'You: the free beta plan, and backup and restore.' },
+        ],
+      },
     ],
     shots: [
-      { key: 'hisaab-phones', w: 1600, h: 700, alt: 'Five Hisaab phone screens in a row: the dark Home, the light Home with money left, score and "You forgot these", Payments by day with rows missing a reason, the October Insights statement, and the monthly score', caption: 'The Hisaab app today: Home, Payments, Insights and Score, with a made-up month of payments.' },
-      { key: 'ken-flow', w: 1440, h: 900, alt: 'Hisaab flow map: seven states of one store payment end to end, with an animated phone mock', caption: 'The flow from payment notification to a named payee.' },
+      { key: 'hisaab-row', w: 1600, h: 623, alt: 'Five Hisaab screens with demo data: Home, the in-app card asking what a ₹120 payment was for, the same card with past reasons, Activity by month, and You', caption: 'Home, the in-app why card, Activity and You, with demo data.' },
     ],
     links: [
-      { href: 'https://hisaabstartup.netlify.app/', label: 'See the Hisaab site' },
+      { href: 'https://hisaabstartup.netlify.app/', label: 'See the Hisaab page' },
       { href: 'https://hisaabstartup.netlify.app/privacy', label: 'Read the privacy policy' },
     ],
   },
@@ -359,7 +417,7 @@ export const journey: Year[] = [
       { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A 3D virtual human who speaks Hinglish; the wait for her first word is down 57%.', caseId: 'aria' },
       { title: 'NuPlay Electronics', org: 'Nurix AI', role: 'Built and ran the demo', period: 'April to September 2026', text: 'A 5-agent support crew, and the 19-day silent outage I traced and fixed.', caseId: 'nuplay-electronics' },
       { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Setting up a new client’s voice agents went from 5 days by hand to 30 minutes; colleagues ran 7 later engagements on it.', caseId: 'agent-builder' },
-      { title: 'Hisaab', org: 'The Ken case competition, then my own startup', role: 'Founder', period: 'September 2026 to now', text: 'Started as a Round 3 case entry; now an app in a free friends beta, heading for Google Play.', caseId: 'hisaab' },
+      { title: 'Hisaab', org: 'My own startup', role: 'Founder', period: 'September 2026 to now', text: 'Asks why right after each UPI payment, so you see where your money went. In a closed test on Google Play.', caseId: 'hisaab' },
     ],
   },
 ];

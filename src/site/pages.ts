@@ -124,7 +124,8 @@ export function home() {
     <div class="wrap building-in">
       <div class="building-text reveal">
         <h2 id="nb-h" class="building-h"><img src="/img/hisaab-logo.svg" width="56" height="56" alt="" /> Now building: Hisaab</h2>
-        <p>My startup in the making. After every UPI payment it asks one question, “What was that for?”, and shows where the month’s money went. It began as my entry to The Ken’s case competition. I kept going after Round 3 and rebuilt it as a product. It is in a free friends beta and heading for Google Play.</p>
+        <p>Where does my money go? A UPI payment already records whom I paid and how much. The why gets lost. So Hisaab asks one thing, right after I pay, while I still remember: why.</p>
+        <p>It is an Android app in a closed test on Google Play, with an iPhone version in testing.</p>
         <div class="actions">
           <a class="btn btn-accent" href="/work/hisaab/">Read the Hisaab story</a>
           ${ext(hs.links![0].href, hs.links![0].label)}
@@ -280,6 +281,59 @@ export function work() {
   });
 }
 
+/** The big picture under a case page's head: the Agent Builder flow, or the first screenshot. */
+const visual = (c: CaseStudy) => `<div class="case-visual reveal${c.id === 'agent-builder' ? ' case-visual-dark' : ''}"><div class="wrap">${c.id === 'agent-builder' ? pipeline('dark') : `<div${c.shots[0].h > c.shots[0].w ? ' class="tall"' : ''}>${shot(c.shots[0], { eager: true, sizes: c.shots[0].h > c.shots[0].w ? '(max-width: 820px) 100vw, 800px' : '(max-width: 820px) 100vw, 1280px' })}</div>`}</div></div>`;
+
+/** Problem, what I did, result: the shape most case pages use. */
+const trio = (c: CaseStudy) => `
+      ${c.problem.length ? `<section class="case-sec reveal" aria-labelledby="p-h"><h2 id="p-h">The problem</h2><div>${paras(c.problem)}</div></section>` : ''}
+      ${c.did.length ? `<section class="case-sec reveal" aria-labelledby="d-h"><h2 id="d-h">What I did</h2><ul class="did">${c.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></section>` : ''}
+      <section class="case-sec reveal" aria-labelledby="r-h"><h2 id="r-h">${c.did.length ? 'The result' : 'What it builds'}</h2><div>${paras(c.result)}${c.figures.length ? figs(c.figures) : ''}${links(c)}</div></section>`;
+
+const links = (c: CaseStudy) => (c.links?.length ? `<p class="case-links">${c.links.map((l) => ext(l.href, l.label)).join('')}</p>` : '');
+
+/** 26 rival apps as 26 squares: the 19 checked (none asks why at payment) and the 7 not confirmed. */
+const rivals = () => `
+  <figure class="rivals">
+    <div class="rv-grid" role="img" aria-label="26 squares, one per rival app: 19 I could check, none of which asks why at the moment of payment, and 7 I could not confirm">
+      ${'<span class="rv rv-no"></span>'.repeat(19)}${'<span class="rv rv-unk"></span>'.repeat(7)}
+    </div>
+    <dl class="rv-key">
+      <div><dt><span class="rv rv-no" aria-hidden="true"></span>19</dt><dd>I could check: none asks why at the moment of payment</dd></div>
+      <div><dt><span class="rv rv-unk" aria-hidden="true"></span>7</dt><dd>I could not confirm either way</dd></div>
+    </dl>
+    <figcaption>26 apps on 31 features. None of the 19 I could check asks why at the moment of payment.</figcaption>
+  </figure>`;
+
+/** Titled chapters, for a case that needs more than problem, did and result (Hisaab). */
+const chapters = (c: CaseStudy) =>
+  c.chapters!
+    .map(
+      (ch, i, all) => `<section class="case-sec reveal" aria-labelledby="ch-${ch.id}"><h2 id="ch-${ch.id}">${esc(ch.heading)}</h2><div>${ch.paras ? paras(ch.paras) : ''}${ch.list ? `<ul class="did">${ch.list.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}${ch.extra === 'rivals' ? rivals() + figs(c.figures) : ''}${i === all.length - 1 ? links(c) : ''}</div></section>`,
+    )
+    .join('');
+
+/** The app's screens in groups, phones given room on a calm sky panel; a snap row on a phone. */
+const screens = (c: CaseStudy) => `
+  <section class="screens" aria-label="${esc(c.title)} screens">
+    <div class="wrap">
+      ${c.screens!
+        .map(
+          (g, gi) => `<div class="screens-group reveal">
+            <h2 class="screens-h">${esc(g.heading)}</h2>
+            <ul class="phones">
+              ${g.phones
+                .map(
+                  (p, pi) => `<li class="phone"><img src="/img/journey/hisaab-${p.key}-400.webp" srcset="/img/journey/hisaab-${p.key}-400.webp 400w, /img/journey/hisaab-${p.key}-800.webp 800w" sizes="(max-width: 820px) 64vw, 280px" width="1200" height="2460" alt="${esc(p.alt)}"${gi === 0 && pi === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async" /><p>${esc(p.caption)}</p></li>`,
+                )
+                .join('')}
+            </ul>
+          </div>`,
+        )
+        .join('')}
+    </div>
+  </section>`;
+
 export function casePage(id: string) {
   const i = cases.findIndex((c) => c.id === id);
   const c = cases[i];
@@ -307,11 +361,9 @@ export function casePage(id: string) {
         </aside>
       </div>
     </header>
-    <div class="case-visual reveal${c.id === 'agent-builder' ? ' case-visual-dark' : ''}"><div class="wrap">${c.id === 'agent-builder' ? pipeline('dark') : `<div${c.shots[0].h > c.shots[0].w ? ' class="tall"' : ''}>${shot(c.shots[0], { eager: true, sizes: c.shots[0].h > c.shots[0].w ? '(max-width: 820px) 100vw, 800px' : '(max-width: 820px) 100vw, 1280px' })}</div>`}</div></div>
+    ${c.screens ? screens(c) : visual(c)}
     <div class="wrap case-body">
-      ${c.problem.length ? `<section class="case-sec reveal" aria-labelledby="p-h"><h2 id="p-h">The problem</h2><div>${paras(c.problem)}</div></section>` : ''}
-      ${c.did.length ? `<section class="case-sec reveal" aria-labelledby="d-h"><h2 id="d-h">What I did</h2><ul class="did">${c.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></section>` : ''}
-      <section class="case-sec reveal" aria-labelledby="r-h"><h2 id="r-h">${c.did.length ? 'The result' : 'What it builds'}</h2><div>${paras(c.result)}${c.figures.length ? figs(c.figures) : ''}${c.links?.length ? `<p class="case-links">${c.links.map((l) => ext(l.href, l.label)).join('')}</p>` : ''}</div></section>
+      ${c.chapters ? chapters(c) : trio(c)}
       ${c.learned ? `<section class="case-sec reveal" aria-labelledby="l-h"><h2 id="l-h">What I learned</h2><div><p class="said">${esc(c.learned)}</p></div></section>` : ''}
     </div>
     ${rest.length ? `<section class="sec sec-tight parch" aria-label="More screenshots"><div class="wrap shots${rest.length === 1 ? ' shots-one' : ''}">${rest.map((s) => `<div class="reveal">${shot(s, { sizes: '(max-width: 820px) 100vw, 50vw' })}</div>`).join('')}</div></section>` : ''}
@@ -319,7 +371,7 @@ export function casePage(id: string) {
       <div class="wrap">
         <h2 id="oth-h" class="reveal">More case studies</h2>
         <ul class="others-list">
-          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${named(o)}</strong><span class="others-sub">${o.headline ? `${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}` : esc(o.summary)}</span></a></li>`).join('')}
+          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${named(o)}</strong><span class="others-sub">${o.headline ? (o.headline.label.startsWith(o.title) ? esc(o.headline.label) : `${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}`) : esc(o.summary)}</span></a></li>`).join('')}
         </ul>
       </div>
     </section>
@@ -389,7 +441,7 @@ export function journeyPage() {
     <div class="wrap now-in reveal">
       <div>
         <h2 id="now-h">Now</h2>
-        <p class="now-text">I graduate from IIT Hyderabad in 2027. Alongside college I am building <a href="/work/hisaab/">Hisaab</a>, my startup in the making, now in a free friends beta. ${esc(person.seeking)}</p>
+        <p class="now-text">I graduate from IIT Hyderabad in 2027. Alongside college I am building <a href="/work/hisaab/">Hisaab</a>, my own startup, in a closed test on Google Play. ${esc(person.seeking)}</p>
       </div>
       <div class="actions"><a class="btn btn-accent" href="${mailto()}">Email me</a><a class="chev chev-light" href="${person.resume}">Download resume</a></div>
     </div>
