@@ -691,3 +691,4 @@ html:not(.js) .js-only { display: none !important; }
 
 /* A project subtitle sits inside its heading, on its own line, in the text face (Aria, Virtual Human). */
 .t-sub { display: block; margin-top: 0.4em; font: 500 max(0.36em, 0.9375rem) / 1.2 var(--font); letter-spacing: -0.01em; -webkit-text-stroke: 0; opacity: 0.82; }
+.quick .t-sub { display: inline; margin: 0 0 0 0.375em; font-size: var(--s); color: var(--muted); }

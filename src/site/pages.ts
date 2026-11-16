@@ -487,7 +487,7 @@ export function recruiter() {
     <div class="wrap two">
       <h2 id="r1" class="reveal">Best results</h2>
       <ul class="quick reveal">
-        ${cases.map((c) => `<li class="quick-case">${c.shots[0] ? `<span class="quick-img">${shot(c.shots[0], { caption: false, sizes: '160px' })}</span>` : '<span class="quick-img quick-img-fig" aria-hidden="true">5 days → 30 min</span>'}<span><a href="/work/${c.id}/"><strong>${esc(c.title)}</strong></a><span class="quick-text">${esc(c.summary)}</span></span></li>`).join('')}
+        ${cases.map((c) => `<li class="quick-case">${c.shots[0] ? `<span class="quick-img">${shot(c.shots[0], { caption: false, sizes: '160px' })}</span>` : '<span class="quick-img quick-img-fig" aria-hidden="true">5 days → 30 min</span>'}<span><a href="/work/${c.id}/"><strong>${named(c)}</strong></a><span class="quick-text">${esc(c.summary)}</span></span></li>`).join('')}
       </ul>
     </div>
   </section>
