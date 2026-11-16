@@ -12,6 +12,7 @@ const figs = (xs: Figure[], cls = 'figs') =>
 /** The before → after figure with its plain-English label, so the number always says what it measures. */
 function change(c: CaseStudy, size: 'xl' | 'l' | 'm' = 'l') {
   const h = c.headline;
+  if (!h) return '';
   return `<div class="change change-${size}">
     <p class="change-fig">${h.before ? `<span class="was">${esc(h.before)}</span><span class="arrow" aria-hidden="true">→</span><span class="sr-only"> to </span>` : ''}<span class="now">${esc(h.after)}</span></p>
     <p class="change-label">${esc(h.label)}</p>
@@ -311,9 +312,9 @@ export function casePage(id: string) {
     </header>
     <div class="case-visual reveal${c.id === 'agent-builder' ? ' case-visual-dark' : ''}"><div class="wrap">${c.id === 'agent-builder' ? pipeline('dark') : shot(c.shots[0], { eager: true, sizes: '(max-width: 820px) 100vw, 1280px' })}</div></div>
     <div class="wrap case-body">
-      <section class="case-sec reveal" aria-labelledby="p-h"><h2 id="p-h">The problem</h2><div>${paras(c.problem)}</div></section>
-      <section class="case-sec reveal" aria-labelledby="d-h"><h2 id="d-h">What I did</h2><ul class="did">${c.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></section>
-      <section class="case-sec reveal" aria-labelledby="r-h"><h2 id="r-h">The result</h2><div>${paras(c.result)}${figs(c.figures)}${c.links?.length ? `<p class="case-links">${c.links.map((l) => ext(l.href, l.label)).join('')}</p>` : ''}</div></section>
+      ${c.problem.length ? `<section class="case-sec reveal" aria-labelledby="p-h"><h2 id="p-h">The problem</h2><div>${paras(c.problem)}</div></section>` : ''}
+      ${c.did.length ? `<section class="case-sec reveal" aria-labelledby="d-h"><h2 id="d-h">What I did</h2><ul class="did">${c.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></section>` : ''}
+      <section class="case-sec reveal" aria-labelledby="r-h"><h2 id="r-h">${c.did.length ? 'The result' : 'What it builds'}</h2><div>${paras(c.result)}${c.figures.length ? figs(c.figures) : ''}${c.links?.length ? `<p class="case-links">${c.links.map((l) => ext(l.href, l.label)).join('')}</p>` : ''}</div></section>
       ${c.learned ? `<section class="case-sec reveal" aria-labelledby="l-h"><h2 id="l-h">What I learned</h2><div><p class="said">${esc(c.learned)}</p></div></section>` : ''}
     </div>
     ${rest.length ? `<section class="sec sec-tight parch" aria-label="More screenshots"><div class="wrap shots${rest.length === 1 ? ' shots-one' : ''}">${rest.map((s) => `<div class="reveal">${shot(s, { sizes: '(max-width: 820px) 100vw, 50vw' })}</div>`).join('')}</div></section>` : ''}
@@ -321,7 +322,7 @@ export function casePage(id: string) {
       <div class="wrap">
         <h2 id="oth-h" class="reveal">More case studies</h2>
         <ul class="others-list">
-          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${named(o)}</strong><span class="others-sub">${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}</span></a></li>`).join('')}
+          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${named(o)}</strong><span class="others-sub">${o.headline ? `${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}` : esc(o.summary)}</span></a></li>`).join('')}
         </ul>
       </div>
     </section>

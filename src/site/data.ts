@@ -29,7 +29,7 @@ export interface CaseStudy {
   kind: 'Work at Nurix AI' | 'Competition' | 'Personal project' | 'Hackathon' | 'Startup in the making';
   /** One sentence, shown on cards and at the top of the case page. */
   summary: string;
-  headline: { before?: string; after: string; label: string };
+  headline?: { before?: string; after: string; label: string };
   problem: string[];
   did: string[];
   result: string[];
@@ -217,25 +217,13 @@ export const cases: CaseStudy[] = [
     role: 'PRD owner, 2-person team',
     period: 'April 2026',
     kind: 'Hackathon',
-    summary:
-      'Upload an annual report, get a valuation workbook with live formulas. Then I audited it against an analyst’s model and found 17 calculation errors.',
-    headline: { after: '60 / 92', label: 'items matched an analyst’s model' },
-    problem: ['An analyst spends hours turning an annual report into a valuation model. We wanted a workbook with live formulas from a single upload.'],
-    did: [
-      'I owned the PRD and directed the build, which we built with Claude Code.',
-      'The pipeline reads the PDF, fills gaps with Claude when extraction confidence is low, writes commentary, then builds an Excel workbook and a Word report.',
-      'The workbook covers the three statements, 20+ ratios, a forecast, WACC, DCF, DDM, comparables and Monte Carlo risk.',
-      'Then I audited it against an analyst’s model and traced every gap to its cause, such as other income counted in profit before tax and leases handled wrong.',
-    ],
-    result: ['60 of 92 items matched the analyst’s model. The gaps exposed 17 calculation errors, each with a named cause.'],
-    figures: [
-      { value: '60 / 92', label: 'items matched an analyst’s model' },
-      { value: '17', label: 'calculation errors found by my audit' },
-      { value: '20+', label: 'ratios, plus DCF and DDM' },
-    ],
+    summary: 'Worked on automated extraction of financial data and building a financial model of the company.',
+    problem: [],
+    did: [],
+    result: ['From one annual report, the tool builds an Excel workbook with live formulas (the three statements, 20+ ratios, a forecast, WACC, DCF, DDM, comparables and Monte Carlo risk) and a Word report.'],
+    figures: [],
     shots: [
       { key: 'finanalyse-workbook', w: 940, h: 1270, alt: 'Generated Excel workbook for Infosys: financial ratios sheet with liquidity, profitability, leverage, efficiency, per-share and DuPont sections for 2022 to 2024', caption: 'An output workbook for a listed company, with live formulas.' },
-      { key: 'finanalyse-audit', w: 1530, h: 1650, alt: 'Accuracy report for a generated TCS model: 60 of 92 data points matched, with a category table of matches and mismatches', caption: 'My audit against an analyst’s model.' },
     ],
   },
 ];
@@ -369,7 +357,7 @@ export const journey: Year[] = [
           'Guided 4 interns and presented in 8 customer meetings.',
         ],
       },
-      { title: 'Financial statement analysis', org: 'Nurix internal hackathon', role: 'PRD owner', period: 'April 2026', text: 'A valuation workbook from one upload, then an audit that found 17 calculation errors.', caseId: 'finanalyse' },
+      { title: 'Financial statement analysis', org: 'Nurix internal hackathon', role: 'PRD owner', period: 'April 2026', text: 'Worked on automated extraction of financial data and building a financial model of the company.', caseId: 'finanalyse' },
       { title: 'Aria', org: 'Personal project', role: 'Product owner', period: 'April to September 2026', text: 'A 3D virtual human who speaks Hinglish; the wait for her first word is down 57%.', caseId: 'aria' },
       { title: 'NuPlay Electronics', org: 'Nurix AI', role: 'Built and ran the demo', period: 'April to September 2026', text: 'A 5-agent support crew, and the 19-day silent outage I traced and fixed.', caseId: 'nuplay-electronics' },
       { title: 'Agent Builder', org: 'Nurix AI', role: 'Conceived and shipped', period: 'June to September 2026', text: 'Setting up a new client’s voice agents went from 5 days by hand to 30 minutes; colleagues ran 7 later engagements on it.', caseId: 'agent-builder' },
