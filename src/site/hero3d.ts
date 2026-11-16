@@ -137,7 +137,7 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
         const a = windowChrome(c, w, h);
         chip(c, 'Now building: Hisaab', a.x + 24, a.y + 22, '#3a3de0');
         const items: [string, string][] = [['77%', 'of 26 students surveyed could not account for their small UPI transfers'], ['26', 'rival apps compared on 31 features'], ['0 of 19', 'rivals I could check ask why at the moment of payment'], ['Why', 'asked right after each payment']];
-        const cw = (a.w - 24 * 2 - 20) / 2, ch = (a.h - 96 - 20) / 2;
+        const cw = (a.w - 24 * 2 - 20) / 2, ch = (a.h - 96 - 20 - 64) / 2; // the bottom strip is left free for the "Read the Hisaab story" tag
         items.forEach(([n, t], i) => {
           const x = a.x + 24 + (i % 2) * (cw + 20), y = a.y + 90 + Math.floor(i / 2) * (ch + 20);
           c.fillStyle = '#ffffff';
@@ -149,8 +149,8 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
           c.shadowColor = 'transparent';
           c.textBaseline = 'alphabetic';
           c.fillStyle = '#3a3de0';
-          c.font = `400 112px ${SERIF}`;
-          c.fillText(n, x + 32, y + ch * 0.58);
+          c.font = `400 96px ${SERIF}`;
+          c.fillText(n, x + 32, y + 104);
           c.fillStyle = '#16143a';
           c.font = `500 26px ${SANS}`;
           // Labels wrap onto two lines inside the card.
