@@ -669,3 +669,6 @@ html:not(.js) .js-only { display: none !important; }
 .hero-canvas canvas { touch-action: pan-y; }
 .hero-dots button.arrow::before { content: '‹'; width: auto; height: auto; background: none; color: #ffffff; font-size: 1.75rem; line-height: 1; transform: translateY(-0.06em); }
 .hero-dots button.arrow.next::before { content: '›'; }
+
+/* A project subtitle sits inside its heading, on its own line, in the text face (Aria, Virtual Human). */
+.t-sub { display: block; margin-top: 0.4em; font: 500 max(0.36em, 0.9375rem) / 1.2 var(--font); letter-spacing: -0.01em; -webkit-text-stroke: 0; opacity: 0.82; }

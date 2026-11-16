@@ -3,6 +3,8 @@ import { cases, tools, journey, skills, education, interests, person, skillProof
 import { esc, page, shot, ext, mailto } from './layout.ts';
 
 const caseById = (id: string) => cases.find((c) => c.id === id)!;
+/** The project name, with its subtitle on a second line when it has one (Aria, Virtual Human). */
+const named = (c: CaseStudy) => `${esc(c.title)}${c.subtitle ? `<span class="t-sub">${esc(c.subtitle)}</span>` : ''}`;
 const paras = (xs: string[]) => xs.map((x) => `<p>${esc(x)}</p>`).join('');
 const figs = (xs: Figure[], cls = 'figs') =>
   `<dl class="${cls}">${xs.map((f) => `<div><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`).join('')}</dl>`;
@@ -44,7 +46,7 @@ export function home() {
   const half = (c: CaseStudy, tone: 'light' | 'dark', pic = c.shots[0]) => `
     <article class="tile tile-half tile-${tone} reveal">
       <div class="tile-text">
-        <h3><a href="/work/${c.id}/">${esc(c.title)}</a></h3>
+        <h3><a href="/work/${c.id}/">${named(c)}</a></h3>
         <p class="tile-sub">${esc(c.summary)}</p>
         ${change(c, 'm')}
         ${caseLink(c)}
@@ -57,7 +59,7 @@ export function home() {
       '2023': { key: 'ecell-logos', w: 1600, h: 213, alt: 'Logos of E-Cell IIT Hyderabad and partners: Innomet Advanced Materials, NPCI and Masters’ Union' },
       '2024': { key: 'tedx-cert', w: 1600, h: 900, alt: 'TEDxIITHyderabad certificate for Shikhar Kansal as PR and Marketing Coordinator, 2024-25' },
       '2025': { key: 'ecell-emerge-banner', w: 1600, h: 800, alt: 'E-MERGE 3.0 banner from E-Cell IIT Hyderabad' },
-      '2026': { key: 'aria-scene', w: 1280, h: 813, alt: 'Aria, the 3D voice companion, in an alpine meadow scene' },
+      '2026': { key: 'aria-scene', w: 1280, h: 813, alt: 'Aria, a 3D virtual human, in an alpine meadow scene' },
     }[y.year]!;
     return { y, pick };
   });
@@ -254,7 +256,7 @@ export function work() {
       .map(
         (c, i) => `<article class="tile tile-full ${i % 2 ? 'tile-light' : 'tile-dark'} bend" aria-labelledby="w-${c.id}">
           <div class="tile-center">
-            <h2 id="w-${c.id}" class="tile-title"><a href="/work/${c.id}/">${esc(c.title)}</a></h2>
+            <h2 id="w-${c.id}" class="tile-title"><a href="/work/${c.id}/">${named(c)}</a></h2>
             <p class="tile-meta">${esc(c.org)} · ${esc(c.period)}</p>
             <p class="tile-sub">${esc(c.summary)}</p>
             ${change(c, 'l')}
@@ -291,7 +293,7 @@ export function casePage(id: string) {
       <div class="wrap head-split">
         <div>
           <p class="crumb reveal"><a href="/work/">All work</a></p>
-          <h1 class="reveal">${esc(c.title)}</h1>
+          <h1 class="reveal">${named(c)}</h1>
           <p class="lede reveal">${esc(c.summary)}</p>
           <div class="reveal">${change(c, 'xl')}</div>
         </div>
@@ -319,15 +321,15 @@ export function casePage(id: string) {
       <div class="wrap">
         <h2 id="oth-h" class="reveal">More case studies</h2>
         <ul class="others-list">
-          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${esc(o.title)}</strong><span class="others-sub">${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}</span></a></li>`).join('')}
+          ${cases.filter((o) => o.id !== c.id && o.shots[0]).slice(0, 3).map((o) => `<li class="reveal"><a href="/work/${o.id}/"><span class="others-img">${shot(o.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 30vw' })}</span><strong>${named(o)}</strong><span class="others-sub">${esc(o.headline.before ? `${o.headline.before} → ${o.headline.after}` : o.headline.after)}, ${esc(o.headline.label)}</span></a></li>`).join('')}
         </ul>
       </div>
     </section>
     <nav class="next" aria-label="Next case study">
-      <div class="wrap"><a href="/work/${next.id}/"><span>Next case study</span><strong>${esc(next.title)}</strong></a></div>
+      <div class="wrap"><a href="/work/${next.id}/"><span>Next case study</span><strong>${named(next)}</strong></a></div>
     </nav>
   </article>`;
-  return page({ title: `${c.title} · Shikhar Kansal`, description: c.summary, path: `/work/${c.id}/`, nav: 'work', body });
+  return page({ title: `${c.title}${c.subtitle ? `, ${c.subtitle}` : ''} · Shikhar Kansal`, description: c.summary, path: `/work/${c.id}/`, nav: 'work', body });
 }
 
 // ---------------------------------------------------------------- Journey

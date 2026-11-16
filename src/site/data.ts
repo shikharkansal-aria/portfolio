@@ -21,6 +21,8 @@ export interface Figure { value: string; label: string }
 export interface CaseStudy {
   id: string;
   title: string;
+  /** Shown with the title, as part of the heading (Aria, Virtual Human). */
+  subtitle?: string;
   org: string;
   role: string;
   period: string;
@@ -150,6 +152,7 @@ export const cases: CaseStudy[] = [
   {
     id: 'aria',
     title: 'Aria',
+    subtitle: 'Virtual Human',
     org: 'Personal project',
     role: 'Designer and product owner',
     period: 'April to September 2026',
