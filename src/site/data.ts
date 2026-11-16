@@ -117,7 +117,7 @@ export const cases: CaseStudy[] = [
       {
         heading: 'Right after a payment',
         phones: [
-          { key: 'askwhy', alt: 'Hisaab’s in-app card over Home, with demo data: What did you pay ₹120 for? at Corner Cafe, and six categories: Food, Groceries, Transport, Bills, Shopping and Other', caption: 'Right after a payment, Hisaab’s in-app card asks what it was for. You tap a category.' },
+          { key: 'askwhy', alt: 'Hisaab’s in-app card over Home, with demo data: it asks what a payment at Corner Cafe was for, with six categories: Food, Groceries, Transport, Bills, Shopping and Other', caption: 'Right after a payment, Hisaab’s in-app card asks what it was for. You tap a category.' },
           { key: 'reasons', alt: 'The same in-app card after a category is picked: four of your past reasons as buttons, and Change category', caption: 'Then one of your past reasons.' },
           { key: 'typing', alt: 'The same in-app card with a text box, Type what it was for, a Save button and Back', caption: 'Or you type a new one.' },
         ],
@@ -125,14 +125,14 @@ export const cases: CaseStudy[] = [
       {
         heading: 'Anytime after',
         phones: [
-          { key: 'home', alt: 'Hisaab Home with demo data: where your money went today, ₹1,026 spent, split into Health, Lunch with Ravi and Other, and payments with Add reason links', caption: 'Home shows where your money went, with a made-up month of payments.' },
+          { key: 'home', alt: 'Hisaab Home with demo data: where your money went today, split into Health, Lunch with Ravi and Other, and payments with Add reason links', caption: 'Home shows where your money went, with a made-up month of payments.' },
           { key: 'activity', alt: 'Activity with demo data: average spend by month as a bar chart, then November 2026 payments, two of them showing Add a reason', caption: 'Activity lists every payment by month. A payment without a reason shows Add a reason.' },
           { key: 'you', alt: 'You with demo data: the profile, Your plan: Free beta, and account rows including Data and backup', caption: 'You: the free beta plan, and backup and restore.' },
         ],
       },
     ],
     shots: [
-      { key: 'hisaab-row', w: 1600, h: 623, alt: 'Five Hisaab screens with demo data: Home, the in-app card asking what a ₹120 payment was for, the same card with past reasons, Activity by month, and You', caption: 'Home, the in-app why card, Activity and You, with demo data.' },
+      { key: 'hisaab-row', w: 1600, h: 623, alt: 'Five Hisaab screens with demo data: Home, the in-app card asking what a payment was for, the same card with past reasons, Activity by month, and You', caption: 'Home, the in-app why card, Activity and You, with demo data.' },
     ],
     links: [
       { href: 'https://hisaabstartup.netlify.app/', label: 'See the Hisaab page' },
