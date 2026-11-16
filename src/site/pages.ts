@@ -32,6 +32,23 @@ const pipeline = (tone: 'dark' | 'light' = 'dark') => `
     <figcaption>How Agent Builder turns a brand’s website into ready voice agents.</figcaption>
   </figure>`;
 
+/** A full-width project tile: name and figure on the left, the summary on the right, the picture across the bottom. */
+const fullTile = (c: CaseStudy, o: { tone: 'dark' | 'light'; tag: 'h2' | 'h3'; media: string; meta?: boolean }) => `
+  <article class="tile tile-full tile-${o.tone} bend" aria-labelledby="t-${c.id}">
+    <div class="wrap tile-head">
+      <div class="tile-head-a">
+        <${o.tag} id="t-${c.id}" class="tile-title"><a href="/work/${c.id}/">${named(c)}</a></${o.tag}>
+        ${o.meta ? `<p class="tile-meta">${esc(c.org)} · ${esc(c.period)}</p>` : ''}
+        ${change(c, 'l')}
+      </div>
+      <div class="tile-head-b">
+        <p class="tile-sub">${esc(c.summary)}</p>
+        ${caseLink(c)}
+      </div>
+    </div>
+    <div class="wrap tile-wide">${o.media}</div>
+  </article>`;
+
 const caseLink = (c: CaseStudy) => `<a class="chev" href="/work/${c.id}/" aria-label="Read the ${esc(c.title)} case study">Read the case study</a>`;
 
 // ---------------------------------------------------------------- Home
@@ -127,25 +144,8 @@ export function home() {
       </div>
     </div>
 
-    <article class="tile tile-full tile-dark bend" aria-labelledby="t-hs">
-      <div class="tile-center">
-        <h3 id="t-hs"><a href="/work/hisaab/">Hisaab</a></h3>
-        <p class="tile-sub">${esc(hs.summary)}</p>
-        ${change(hs, 'xl')}
-        ${caseLink(hs)}
-      </div>
-      <div class="wrap tile-wide"><a class="tile-media" href="/work/hisaab/" tabindex="-1" aria-hidden="true">${shot(hs.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px' })}</a></div>
-    </article>
-
-    <article class="tile tile-full tile-light bend" aria-labelledby="t-ab">
-      <div class="tile-center">
-        <h3 id="t-ab"><a href="/work/agent-builder/">Agent Builder</a></h3>
-        <p class="tile-sub">${esc(ab.summary)}</p>
-        ${change(ab, 'xl')}
-        ${caseLink(ab)}
-      </div>
-      <div class="wrap tile-wide">${pipeline('light')}</div>
-    </article>
+    ${fullTile(hs, { tone: 'dark', tag: 'h3', media: `<a class="tile-media" href="/work/hisaab/" tabindex="-1" aria-hidden="true">${shot(hs.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px' })}</a>` })}
+    ${fullTile(ab, { tone: 'light', tag: 'h3', media: pipeline('light') })}
 
     <div class="wrap tiles-two">
       ${half(np, 'dark')}
@@ -249,22 +249,19 @@ export function work() {
   <section class="page-head">
     <div class="wrap">
       <h1 class="reveal">Work</h1>
-      <p class="lede reveal">Six projects from my internship, competitions and my own time. Each page covers the problem, what I decided, and what changed, with the numbers I measured.</p>
+      <p class="lede reveal">Six projects from my internship, competitions and my own time. Most pages cover the problem, what I decided and what changed, with the numbers I measured.</p>
     </div>
   </section>
   <section class="work-list" aria-label="Projects">
     ${cases
       .map(
-        (c, i) => `<article class="tile tile-full ${i % 2 ? 'tile-light' : 'tile-dark'} bend" aria-labelledby="w-${c.id}">
-          <div class="tile-center">
-            <h2 id="w-${c.id}" class="tile-title"><a href="/work/${c.id}/">${named(c)}</a></h2>
-            <p class="tile-meta">${esc(c.org)} · ${esc(c.period)}</p>
-            <p class="tile-sub">${esc(c.summary)}</p>
-            ${change(c, 'l')}
-            ${caseLink(c)}
-          </div>
-          <div class="wrap tile-wide">${c.id === 'agent-builder' ? pipeline(i % 2 ? 'light' : 'dark') : `<a class="tile-media" href="/work/${c.id}/" tabindex="-1" aria-hidden="true">${shot(c.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px', eager: i < 2 })}</a>`}</div>
-        </article>`,
+        (c, i) =>
+          fullTile(c, {
+            tone: i % 2 ? 'light' : 'dark',
+            tag: 'h2',
+            meta: true,
+            media: c.id === 'agent-builder' ? pipeline(i % 2 ? 'light' : 'dark') : `<a class="tile-media" href="/work/${c.id}/" tabindex="-1" aria-hidden="true">${shot(c.shots[0], { caption: false, sizes: '(max-width: 820px) 100vw, 1200px', eager: i < 2 })}</a>`,
+          }),
       )
       .join('')}
   </section>
@@ -276,7 +273,7 @@ export function work() {
   </section>`;
   return page({
     title: 'Work · Shikhar Kansal',
-    description: 'Case studies: Agent Builder, NuPlay Electronics, Hisaab, Aria, EY CAFTA Treasury360 and a financial statement analysis tool, each with the problem, decisions and measured result.',
+    description: 'Case studies: Hisaab, Agent Builder, NuPlay Electronics, Aria, EY CAFTA Treasury360 and financial statement analysis, with the problem, the decisions and what changed.',
     path: '/work/',
     nav: 'work',
     body,
@@ -310,7 +307,7 @@ export function casePage(id: string) {
         </aside>
       </div>
     </header>
-    <div class="case-visual reveal${c.id === 'agent-builder' ? ' case-visual-dark' : ''}"><div class="wrap">${c.id === 'agent-builder' ? pipeline('dark') : shot(c.shots[0], { eager: true, sizes: '(max-width: 820px) 100vw, 1280px' })}</div></div>
+    <div class="case-visual reveal${c.id === 'agent-builder' ? ' case-visual-dark' : ''}"><div class="wrap">${c.id === 'agent-builder' ? pipeline('dark') : `<div${c.shots[0].h > c.shots[0].w ? ' class="tall"' : ''}>${shot(c.shots[0], { eager: true, sizes: c.shots[0].h > c.shots[0].w ? '(max-width: 820px) 100vw, 800px' : '(max-width: 820px) 100vw, 1280px' })}</div>`}</div></div>
     <div class="wrap case-body">
       ${c.problem.length ? `<section class="case-sec reveal" aria-labelledby="p-h"><h2 id="p-h">The problem</h2><div>${paras(c.problem)}</div></section>` : ''}
       ${c.did.length ? `<section class="case-sec reveal" aria-labelledby="d-h"><h2 id="d-h">What I did</h2><ul class="did">${c.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></section>` : ''}

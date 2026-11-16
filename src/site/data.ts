@@ -59,7 +59,7 @@ export const cases: CaseStudy[] = [
     did: [
       'For The Ken’s case competition I built the first Android version and, for Round 3, an agent build on Pine Labs’ AgenticOrg platform: four agents (ledger, payment rails, voice and month) with MCP servers for Gnani speech and mock payment and delivery services. We submitted it on 4 October.',
       'After the competition I kept going and rebuilt Hisaab as a product. After every payment it asks one question, and the reason is always typed, never picked from a preset list. It remembers the person or shop, folds a bank SMS and an app alert into one row, cancels a debit when its refund arrives, and leaves transfers between your own accounts out of the totals.',
-      'I built privacy into the app itself: backup, restore and Delete everything are in it, and the privacy policy is public.',
+      'I built backup, restore and Delete everything into the app, and the privacy policy is public.',
       'I redesigned every screen in a premium ledger style and kept quality measurable: the build fails if the app ever shows streaks, grades or judging words, and every change runs the full test suite.',
       'I started telling people about it: Hisaab’s X account went live on 26 October, with posts for X, LinkedIn and Instagram that go out only after I approve each one.',
     ],
