@@ -136,7 +136,7 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
       draw(c, w, h) {
         const a = windowChrome(c, w, h);
         chip(c, 'Now building: Hisaab', a.x + 24, a.y + 22, '#3a3de0');
-        const items: [string, string][] = [['26', 'students surveyed before any code'], ['73%', 'avoid checking their balance'], ['77%', 'lose track of small UPI transfers'], ['Why', 'asked after every payment']];
+        const items: [string, string][] = [['77%', 'of 26 students surveyed could not account for their small UPI transfers'], ['26', 'rival apps compared on 31 features'], ['0 of 19', 'rivals I could check ask why at the moment of payment'], ['Why', 'asked right after each payment']];
         const cw = (a.w - 24 * 2 - 20) / 2, ch = (a.h - 96 - 20) / 2;
         items.forEach(([n, t], i) => {
           const x = a.x + 24 + (i % 2) * (cw + 20), y = a.y + 90 + Math.floor(i / 2) * (ch + 20);
@@ -152,8 +152,15 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
           c.font = `400 112px ${SERIF}`;
           c.fillText(n, x + 32, y + ch * 0.58);
           c.fillStyle = '#16143a';
-          c.font = `500 28px ${SANS}`;
-          c.fillText(t, x + 34, y + ch - 34);
+          c.font = `500 26px ${SANS}`;
+          // Labels wrap onto two lines inside the card.
+          const words = t.split(' '), lines: string[] = [''];
+          for (const wd of words) {
+            const tryLine = lines[lines.length - 1] ? `${lines[lines.length - 1]} ${wd}` : wd;
+            if (c.measureText(tryLine).width > cw - 68 && lines[lines.length - 1]) lines.push(wd);
+            else lines[lines.length - 1] = tryLine;
+          }
+          lines.slice(0, 2).forEach((l, li, arr) => c.fillText(l, x + 34, y + ch - 30 - (arr.length - 1 - li) * 34));
         });
       },
     },
@@ -315,7 +322,7 @@ export async function startHero(host: HTMLElement, opts: { reduce: boolean }) {
   const [avatar, logo, hisaab] = await Promise.all([
     load('/img/avatar-cutout.webp'),
     load('/img/hisaab-logo.svg'),
-    load('/img/journey/hisaab-phones-800.webp'),
+    load('/img/journey/hisaab-row-800.webp'),
   ]);
   const avTex = new CanvasTexture(avatar);
   avTex.colorSpace = SRGBColorSpace;
