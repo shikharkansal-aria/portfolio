@@ -60,7 +60,7 @@ export interface CaseStudy {
 
 const nurixDates = 'January to July 2026, client work to September';
 
-// Hisaab: every line below is from .team/reports/T-169/CONTENT.md (Hisaab repo), checked against its CLAIMS.md.
+// Hisaab: every line below is reviewed copy, each claim checked against its source.
 const hisaab = {
   problem: [
     'Where does my money go? I kept asking it at the end of each month. A UPI payment already records whom I paid and how much. The why gets lost, and without it a month of payments reads as a list of names and numbers.',

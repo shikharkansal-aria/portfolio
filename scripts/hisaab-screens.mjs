@@ -1,14 +1,16 @@
 // Builds the Hisaab screens the site shows from the framed app screenshots (demo data).
-// Run: node scripts/hisaab-screens.mjs [folder with the framed PNGs]
-// Default folder: ~/Hisaab-local/hisaab/.team/reports/T-170/screens/framed
+// Run: node scripts/hisaab-screens.mjs <folder with the framed PNGs>
 // Writes into public/img/journey/:
 //   hisaab-row.webp (1600 wide) and hisaab-row-800.webp: the five-phone row (Home, ask why, reasons, Activity, You)
 //   hisaab-<screen>-400.webp and -800.webp: single phones, transparent corners kept
 import sharp from 'sharp';
-import os from 'node:os';
 import { join } from 'node:path';
 
-const src = process.argv[2] ?? join(os.homedir(), 'Hisaab-local/hisaab/.team/reports/T-170/screens/framed');
+const src = process.argv[2];
+if (!src) {
+  console.error('Usage: node scripts/hisaab-screens.mjs <folder with the framed PNGs>');
+  process.exit(1);
+}
 const out = 'public/img/journey';
 
 const phones = {
