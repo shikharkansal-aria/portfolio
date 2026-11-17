@@ -75,7 +75,7 @@ const hisaab = {
   ],
   market: [
     'How big. UPI carried 25.47 billion payments in October 2026, 23% more than the 20.70 billion of October 2025 (NPCI monthly statistics; growth is my arithmetic).',
-    'Who is there and where they stop. Among the 26 apps I compared, at least one reads payment notifications, and none of the 19 I could check asks why at the moment of payment. Most people I surveyed use none of them: 64% scroll their UPI app history and 73.3% never tried a tracker.',
+    'Who is there and where they stop. Among the 26 apps I compared, at least one reads payment notifications, and none of the 21 I could check asks why at the moment of payment. Most people I surveyed use none of them: 64% scroll their UPI app history and 73.3% never tried a tracker.',
     'Why the gap exists. Trackers lose people fast: finance apps keep 2% of users to day 30 (Adjust, quoted by Stream at getstream.io, 22 Jan 2026, updated 23 Oct 2026).',
     'What makes it hard. Few people stay with a money app past the first month, and holding money needs a licence and capital. Fi, built on a partner bank, said in March 2026 its banking would end (TechCrunch, 11 Mar 2026). So I start with one job that earns trust.',
   ],
@@ -95,9 +95,9 @@ const hisaab = {
     'I filed an Indian provisional patent application in November 2026.',
   ],
   research: [
-    'I compared 26 apps, money trackers and habit apps, on 31 features. Of the 19 I could check, none asks why at the moment of payment; for the other 7 I could not confirm either way.',
+    'I compared 26 apps, money trackers and habit apps, on 31 features. Of the 21 I could check, none asks why at the moment of payment; for the other 5 I could not confirm either way.',
     'At least one rival already reads payment notifications on Android, so my edge has to be the why.',
-    'The study also showed where I am behind. 7 of the rivals offer family sharing, 2 of them as a paid feature; Hisaab has nothing for that yet, and no app lock either.',
+    'The study also showed where I am behind. 8 of the rivals offer family sharing, 3 of them as a paid feature; Hisaab has nothing for that yet, and no app lock either.',
   ],
   today: [
     'The Android app is in a closed test on Google Play, free during the beta. It is not on the public Play Store yet: production access needs 12 testers opted in for 14 days in a row.',
@@ -127,7 +127,7 @@ export const cases: CaseStudy[] = [
     learned: 'A competition gives you a deadline. A product needs a reason to open it tomorrow, and I am still proving that reason.',
     figures: [
       { value: '26', label: 'rival apps compared on 31 features' },
-      { value: '0 of 19', label: 'rivals I could check ask why at the moment of payment (7 more not confirmed)' },
+      { value: '0 of 21', label: 'rivals I could check ask why at the moment of payment (5 more not confirmed)' },
       { value: '18.6%', label: 'of 86 people surveyed know last month’s spending almost to the rupee' },
     ],
     chapters: [

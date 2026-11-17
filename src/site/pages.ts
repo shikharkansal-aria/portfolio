@@ -292,17 +292,17 @@ const trio = (c: CaseStudy) => `
 
 const links = (c: CaseStudy) => (c.links?.length ? `<p class="case-links">${c.links.map((l) => ext(l.href, l.label)).join('')}</p>` : '');
 
-/** 26 rival apps as 26 squares: the 19 checked (none asks why at payment) and the 7 not confirmed. */
+/** 26 rival apps as 26 squares: the 21 checked (none asks why at payment) and the 5 not confirmed. */
 const rivals = () => `
   <figure class="rivals">
-    <div class="rv-grid" role="img" aria-label="26 squares, one per rival app: 19 I could check, none of which asks why at the moment of payment, and 7 I could not confirm">
-      ${'<span class="rv rv-no"></span>'.repeat(19)}${'<span class="rv rv-unk"></span>'.repeat(7)}
+    <div class="rv-grid" role="img" aria-label="26 squares, one per rival app: 21 I could check, none of which asks why at the moment of payment, and 5 I could not confirm">
+      ${'<span class="rv rv-no"></span>'.repeat(21)}${'<span class="rv rv-unk"></span>'.repeat(5)}
     </div>
     <dl class="rv-key">
-      <div><dt><span class="rv rv-no" aria-hidden="true"></span>19</dt><dd>I could check: none asks why at the moment of payment</dd></div>
-      <div><dt><span class="rv rv-unk" aria-hidden="true"></span>7</dt><dd>I could not confirm either way</dd></div>
+      <div><dt><span class="rv rv-no" aria-hidden="true"></span>21</dt><dd>I could check: none asks why at the moment of payment</dd></div>
+      <div><dt><span class="rv rv-unk" aria-hidden="true"></span>5</dt><dd>I could not confirm either way</dd></div>
     </dl>
-    <figcaption>26 apps on 31 features. None of the 19 I could check asks why at the moment of payment.</figcaption>
+    <figcaption>26 apps on 31 features. None of the 21 I could check asks why at the moment of payment.</figcaption>
   </figure>`;
 
 /** A row of numbers, each with what it counts and, when it comes from outside, its source and date. */
