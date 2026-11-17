@@ -1,5 +1,5 @@
 // Every page of the site, rendered to HTML at build time by the plugin in vite.config.ts.
-import { cases, tools, journey, skills, education, interests, person, skillProof, nurixNumbers, type CaseStudy, type Figure } from './data.ts';
+import { cases, tools, journey, skills, education, interests, person, skillProof, nurixNumbers, type CaseStudy, type Chapter, type Figure, type Stat } from './data.ts';
 import { esc, page, shot, ext, mailto } from './layout.ts';
 
 const caseById = (id: string) => cases.find((c) => c.id === id)!;
@@ -305,12 +305,37 @@ const rivals = () => `
     <figcaption>26 apps on 31 features. None of the 19 I could check asks why at the moment of payment.</figcaption>
   </figure>`;
 
+/** A row of numbers, each with what it counts and, when it comes from outside, its source and date. */
+const stats = (xs: Stat[], note?: string) => `
+  <div class="stats">
+    <dl class="stat-row">${xs.map((x) => `<div><dt>${esc(x.label)}</dt><dd>${esc(x.value).replace(/^([\d.,+%]+) ([a-z]+)$/, '$1 <span class="unit">$2</span>')}</dd>${x.source ? `<p class="stat-src">${esc(x.source)}</p>` : ''}</div>`).join('')}</dl>
+    ${note ? `<p class="stat-note">${esc(note)}</p>` : ''}
+  </div>`;
+
+/** One bar per answer; the question and the sample sit above the bars as plain text. */
+const bars = (b: NonNullable<Chapter['bars']>) => `
+  <figure class="bars">
+    <figcaption>${esc(b.caption)}</figcaption>
+    <ul>${b.rows.map((r) => `<li><span class="bar-label">${esc(r.label)}</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="width:${r.pct}%"></span></span><span class="bar-val">${r.pct}%</span></li>`).join('')}</ul>
+  </figure>`;
+
+/** A paragraph that opens with a short lead ("How big.") gets that lead set bold. */
+const lead = (x: string) => {
+  const m = /^([A-Z][^.]{2,40}\.) (.+)$/.exec(x);
+  return m && !/\d/.test(m[1]) ? `<p><strong>${esc(m[1])}</strong> ${esc(m[2])}</p>` : `<p>${esc(x)}</p>`;
+};
+
 /** Titled chapters, for a case that needs more than problem, did and result (Hisaab). */
 const chapters = (c: CaseStudy) =>
   c.chapters!
-    .map(
-      (ch, i, all) => `<section class="case-sec reveal" aria-labelledby="ch-${ch.id}"><h2 id="ch-${ch.id}">${esc(ch.heading)}</h2><div>${ch.paras ? paras(ch.paras) : ''}${ch.list ? `<ul class="did">${ch.list.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}${ch.extra === 'rivals' ? rivals() + figs(c.figures) : ''}${i === all.length - 1 ? links(c) : ''}</div></section>`,
-    )
+    .map((ch, i, all) => {
+      const row = ch.stats ? stats(ch.stats, ch.statsNote) : '';
+      // Bars sit right after the paragraph that asks their question.
+      const ps = ch.paras ?? [];
+      const cut = ch.bars ? ch.bars.after : ps.length;
+      const text = ch.statsFirst ? ps.map(lead).join('') : paras(ps.slice(0, cut)) + (ch.bars ? bars(ch.bars) : '') + paras(ps.slice(cut));
+      return `<section class="case-sec reveal" aria-labelledby="ch-${ch.id}"><h2 id="ch-${ch.id}">${esc(ch.heading)}</h2><div>${ch.statsFirst ? row + text : text}${ch.list ? `<ul class="did">${ch.list.map((d) => `<li>${esc(d)}</li>`).join('')}</ul>` : ''}${ch.statsFirst ? '' : row}${ch.extra === 'rivals' ? rivals() : ''}${i === all.length - 1 ? links(c) : ''}</div></section>`;
+    })
     .join('');
 
 /** The app's screens in groups, phones given room on a calm sky panel; a snap row on a phone. */

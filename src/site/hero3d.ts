@@ -136,7 +136,7 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
       draw(c, w, h) {
         const a = windowChrome(c, w, h);
         chip(c, 'Now building: Hisaab', a.x + 24, a.y + 22, '#3a3de0');
-        const items: [string, string][] = [['77%', 'of 26 students surveyed could not account for their small UPI transfers'], ['26', 'rival apps compared on 31 features'], ['0 of 19', 'rivals I could check ask why at the moment of payment'], ['Why', 'asked right after each payment']];
+        const items: [string, string][] = [['18.6%', 'of 86 people surveyed know last month’s spending almost to the rupee'], ['25.47 billion', 'UPI payments in October 2026'], ['26', 'rival apps compared on 31 features'], ['0 of 19', 'rivals I could check ask why at the moment of payment']];
         const cw = (a.w - 24 * 2 - 20) / 2, ch = (a.h - 96 - 20 - 64) / 2; // the bottom strip is left free for the "Read the Hisaab story" tag
         items.forEach(([n, t], i) => {
           const x = a.x + 24 + (i % 2) * (cw + 20), y = a.y + 90 + Math.floor(i / 2) * (ch + 20);
@@ -149,7 +149,10 @@ function buildFrames(imgs: { hisaab: HTMLImageElement }): Frame[] {
           c.shadowColor = 'transparent';
           c.textBaseline = 'alphabetic';
           c.fillStyle = '#3a3de0';
-          c.font = `400 96px ${SERIF}`;
+          // The figure shrinks to fit its card (25.47 billion is wider than the rest).
+          let fs = 96;
+          c.font = `400 ${fs}px ${SERIF}`;
+          while (c.measureText(n).width > cw - 64 && fs > 48) c.font = `400 ${(fs -= 4)}px ${SERIF}`;
           c.fillText(n, x + 32, y + 104);
           c.fillStyle = '#16143a';
           c.font = `500 26px ${SANS}`;

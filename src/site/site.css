@@ -737,3 +737,28 @@ html:not(.js) .js-only { display: none !important; }
 .story-media img, .story-step:nth-child(3) .story-media img, .story-step:nth-child(4) .story-media img { width: 100%; height: auto; object-fit: initial; }
 .story-step:nth-child(1) .story-media { padding: clamp(1.75rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem); }
 .story-step:nth-child(1) .story-media img { width: 100%; }
+
+/* Survey bars: one bar per answer, the question and sample written above them. */
+.bars { margin: 2rem 0 0; }
+.bars + p { margin-top: 2rem; }
+.bars figcaption { font-weight: 600; max-width: 52ch; }
+.bars ul { list-style: none; display: grid; gap: 0.75rem; margin-top: 1.25rem; }
+.bars li { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr) 3.75rem; align-items: center; gap: 1rem; }
+.bar-track { height: 1.75rem; border-radius: 0.5rem; background: rgba(51, 56, 214, 0.1); overflow: hidden; }
+.bar-fill { display: block; height: 100%; border-radius: 0.5rem; background: var(--accent); }
+.bar-val { font: 400 1.25rem / 1 var(--serif); color: var(--accent); text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) {
+  .bars li { grid-template-columns: minmax(0, 1fr) auto; gap: 0.375rem 0.75rem; }
+  .bar-track { grid-column: 1 / -1; grid-row: 2; height: 1.25rem; }
+}
+
+/* Stat rows: the number, what it counts, and its source in small type. */
+.stats { margin: 2rem 0 0; }
+.case-sec .stats:first-child { margin-top: 0; margin-bottom: 2rem; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: 0.625rem; margin: 0; }
+.stat-row div { display: flex; flex-direction: column; padding: 1.25rem 1.375rem; border-radius: 1.375rem; background: rgba(51, 56, 214, 0.07); }
+.stat-row dd { order: -1; margin: 0 0 0.5rem; font: 400 clamp(1.625rem, 2.4vw, 2.125rem) / 1.05 var(--serif); color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat-row dt { font-size: var(--s); line-height: 1.4; }
+.stat-row .unit { font-size: 0.62em; letter-spacing: 0; }
+.stat-src { margin-top: 0.625rem; font-size: 0.75rem; line-height: 1.4; color: var(--muted); }
+.stat-note { margin-top: 0.875rem; font-size: var(--s); color: var(--muted); }

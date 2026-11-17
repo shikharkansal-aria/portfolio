@@ -19,7 +19,20 @@ export interface Shot { key: string; alt: string; w: number; h: number; caption:
 export interface Figure { value: string; label: string }
 export interface Phone { key: string; alt: string; caption: string }
 /** A titled section of a case page; used instead of problem, did and result when a case needs more chapters. */
-export interface Chapter { id: string; heading: string; paras?: string[]; list?: string[]; extra?: 'rivals' }
+export interface Stat { value: string; label: string; source?: string }
+export interface Chapter {
+  id: string;
+  heading: string;
+  paras?: string[];
+  list?: string[];
+  extra?: 'rivals';
+  /** One answer each: a bar per answer, with the question and sample as a visible caption. */
+  bars?: { caption: string; rows: { label: string; pct: number }[]; after: number };
+  /** A row of numbers; with statsFirst they sit above the paragraphs. */
+  stats?: Stat[];
+  statsNote?: string;
+  statsFirst?: boolean;
+}
 
 export interface CaseStudy {
   id: string;
@@ -51,10 +64,23 @@ const nurixDates = 'January to July 2026, client work to September';
 const hisaab = {
   problem: [
     'Where does my money go? I kept asking it at the end of each month. A UPI payment already records whom I paid and how much. The why gets lost, and without it a month of payments reads as a list of names and numbers.',
-    'Before writing any code I surveyed 26 college students. 77% named small UPI transfers as the spending they could not account for. Every one of them had tried a tracker and given up, typically inside two weeks.',
+  ],
+  survey: [
+    'I ran an exploratory survey on the IIT Hyderabad campus and got 86 responses. 87.2% of the people who answered were college students and 84.9% were aged 18 to 22, so the results describe an early student group, not every UPI user.',
+    '“Do you know where your money went last month?” 18.6% said yes, almost to the rupee. 61.6% said roughly, 16.3% not really, and 3.5% had no idea.',
+    '“How do you track spending today?” 64% scroll through their UPI app history. People could tick several answers.',
+    '“Have you used an expense tracking app?” 73.3% have never tried one.',
+    '“What would stop you from using a money app?” 62.8% picked “It wants my bank login”. People could tick up to two.',
+    '47.7% would rather tap a suggested response, and 37.2% would rather type a few words.',
+  ],
+  market: [
+    'How big. UPI carried 25.47 billion payments in October 2026, 23% more than the 20.70 billion of October 2025 (NPCI monthly statistics; growth is my arithmetic).',
+    'Who is there and where they stop. Among the 26 apps I compared, at least one reads payment notifications, and none of the 19 I could check asks why at the moment of payment. Most people I surveyed use none of them: 64% scroll their UPI app history and 73.3% never tried a tracker.',
+    'Why the gap exists. Trackers lose people fast: finance apps keep 2% of users to day 30 (Adjust, quoted by Stream at getstream.io, 22 Jan 2026, updated 23 Oct 2026).',
+    'What makes it hard. Few people stay with a money app past the first month, and holding money needs a licence and capital. Fi, built on a partner bank, said in March 2026 its banking would end (TechCrunch, 11 Mar 2026). So I start with one job that earns trust.',
   ],
   insight: [
-    'An app that asks me to open it and type what I spent loses me within two weeks. So Hisaab asks one thing, right after I pay, while I still remember: why. Whom and how much are already there.',
+    'Most people I asked check their spending by scrolling UPI history, and most have never tried an expense app. So Hisaab asks one thing, right after I pay, while I still remember: why. Whom and how much are already there.',
     'It began as my entry to The Ken’s case competition. After the competition I kept building it as my own product.',
   ],
   built: [
@@ -102,14 +128,46 @@ export const cases: CaseStudy[] = [
     figures: [
       { value: '26', label: 'rival apps compared on 31 features' },
       { value: '0 of 19', label: 'rivals I could check ask why at the moment of payment (7 more not confirmed)' },
-      { value: '77%', label: 'of students surveyed could not account for their small UPI transfers' },
+      { value: '18.6%', label: 'of 86 people surveyed know last month’s spending almost to the rupee' },
     ],
     chapters: [
       { id: 'problem', heading: 'The problem', paras: hisaab.problem },
+      {
+        id: 'survey',
+        heading: 'The survey',
+        paras: hisaab.survey,
+        bars: {
+          caption: 'Do you know where your money went last month? 86 answers, exploratory IIT Hyderabad campus survey.',
+          rows: [
+            { label: 'Yes, almost to the rupee', pct: 18.6 },
+            { label: 'Roughly', pct: 61.6 },
+            { label: 'Not really', pct: 16.3 },
+            { label: 'No idea', pct: 3.5 },
+          ],
+          after: 2,
+        },
+        stats: [
+          { value: '18.6%', label: 'know last month’s spending almost to the rupee' },
+          { value: '64%', label: 'track by scrolling UPI history' },
+          { value: '73.3%', label: 'never tried an expense app' },
+        ],
+        statsNote: '86 answers, exploratory campus survey. 64% is from a question where people could tick several answers.',
+      },
+      {
+        id: 'market',
+        heading: 'The market',
+        paras: hisaab.market,
+        statsFirst: true,
+        stats: [
+          { value: '25.47 billion', label: 'UPI payments in October 2026', source: 'NPCI monthly statistics, October 2026' },
+          { value: '+23%', label: 'on October 2025 (20.70 billion)', source: 'My arithmetic on NPCI monthly statistics, October 2025 and 2026' },
+          { value: '2%', label: 'of finance app users still active on day 30', source: 'Adjust, quoted by Stream, 22 Jan 2026, updated 23 Oct 2026' },
+        ],
+      },
       { id: 'insight', heading: 'The insight', paras: hisaab.insight },
       { id: 'built', heading: 'What I built', paras: hisaab.built },
       { id: 'decisions', heading: 'Key decisions', list: hisaab.decisions },
-      { id: 'research', heading: 'The research', paras: hisaab.research, extra: 'rivals' },
+      { id: 'research', heading: 'The rival study', paras: hisaab.research, extra: 'rivals' },
       { id: 'today', heading: 'Where it stands today', paras: hisaab.today },
       { id: 'vision', heading: 'The vision', paras: hisaab.vision },
     ],
