@@ -730,6 +730,7 @@ html:not(.js) .js-only { display: none !important; }
 /* Case heads: the summary at reading size, and the new state on its own line, sized to fit long words (Closed test on Google Play). */
 .case-head .lede { font-size: clamp(1.125rem, 1.6vw, 1.4rem); line-height: 1.45; max-width: 52ch; text-wrap: pretty; }
 .case-head .now { flex-basis: 100%; }
+.case-head .change-fig { row-gap: 0.3em; }
 .case-head .change-xl .change-fig { font-size: clamp(2rem, 4.4vw, 3.75rem); }
 
 /* Home timeline: each picture box takes its picture's shape; the logo strip gets a short padded box. */
